@@ -5,68 +5,43 @@ E-Learning add course
 @endsection
     
 @section('courses')
-
-
-<div class="card  mt-30">
+  
+  <div class="card mb-3">
+    
     <div class="card-header">
-      <h5 class="mb-0">Course Information</h5>
+      <div class="row flex-between-end">
+        <div class="col-auto align-self-center">
+          <h5 class="mb-0" data-anchor="data-anchor">Create course</h5>
+        </div>
+      </div>
     </div>
     <div class="card-body bg-light">
-      <form class="row gx-2">
-        <div class="col-12 mb-3"><label class="form-label" for="course-name">Course Title<span class="text-danger">*</span></label><input class="form-control" id="course-name" type="text" placeholder="Course Title" required="required" /></div>
-        <div class="col-sm-6 mb-3"><label class="form-label" for="course-category">Category<span class="text-danger">*</span></label><select class="form-select" id="course-category" name="course-category">
-            <option>Select a category</option>
-            <option>Academia</option>
-            <option>Arts & Crafts</option>
-            <option>Design</option>
-            <option>Development</option>
-            <option>Finance</option>
-            <option>Marketing</option>
-            <option>Music</option>
-            <option>Lifestyle</option>
-            <option>Photography</option>
-            <option>Miscellaneous</option>
-          </select></div>
-        <div class="col-sm-6 mb-3"><label class="form-label" for="course-subcategory">Sub-category<span class="text-danger">*</span></label><select class="form-select" id="course-subcategory" name="course-sub-category">
-            <option>Select a sub-category</option>
-            <option>3D & Animation</option>
-            <option>Architectural Design</option>
-            <option>Graphics Design</option>
-            <option>Game Design</option>
-            <option>Fashion Design</option>
-            <option>Illustration</option>
-            <option>User Interface Design</option>
-            <option>UX Design</option>
-            <option>Web Design</option>
-            <option>Others…</option>
-          </select></div>
-        <div class="col-12 mb-3"><label class="form-label" for="course-tags">Tags<span class="text-danger">*</span></label><input class="form-control js-choice" id="course-tags" type="text" name="tags" required="required" size="1" data-placeholder="Select upto 4 tags" data-options='{"removeItemButton":true,"placeholder":true}' /></div>
-        <div class="col-12"><label class="form-label" for="course-description">Course Description<span class="text-danger">*</span></label>
-          <div class="create-course-description-textarea"><textarea class="tinymce d-none" data-tinymce="data-tinymce" name="course-description" id="course-description" required="required"></textarea></div>
+      <div class="tab-content">
+        <div class="tab-pane preview-tab-pane active" role="tabpanel" aria-labelledby="tab-dom-7a421d91-36e1-4a1c-94fa-15531761cb81" id="dom-7a421d91-36e1-4a1c-94fa-15531761cb81">
+          <form action="{{route('courses.store')}}" method="Post" enctype="multipart/form-data">
+            @csrf
+            {{-- @method('put') --}}
+            <div class="mb-3"><label class="form-label" for="basic-form-name">Title</label><input class="form-control" id="basic-form-name" type="text" placeholder="Title" name="title" /></div>
+            <div class="mb-3"><label class="form-label" for="basic-form-gender">Categories</label><select class="form-select" id="basic-form-gender" aria-label="Default select example" name="category">
+                <option selected="selected">Select the category</option>
+                @foreach ($categories as $category)
+
+                  <option value="{{$category->id}}">{{$category->Nom_categorie	}}</option>
+
+                @endforeach
+                
+              </select></div>
+            
+            <div class="mb-3"><label class="form-label">Upload Cover Image</label><input class="form-control" type="file" name="image" /></div>
+            <div class="mb-3"><label class="form-label" for="basic-form-textarea">Description</label><textarea class="form-control" id="basic-form-textarea" rows="3" placeholder="Description" name="description"></textarea></div>
+            
+            <button class="btn btn-primary" type="submit">Submit</button>
+          </form>
         </div>
-
         
-        
-            <div class="card-header">
-              <h5 class="mb-0">Upload Cover Photo <span data-bs-toggle="tooltip" data-bs-placement="top" title="Add cover photo"><span class="fas fa-info-circle text-primary fs-0 ms-2"></span></span></h5>
-            </div>
-            <div class="card-body bg-light">
-              <form class="dropzone dropzone-single p-0" data-dropzone="data-dropzone" data-options='{"maxFiles":1,"acceptedFiles":"image/*"}'>
-                <div class="fallback"><input type="file" name="file" /></div>
-                <div class="dz-preview dz-preview-single">
-                  <div class="dz-preview-cover dz-complete"><img class="dz-preview-img" src="../../../assets/img/generic/image-file-2.png" alt="" data-dz-thumbnail="" /><a class="dz-remove text-danger" href="#!" data-dz-remove="data-dz-remove"><span class="fas fa-times"></span></a>
-                    <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress=""></span></div>
-                    <div class="dz-errormessage m-1"><span data-dz-errormessage="data-dz-errormessage"></span></div>
-                  </div>
-                  <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress=""></span></div>
-                </div>
-                <div class="dz-message fs--1" data-dz-message="data-dz-message"><img class="me-2" src="../../../assets/img/icons/cloud-upload.svg" width="20" alt="" /><span class="d-none d-lg-inline">Drag your image here<br/>or, </span><span class="btn btn-link p-0 fs--1">Browse</span></div>
-              </form>
-            </div>
-          
-
-      </form>
+      </div>
     </div>
   </div>
-</div
+</div>
+
 @endsection

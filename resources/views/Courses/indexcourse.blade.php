@@ -69,7 +69,7 @@ E-Learning courses
           <div class="card h-100 overflow-hidden">
             <div class="card-body p-0 d-flex flex-column justify-content-between">
               <div>
-                <div class="hoverbox text-center"><a class="text-decoration-none" href="../../../assets/video/beach.mp4" data-gallery="attachment-bg"><img class="w-100 h-100 object-fit-cover" src="../../../assets/img/elearning/courses/course1.png" alt="" /></a>
+                <div class="hoverbox text-center"><a class="text-decoration-none" href="../../../assets/video/beach.mp4" data-gallery="attachment-bg"><img class="w-100 h-100 object-fit-cover" src="\iamges\{{$course->image}}" alt="" /></a>
                   <div class="hoverbox-content flex-center pe-none bg-holder overlay overlay-2"><img class="z-1" src="../../../assets/img/icons/play.svg" width="60" alt="" /></div>
                 </div>
                 <div class="p-3">
@@ -80,7 +80,11 @@ E-Learning courses
               <div class="row g-0 mb-3 align-items-end">
                 <div class="col ps-3">
                   <h4 class="fs-1 text-warning d-flex align-items-center"> <span>{{$course->image}}</span><del class="ms-2 fs--1 text-700">$139.90</del></h4>
+                  <h4 class="fs-1 text-warning d-flex align-items-center"> <span>{{$course->category->Nom_categorie	}}</span><del class="ms-2 fs--1 text-700">$139.90</del></h4>
+                  <h4 class="fs-1 text-warning d-flex align-items-center"> <span>{{$course->user->name	}}</span><del class="ms-2 fs--1 text-700">$139.90</del></h4>
                   <p class="mb-0 fs--1 text-800"><a href="{{route('courses.show',['course'=>$course->id])}}"><button class="btn btn-sm btn-outline-secondary">more details</button></a></p>
+                  <p class="mb-0 fs--1 text-800"><a href="{{route('courses.edit',['course'=>$course->id])}}"><button class="btn btn-sm btn-outline-secondary">Update course details</button></a></p> 
+                  <p class="mb-0 fs--1 text-800"><a href="{{route('courses.create')}}"><button class="btn btn-sm btn-outline-secondary">Update course details</button></a></p>
                 </div>
                 <div class="col-auto pe-3"><a class="btn btn-sm btn-falcon-default me-2 hover-danger" href="#!" data-bs-toggle="tooltip" data-bs-placement="top" title="Add to Wishlist"><span class="far fa-heart" data-fa-transform="down-2"></span></a><a class="btn btn-sm btn-falcon-default hover-primary" href="#!" data-bs-toggle="tooltip" data-bs-placement="top" title="Add to Cart"><span class="fas fa-cart-plus" data-fa-transform="down-2"></span></a></div>
               </div>

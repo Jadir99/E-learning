@@ -18,6 +18,10 @@ return new class extends Migration
             $table->string('title');
             $table->string('image');
             $table->date('date_pub');
+            $table->unsignedBigInteger('category_id');
+            $table->foreign('category_id')->references('id')->on('categories');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

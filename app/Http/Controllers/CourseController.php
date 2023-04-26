@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\course;
 use App\Models\categorie;
-
+use Illuminate\Support\Str;
 class CourseController extends Controller
 {
     /**
@@ -21,7 +21,8 @@ class CourseController extends Controller
      */
     public function create()
     {
-        return view('courses.add_course');
+        
+        return view('courses.add_course',['categories'=>categorie::all()]);
     }
 
     /**
@@ -29,13 +30,32 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $date_published =date('Y-m-d');
+        $request->validate([
+                        'title' => 'required',
+                        'category' => 'required',
+                        'image' => 'required ',
+                        'description' => 'required ',
+                ]);
+                $course=new course();
+                $course->title=$request->input('title');
+                $course->category_id=$request->input('category');
+                $slug=Str::slug($request->title,'-');
+                $newImageName=uniqid().'-'.$slug.'.'.$request->image->extension() ;
+                $request->image->move(public_path('iamges'), $newImageName);
+                $course->image=$newImageName;
+                $course->description=$request->input('description');
+                $course->user_id=1;
+                $course->date_pub=$date_published;
+
+                $course->save();
+                return redirect()->route('courses.index');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show( $id)
     {
         $course= course::findOrFail($id);
     if ($course !=false )
@@ -45,9 +65,12 @@ class CourseController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit( $id)
     {
-        //
+        $edit_cours= course::findOrFail($id);
+
+        if ($edit_cours !=false )
+        return view('courses.update_course',['course' => $edit_cours]);
     }
 
     /**

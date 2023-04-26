@@ -41,6 +41,7 @@
     <!-- ===============================================-->
     <!--    Stylesheets-->
     <!-- ===============================================-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
     <link href="../../../vendors/swiper/swiper-bundle.min.css" rel="stylesheet">
     <link href="../../../vendors/glightbox/glightbox.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.gstatic.com/">
