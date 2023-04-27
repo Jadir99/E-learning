@@ -41,4 +41,54 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    //many courses to learn
+    public function learner()
+    {
+        return $this->hasMany(course::class);
+    }
+
+
+    //many courses to publish
+    public function former()
+    {
+        return $this->belongsToMany(course::class,'prendre_course_users');
+    }
+
+
+    // every comment has course and user 
+    public function comment()
+    {
+        return $this->belongsToMany(course::class,'comment_course_users');
+    }
+
+    //*******************************************************************for delivery table between partie user devoir********************* */
+    public function parties_devoir()
+    {
+        return $this->belongsToMany(Partie::class,'delivery_user_partie__devoirs');
+    }
+
+    //many learners
+    public function devoirs()
+    {
+        return $this->belongsToMany(Devoir::class,'delivery_user_partie__devoirs');
+    }
+    //*******************************************************************end of  delivery table between partie user devoir********************* */
+
+    
+    //*******************************************************************for Answers table between partie user quiz********************* */
+    public function parties_quize()
+    {
+        return $this->belongsToMany(Partie::class,'answer_user_partie_quizzes');
+    }
+
+    //many learners
+    public function quizzes()
+    {
+        return $this->belongsToMany(Quiz::class,'answer_user_partie_quizzes');
+    }
+    //*******************************************************************end of  Answers table between partie user quiz********************* */
+
+    
 }

@@ -16,8 +16,32 @@ class course extends Model
     {
         return $this->belongsTo(categorie::class);
     }
+    
+    //many parties
+    public function partie()
+    {
+        return $this->hasMany(Partie::class);
+    }
+
+    //many learners
+    public function learner()
+    {
+        return $this->belongsToMany(User::class,'prendre_course_users');
+    }
+
+    // every comment has course and user 
+    public function comment()
+    {
+        return $this->belongsToMany(User::class,'comment_course_users');
+    }
+    //every course has one former
     public function user()
     {
         return $this->belongsTo(User::class);
     }
+
+
+
+
+
 }
