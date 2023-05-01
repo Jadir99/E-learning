@@ -129,7 +129,7 @@
                             </div>
                           </div>
                           <div class="notification-body">
-                            <p class="mb-1"><strong>Albert Brooks</strong> reacted to <strong>Mia Khalifa's</strong> status</p>
+                            <p class="mb-1"><strong>Albert Brooks</strong> reacted to <strong>Mia s's</strong> status</p>
                             <span class="notification-time"><span class="me-2 fab fa-gratipay text-danger"></span>9hr</span>
                           </div>
                         </a>
@@ -194,7 +194,18 @@
                   <a class="dropdown-item" href="#!">Feedback</a>
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="../../../pages/user/settings.html">Settings</a>
-                  <a class="dropdown-item" href="../../../pages/authentication/card/logout.html">Logout</a>
+                  <a class="dropdown-item" href="{{ route('logout') }}"
+                      onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();">
+                      {{ __('Logout') }}
+                  </a>
+
+                  <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                      @csrf
+                  </form>  
+
+                                    
+                                    
                 </div>
               </div>
             </li>

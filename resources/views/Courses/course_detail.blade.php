@@ -29,7 +29,7 @@ E-Learning detail
     <div class="card overflow-hidden mb-3" data-bs-theme="light">
       <div class="card-body bg-black">
         {{-- l'image de toutes les choses --}}
-        <div class="bg-holder rounded-3 bg-white" style="background-image:url(../../../assets/img/icons/spot-illustrations/course-details-bg.pg);" ></div>
+        <div class="bg-holder rounded-3 bg-dark" style="background-image:url(../../../assets/img/icons/spot-illustrations/course-details-bg.pg);" ></div>
         <!--/.bg-holder-->
         <div class="row">
           <div class="col-xl-8 position-relative">
@@ -43,10 +43,10 @@ E-Learning detail
                 </div>
               </div>
               <div class="col-lg-7">
-                <h6 class="fw-semi-bold text-400">A course by <a class="text-info" href="../trainer-profile.html">Bill Finger</a></h6>
-                <h2 class="fw-bold text-white">Advanced Design Tools for Modern Designs </h2>
+                <h6 class="fw-semi-bold text-400">A course by <a class="text-info" href="../trainer-profile.html">{{$course->user->name}}/{{($course->count())}}</a></h6>
+                
                 <p class="text-white fw-semi-bold fs--1"><span class="me-1">4.8</span><span class="fa fa-star text-warning"></span><span class="fa fa-star text-warning"></span><span class="fa fa-star text-warning"></span><span class="fa fa-star text-warning"></span><span class="fa fa-star-half-alt text-warning star-icon"></span><span class="text-info ms-2">(6,899 reviews)</span></p>
-                <p class="mb-0 fw-medium text-400"> Exploring Photoshop, Illustrator, Krita, Procreate, and Canva; trace the evolution of graphic design from ancient...<a class="text-info" href="#!"> See more</a></p>
+                <p class="mb-0 fw-medium text-400"> {{$course->description}} ...<a class="text-info" href="#!"> See more</a></p>
               </div>
             </div>
             <hr class="text-secondary text-opacity-50" />
@@ -421,7 +421,7 @@ E-Learning detail
                           <div class="hoverbox-content flex-center pe-none bg-holder overlay overlay-2"><img class="z-1" src="../../../assets/img/icons/play.svg" width="60" alt="" /></div>
                         </div>
                         <div class="p-3">
-                          <h5 class="fs-0 mb-2"><a class="text-dark" href="course-details.html">Advanced Design Tools for Modern Designs</a></h5>
+                          
                           <h5 class="fs-0"><a href="../trainer-profile.html">Bill Finger</a></h5>
                         </div>
                       </div>

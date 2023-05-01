@@ -8,14 +8,13 @@
 </head>
 <body>
     <ul>
-        <li><a href="{{route('pages.index')}}">pages</a></li>
+        {{-- <li><a href="{{route('pages.index')}}">pages</a></li>
         <li><a href="{{route('pages.login')}}">login</a></li>
-        <li><a href="{{route('pages.register')}}">register</a></li>
+        <li><a href="{{route('pages.register')}}">register</a></li> --}}
     </ul>
 
     @yield('text')
     <br>
     {{-- @yield('footer') --}}
-    @extends('footer')
 </body>
 </html>

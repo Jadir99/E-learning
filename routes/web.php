@@ -4,6 +4,8 @@ use App\Http\Controllers\CourseController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PagesControllers;
 
+use Illuminate\Support\Facades\Auth;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,9 +17,7 @@ use App\Http\Controllers\PagesControllers;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 // Route::get('/', [PagesControllers::class, 'index'])->name('pages.index');
 Route::get('/login1', [PagesControllers::class, 'login'])->name('pages.login');
 Route::get('/register1', [PagesControllers::class, 'register'])->name('pages.register');
@@ -26,6 +26,16 @@ Route::get('/register1', [PagesControllers::class, 'register'])->name('pages.reg
 // });
 Auth::routes();
 
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/index', [PagesControllers::class, 'index'])->name('pages.index');
+// // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [PagesControllers::class, 'index'])->name('pages.index');
+
+Route::get('/home', function () {
+    return view('index');
+});
+
+Route::get('/', function () {
+    return view('welcome');
+})->name('home');
+
+
 Route::resource('courses', CourseController::class);

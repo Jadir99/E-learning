@@ -54,7 +54,7 @@ E-Learning courses
                     <div class="col-auto"> <select class="form-select form-select-sm" aria-label="Bulk actions">
                         <option value="rating">Rating</option>
                         <option value="review">Review</option>
-                        <option value="price">Price</option>
+                        <option value="price">{{$courses->count()}}</option>
                       </select></div>
                   </form>
                 </div>
@@ -75,7 +75,7 @@ E-Learning courses
                 </div>
                 <div class="p-3">
                   <h5 class="fs-0 mb-2"><a class="text-dark" href="course-details.html"></a></h5>
-                  <h5 class="fs-0"><a href="../trainer-profile.html"> {{$course->title}}</a></h5>
+                  <h5 class="fs-0"><a href="{{route('courses.show',['course'=>$course->id])}}"> {{$course->title}}</a></h5>
                 </div>
               </div>
               <div class="row g-0 mb-3 align-items-end">

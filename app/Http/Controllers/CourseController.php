@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\course;
 use App\Models\categorie;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
+use Termwind\Components\Dd;
+
 class CourseController extends Controller
 {
     /**
@@ -45,7 +48,7 @@ class CourseController extends Controller
                 $request->image->move(public_path('iamges'), $newImageName);
                 $course->image=$newImageName;
                 $course->description=$request->input('description');
-                $course->user_id=1;
+                $course->user_id=Auth::user()->id;
                 $course->date_pub=$date_published;
 
                 $course->save();
@@ -70,7 +73,7 @@ class CourseController extends Controller
         $edit_cours= course::findOrFail($id);
 
         if ($edit_cours !=false )
-        return view('courses.update_course',['course' => $edit_cours]);
+        return view('courses.update_course',['course' => $edit_cours,'categories'=>categorie::all()]);
     }
 
     /**
@@ -78,7 +81,25 @@ class CourseController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        
+        $request->validate([
+                'title' => 'required',
+                'category' => 'required',
+                'image' => 'required ',
+                'description' => 'required ',
+        ]);
+
+        $course_update= course::findOrFail($id);
+        $course_update->title=$request->input('title');
+        $course_update->category_id=$request->input('category');
+        $slug=Str::slug($request->title,'-');
+        $newImageName=uniqid().'-'.$slug.'.'.$request->image->extension() ;
+        $request->image->move(public_path('iamges'), $newImageName);
+        $course_update->image=$newImageName;
+        $course_update->description=$request->input('description');
+        $course_update->update();
+        // dd($course_update);
+        return redirect()->route('courses.show',['course' => $course_update->id]); 
     }
 
     /**
