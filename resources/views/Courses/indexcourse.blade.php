@@ -9,10 +9,11 @@ E-Learning courses
 <div class="row g-3">
     <div class="col-xxl-2 col-xl-3">
       <aside class="scrollbar-overlay font-sans-serif p-4 p-xl-3 ps-xl-0 offcanvas offcanvas-start offcanvas-filter-sidebar" tabindex="-1" id="filterOffcanvas" aria-labelledby="filterOffcanvasLabel">
+        
         <div class="d-flex flex-between-center">
           <div class="d-flex gap-2 flex-xl-grow-1 align-items-center justify-content-xl-between">
             <h5 class="mb-0 text-700 d-flex align-items-center" id="filterOffcanvasLabel"><span class="fas fa-filter fs--1 me-1"></span><span>Filter</span></h5><button class="btn btn-sm btn-outline-secondary">Reset</button>
-            <p class="mb-0 fs--1 text-800"><a href="{{route('courses.create')}}"><button class="btn btn-sm btn-outline-secondary">add course </button></a></p>
+            
           </div><button class="btn-close text-reset d-xl-none shadow-none" type="button" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <ul class="list-unstyled">
@@ -70,23 +71,27 @@ E-Learning courses
           <div class="card h-100 overflow-hidden">
             <div class="card-body p-0 d-flex flex-column justify-content-between">
               <div>
-                <div class="hoverbox text-center"><a class="text-decoration-none" href="../../../assets/video/beach.mp4" data-gallery="attachment-bg"><img class="w-100 h-100 object-fit-cover" src="\iamges\{{$course->image}}" alt="" /></a>
-                  <div class="hoverbox-content flex-center pe-none bg-holder overlay overlay-2"><img class="z-1" src="../../../assets/img/icons/play.svg" width="60" alt="" /></div>
+                <div class="hoverbox text-center"><a class="text-decoration-none" href="\iamges\{{$course->image}}" data-gallery="attachment-bg"><img class="w-100 h-100 object-fit-cover" src="\iamges\{{$course->image}}" alt="" /></a>
                 </div>
-                <div class="p-3">
+                <div class="p-2 pb-1 ">
                   <h5 class="fs-0 mb-2"><a class="text-dark" href="course-details.html"></a></h5>
                   <h5 class="fs-0"><a href="{{route('courses.show',['course'=>$course->id])}}"> {{$course->title}}</a></h5>
                 </div>
               </div>
               <div class="row g-0 mb-3 align-items-end">
                 <div class="col ps-3">
-                  <h4 class="fs-1 text-warning d-flex align-items-center"> <span>{{$course->category->Nom_categorie	}}</span><del class="ms-2 fs--1 text-700">$139.90</del></h4>
-                  <h4 class="fs-1 text-warning d-flex align-items-center"> <span>{{$course->user->name	}}</span><del class="ms-2 fs--1 text-700">$139.90</del></h4>
-                  <p class="mb-0 fs--1 text-800"><a href="{{route('courses.show',['course'=>$course->id])}}"><button class="btn btn-sm btn-outline-secondary">more details</button></a></p>
-                  <p class="mb-0 fs--1 text-800"><a href="{{route('courses.edit',['course'=>$course->id])}}"><button class="btn btn-sm btn-outline-secondary">Update course details</button></a></p> 
-                  <p class="mb-0 fs--1 text-800"><a href="{{route('courses.create')}}"><button class="btn btn-sm btn-outline-secondary">Update course details</button></a></p>
+                  <h4 class="fs-1 text-warning d-flex align-items-center"> <span>{{$course->user->name	}}</span></h4>
+                  <p class="mb-0 fs--1 text-800"><a class="dropdown-item" href="{{route('courses.show',['course'=>$course->id])}}"><span class="text-primary opacity-70">More details</span></a></p>
+                  @if (Auth::user()->id==$course->user->id)
+                    <p class="mb-0 fs--1 text-800"><a class="dropdown-item" href="{{route('courses.edit',['course'=>$course->id])}}"><span class="text-primary opacity-70">Update course</span></a></p>
+                    <p class="mb-0 fs--1 text-800-danger"><a class="dropdown-item" href="{{route('courses.edit',['course'=>$course->id])}}"><span class="text-danger">Delete course</span></a></p>    
+                  @endif
+                  
+                  
                 </div>
-                <div class="col-auto pe-3"><a class="btn btn-sm btn-falcon-default me-2 hover-danger" href="#!" data-bs-toggle="tooltip" data-bs-placement="top" title="Add to Wishlist"><span class="far fa-heart" data-fa-transform="down-2"></span></a><a class="btn btn-sm btn-falcon-default hover-primary" href="#!" data-bs-toggle="tooltip" data-bs-placement="top" title="Add to Cart"><span class="fas fa-cart-plus" data-fa-transform="down-2"></span></a></div>
+                <div class="col-auto pe-3">
+                  <a class="btn btn-sm btn-falcon-default me-2 hover-danger" href="#!" data-bs-toggle="tooltip" data-bs-placement="top" title="Add to Wishlist"><span class="far fa-heart" data-fa-transform="down-2"></span></a>
+                </div>
               </div>
             </div>
           </div>

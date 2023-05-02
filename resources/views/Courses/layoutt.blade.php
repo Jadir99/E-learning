@@ -90,6 +90,9 @@
           <div class="collapse navbar-collapse scrollbar" id="navbarStandard">
           </div>
           <ul class="navbar-nav navbar-nav-icons ms-auto flex-row align-items-center">
+            <li class="nav-item pt-3">            
+            <h6 class="dropdown-header fw-medium text-uppercase px-x1 fs--2 pt-0 pb-2"><a class="dropdown-item fs--1 px-x1 py-1 hover-primary" href="{{route('courses.create')}}">New course</a></h6>
+            </li>
             <li class="nav-item px-2">
               <div class="theme-control-toggle fa-icon-wait"><input class="form-check-input ms-0 theme-control-toggle-input" id="themeControlToggle" type="checkbox" data-theme-control="theme" value="dark" /><label class="mb-0 theme-control-toggle-label theme-control-toggle-light" for="themeControlToggle" data-bs-toggle="tooltip" data-bs-placement="left" title="Switch to light theme"><span class="fas fa-sun fs-0"></span></label><label class="mb-0 theme-control-toggle-label theme-control-toggle-dark" for="themeControlToggle" data-bs-toggle="tooltip" data-bs-placement="left" title="Switch to dark theme"><span class="fas fa-moon fs-0"></span></label></div>
             </li>
@@ -186,9 +189,8 @@
                 </div>
               </a>
               <div class="dropdown-menu dropdown-caret dropdown-caret dropdown-menu-end py-0" aria-labelledby="navbarDropdownUser">
-                <div class="bg-white dark__bg-1000 rounded-2 py-2">
-                  <a class="dropdown-item fw-bold text-warning" href="#!"><span class="fas fa-crown me-1"></span><span>Go Pro</span></a>
-                  <div class="dropdown-divider"></div>
+                <div class=" rounded-2 py-2">
+                  <a class="dropdown-item" href="#!">{{Auth::user()->name}}</a>
                   <a class="dropdown-item" href="#!">Set status</a>
                   <a class="dropdown-item" href="../../../pages/user/profile.html">Profile &amp; account</a>
                   <a class="dropdown-item" href="#!">Feedback</a>
