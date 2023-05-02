@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\Partie;
 class PartieController extends Controller
 {
     /**
@@ -19,7 +19,9 @@ class PartieController extends Controller
      */
     public function create()
     {
-        return view('parties.add_chapter');
+        // echo $_GET['course'];
+        // echo 'lknlkn';
+        return view('parties.add_chapter',['couse'=>$_GET['course']]);
     }
 
     /**
@@ -27,7 +29,28 @@ class PartieController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        // echo 'lihkuhkho';
+        // dd($request);
+
+        $date_published_partie =date('Y-m-d');
+        $request->validate([
+                        'title' => 'required',
+                        'description' => 'required ',
+                ]);
+        
+                $partie=new Partie();
+                $partie->title_partie=$request->input('title');
+                $partie->description_partie=$request->input('description');
+                $partie->course_id=$request->input('course');
+                $partie->date_pub_partie=$date_published_partie;
+                $partie->save();
+
+                // $devoir=
+                // $quiz=
+                // ee
+
+                return redirect()->route('courses.edit',['course'=>$request->input('course')]);
     }
 
     /**

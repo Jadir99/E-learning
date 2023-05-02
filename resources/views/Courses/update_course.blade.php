@@ -120,7 +120,7 @@ E-Learning update course
         </table>
       </div>
     </div>
-    <div class="card-footer py-2 text-center"><a class="btn btn-link btn-sm px-0 fw-medium" href="{{route('parties.create')}}"> <span class="fas fa-plus me-1 fs--2"></span>Add New Chaptar</a></div>
+    <div class="card-footer py-2 text-center"><a class="btn btn-link btn-sm px-0 fw-medium" href="{{route('parties.create',['course'=>$course->id])}}"> <span class="fas fa-plus me-1 fs--2"></span>Add New Chaptar</a></div>
   
 </div>
 </div>
