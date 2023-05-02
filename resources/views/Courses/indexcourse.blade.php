@@ -84,7 +84,13 @@ E-Learning courses
                   <p class="mb-0 fs--1 text-800"><a class="dropdown-item" href="{{route('courses.show',['course'=>$course->id])}}"><span class="text-primary opacity-70">More details</span></a></p>
                   @if (Auth::user()->id==$course->user->id)
                     <p class="mb-0 fs--1 text-800"><a class="dropdown-item" href="{{route('courses.edit',['course'=>$course->id])}}"><span class="text-primary opacity-70">Update course</span></a></p>
-                    <p class="mb-0 fs--1 text-800-danger"><a class="dropdown-item" href="{{route('courses.edit',['course'=>$course->id])}}"><span class="text-danger">Delete course</span></a></p>    
+                  <form action="{{route('courses.destroy',['course'=>$course->id ])}}" method="post" >
+                      @csrf
+                      @method('delete')
+                      <button type="submit" ><p class="mb-0 fs--1 text-800-danger"><span class="text-danger">Delete course</span></p>  </button>
+                        
+                  </form>
+                    
                   @endif
                   
                   

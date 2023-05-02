@@ -107,7 +107,9 @@ class CourseController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $to_delete= course::findOrFail($id);
+        $to_delete->delete();
+        return redirect()->route('courses.index'); 
     }
 }
 // {
