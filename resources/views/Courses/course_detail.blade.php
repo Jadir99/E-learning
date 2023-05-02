@@ -29,7 +29,7 @@ E-Learning detail
     <div class="card overflow-hidden mb-3" data-bs-theme="light">
       <div class="card-body bg-black">
         {{-- l'image de toutes les choses --}}
-        <div class="bg-holder rounded-3 bg-dark" style="background-image:url(../../../assets/img/icons/spot-illustrations/course-details-bg.pg);" ></div>
+        <div class="bg-holder rounded-3 bg-dark" style="background-image:url(../../../assets/img/icons/spot-illustrations/course-details-bg.png);" ></div>
         <!--/.bg-holder-->
         <div class="row">
           <div class="col-xl-8 position-relative">
@@ -37,9 +37,9 @@ E-Learning detail
               <div class="col-lg-5">
                 <div class="position-relative">
                     {{-- l'image de video  --}}
-                  <div class="bg-holder rounded-1 overlay" style="background-image:url(../../../assets/img/elearning/courses/course-details.png);"></div>
+                  <div class="bg-holder rounded-1 overlay" style="background-image:url('{{ asset("iamges/". $course->image) }}');"></div>
                   <!--/.bg-holder-->
-                  <a class="text-decoration-none position-relative d-block py-7 text-center" href="../../../assets/video/beach.mp4" data-gallery="attachment-bg"><img class="rounded-1" src="../../../assets/img/icons/play.svg" width="60" alt="" /></a>
+                  <a class="text-decoration-none position-relative d-block py-7 text-center" href="\iamges\{{$course->image}}" data-gallery="attachment-bg"><img class="rounded-1" src="" width="60" alt="" /></a>
                 </div>
               </div>
               <div class="col-lg-7">

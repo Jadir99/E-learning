@@ -3,7 +3,7 @@
 use App\Http\Controllers\CourseController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PagesControllers;
-
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -39,3 +39,4 @@ Route::get('/', function () {
 
 
 Route::resource('courses', CourseController::class);
+Route::resource('users', UserController::class);
