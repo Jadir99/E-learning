@@ -53,69 +53,30 @@ E-Learning update course
       <div class="table-responsive scrollbar">
         <table class="table table-borderless mb-0 fs--1 overflow-hidden">
           <tbody>
+            @foreach ($parties as $part)
+
             <tr class="btn-reveal-trigger bg-light">
               <td class="align-middle white-space-nowrap">
                 <div class="d-flex gap-3 align-items-center position-relative"><img class="rounded-1 border border-200" src="../../../assets/img/elearning/lessons/intro.png" width="60" alt="" />
                   <div>
-                    <h5 class="fs-0 text-primary">Intro<span data-bs-toggle="tooltip" data-bs-placement="top" title="Requirement fulfilled"><span class="text-primary fs-0 ms-2 fas fa-check-circle"></span></span></h5>
-                    <p class="fs--1 text-900 mb-0">Introduction and Course Objectives</p>
+                    <h5 class="fs-0 text-primary">{{$part->title_partie}}<span data-bs-toggle="tooltip" data-bs-placement="top" title="Requirement fulfilled"><span class="text-primary fs-0 ms-2 fas fa-check-circle"></span></span></h5>
+                    <p class="fs--1 text-900 mb-0">{{$part->description_partie}}</p>
                   </div>
                 </div>
               </td>
               <td class="align-middle white-space-nowrap fs--1 text-700">
-                <p class="mb-1">1 Slide • 4 Minutes</p>
-                <p class="mb-0">0 Tests</p>
+                <p class="mb-1">create at {{$part->date_pub_partie}}</p>
               </td>
               <td class="align-middle white-space-nowrap text-end">
                 <div class="dropdown font-sans-serif position-static d-inline-block btn-reveal-trigger"><button class="btn btn-link text-600 btn-sm dropdown-toggle btn-reveal dropdown-caret-none float-end" type="button" id="dropdown-0" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs--1"></span></button>
-                  <div class="dropdown-menu dropdown-menu-end border py-2" aria-labelledby="dropdown-0"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Edit</a>
+                  <div class="dropdown-menu dropdown-menu-end border py-2" aria-labelledby="dropdown-0"><a class="dropdown-item" href="{{route('parties.show',['party'=>$part->id])}}">View</a><a class="dropdown-item" href="#!">Edit</a>
                     <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Delete</a>
                   </div>
                 </div>
               </td>
             </tr>
-            <tr class="btn-reveal-trigger">
-              <td class="align-middle white-space-nowrap">
-                <div class="d-flex gap-3 align-items-center position-relative"><img class="rounded-1 border border-200" src="../../../assets/img/elearning/lessons/chapter1.png" width="60" alt="" />
-                  <div>
-                    <h5 class="fs-0 text-primary">Chapter 1<span data-bs-toggle="tooltip" data-bs-placement="top" title="Requirement fulfilled"><span class="text-primary fs-0 ms-2 fas fa-check-circle"></span></span></h5>
-                    <p class="fs--1 text-900 mb-0">Getting Started with Photoshop</p>
-                  </div>
-                </div>
-              </td>
-              <td class="align-middle white-space-nowrap fs--1 text-700">
-                <p class="mb-1">3 Slide • 11 Minutes</p>
-                <p class="mb-0">3 Tests</p>
-              </td>
-              <td class="align-middle white-space-nowrap text-end">
-                <div class="dropdown font-sans-serif position-static d-inline-block btn-reveal-trigger"><button class="btn btn-link text-600 btn-sm dropdown-toggle btn-reveal dropdown-caret-none float-end" type="button" id="dropdown-1" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs--1"></span></button>
-                  <div class="dropdown-menu dropdown-menu-end border py-2" aria-labelledby="dropdown-1"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Edit</a>
-                    <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Delete</a>
-                  </div>
-                </div>
-              </td>
-            </tr>
-            <tr class="btn-reveal-trigger bg-light">
-              <td class="align-middle white-space-nowrap">
-                <div class="d-flex gap-3 align-items-center position-relative"><img class="rounded-1 border border-200" src="../../../assets/img/elearning/lessons/chapter2.png" width="60" alt="" />
-                  <div>
-                    <h5 class="fs-0 text-primary">Chapter 2<span data-bs-toggle="tooltip" data-bs-placement="top" title="No. of Slide/Test doesn’t fulfill requirement"><span class="text-primary fs-0 ms-2 fas fa-exclamation-circle"></span></span></h5>
-                    <p class="fs--1 text-900 mb-0">Understanding Layers</p>
-                  </div>
-                </div>
-              </td>
-              <td class="align-middle white-space-nowrap fs--1 text-700">
-                <p class="mb-1">1 Slide • 3 Minutes</p>
-                <p class="mb-0">0 Tests</p>
-              </td>
-              <td class="align-middle white-space-nowrap text-end">
-                <div class="dropdown font-sans-serif position-static d-inline-block btn-reveal-trigger"><button class="btn btn-link text-600 btn-sm dropdown-toggle btn-reveal dropdown-caret-none float-end" type="button" id="dropdown-2" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs--1"></span></button>
-                  <div class="dropdown-menu dropdown-menu-end border py-2" aria-labelledby="dropdown-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Edit</a>
-                    <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Delete</a>
-                  </div>
-                </div>
-              </td>
-            </tr>
+                
+            @endforeach
           </tbody>
         </table>
       </div>

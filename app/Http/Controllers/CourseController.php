@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\course;
 use App\Models\categorie;
+use App\Models\Partie;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Termwind\Components\Dd;
@@ -72,8 +73,14 @@ class CourseController extends Controller
     {
         $edit_cours= course::findOrFail($id);
 
+        // // dd($edit_cours->partie());
+        // foreach ($edit_cours->partie as $partie) {
+        //     echo $partie->title_partie.'v';
+        // }
+
+
         if ($edit_cours !=false )
-        return view('courses.update_course',['course' => $edit_cours,'categories'=>categorie::all()]);
+        return view('courses.update_course',['course' => $edit_cours,'categories'=>categorie::all(),'parties'=>$edit_cours->partie]);
     }
 
     /**

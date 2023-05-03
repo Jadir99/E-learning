@@ -17,12 +17,12 @@ return new class extends Migration
             $table->decimal('review');
 
             
-            $table->unsignedBigInteger('id_course');
-            $table->foreign('id_course')->references('id')->on('courses')->onUpdate('cascade')->onDelete('cascade');
+            $table->unsignedBigInteger('course_id');
+            $table->foreign('course_id')->references('id')->on('courses')->onUpdate('cascade')->onDelete('cascade');
 
 
-            $table->unsignedBigInteger('id_user');
-            $table->foreign('id_user')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
 
 
             $table->timestamps();

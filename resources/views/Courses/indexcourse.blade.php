@@ -21,8 +21,10 @@ E-Learning courses
             <div class="collapse show" id="category-collapse">
               <ul class="list-unstyled">
                 @foreach ($categories as $categorie)
+                
+                
                     <li>
-                        <div class="form-check d-flex ps-0"><label class="form-check-label fs--1 flex-1 text-truncate" for="filter-category-on-sale"><span class="fas fa-tags fs--2 me-3"></span>{{$categorie->Nom_categorie}}</label><input class="form-check-input" type="checkbox" checked="checked" name="on-sale" id="filter-category-on-sale" /></div>
+                        <div class="form-check d-flex ps-0"><label class="form-check-label fs--1 flex-1 text-truncate" for="filter-category-on-sale"><span class="fas fa-tags fs--2 me-3"></span>{{$categorie->Nom_categorie}}</label><input class="form-check-input" type="checkbox"  name="on-sale" id="filter-category-on-sale" /></div>
                     </li>
                 @endforeach
                 
@@ -66,7 +68,7 @@ E-Learning courses
       </div>
       <div class="row mb-3 g-3">
         @foreach ($courses as $course)
-            
+        <input type="hidden" name='courses[]' value='{{$course->id}}'  onclick="myFunction()"> 
         <article class="col-md-6 col-xxl-4">
           <div class="card h-100 overflow-hidden">
             <div class="card-body p-0 d-flex flex-column justify-content-between">
@@ -123,4 +125,36 @@ E-Learning courses
       </div>
     </div>
   </div>
+  <script>
+    function myFunction() {
+  // Get the checkbox
+ 
+  
+  var checkBox = document.getElementsByName("produits[]");
+  var text = document.getElementsByName("quantiti_commande[]");
+//   alert(text.length);
+  // If the checkbox is checked, display the output text
+  for (i=0;i<checkBox.length;i++){
+	if (checkBox[i].checked == true){
+    text[i].style.display = "block";
+  } else {
+    text[i].style.display = "none";
+  }
+  }
+}
+
+
+    function Cat(id){
+  child=document.getElementById("table-body").children;
+  let size = child.length;
+  for(var i=0;i<size;i++) {
+    if(child.item(i).getAttribute("id")!=id){
+      child.item(i).style.display = "none";
+    }
+    if(child.item(i).getAttribute("id")==id){
+        child.item(i).style.display = "";
+    }
+  }
+}
+  </script>
 @endsection

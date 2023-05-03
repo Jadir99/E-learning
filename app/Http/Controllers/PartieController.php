@@ -7,6 +7,7 @@ use App\Models\Partie;
 use App\Models\Devoir;
 use App\Models\Quiz;
 use App\Models\Conetent;
+use Illuminate\Support\Str;
 class PartieController extends Controller
 {
     /**
@@ -49,15 +50,40 @@ class PartieController extends Controller
                 $partie->date_pub_partie=$date_published_partie;
                 $partie->save();
 
-                // $devoir=
-                // $quiz=
-                // ee
-
+                
+                // adding chapter
                 $partie_id= Partie::latest('id')->first()->id;
                 $devoir=new Devoir();
                 $devoir->devoir_title=$request->input('devoir_title');
-                $devoir->id_partie	=$partie_id;
+                $devoir->enonce=$request->input('enonce');
+                $devoir->partie_id	=$partie_id;
                 $devoir->save();
+
+
+                // adding video
+
+                $video= new  Conetent();
+
+                $slug=Str::slug($request->input('title'),'-');
+                $new_video=uniqid().'-'.$slug.'.'.$request->video->extension() ;
+                $request->video->move(public_path('videos'), $new_video);
+                $video->path_content=$new_video;
+                $video->type_content='video';
+                $video->partie_id=$partie_id;
+                $video->save();
+
+
+                // adding document
+                $document= new Conetent();
+
+                $slug=Str::slug($request->input('title'),'-');
+                $new_document=uniqid().'-'.$slug.'.'.$request->document->extension() ;
+                $request->document->move(public_path('documents'), $new_document);
+                $document->path_content=$new_document;
+                $document->type_content='document';
+                $document->partie_id=$partie_id;
+                $document->save();
+
 
                 return redirect()->route('courses.edit',['course'=>$request->input('course')]);
     }
@@ -67,7 +93,9 @@ class PartieController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $party= Partie::findOrFail($id);
+        if ($party !=false )
+        return view('parties.party_detail',['party'=>$party,'devoirs'=>$party->devoir]);
     }
 
     /**

@@ -17,14 +17,14 @@ return new class extends Migration
             $table->decimal('note_quiz');
 
             
-            $table->unsignedBigInteger('id_partie');
-            $table->foreign('id_partie')->references('id')->on('parties')->onUpdate('cascade')->onDelete('cascade');
+            $table->unsignedBigInteger('partie_id');
+            $table->foreign('partie_id')->references('id')->on('parties')->onUpdate('cascade')->onDelete('cascade');
 
-            $table->unsignedBigInteger('id_quiz');
-            $table->foreign('id_quiz')->references('id')->on('quizzes')->onUpdate('cascade')->onDelete('cascade');
+            $table->unsignedBigInteger('quiz_id');
+            $table->foreign('quiz_id')->references('id')->on('quizzes')->onUpdate('cascade')->onDelete('cascade');
 
-            $table->unsignedBigInteger('id_user');
-            $table->foreign('id_user')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
 
             $table->timestamps();
         });

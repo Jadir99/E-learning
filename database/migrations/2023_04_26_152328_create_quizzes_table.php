@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('quiz_title');
-            $table->unsignedBigInteger('id_partie');
-            $table->foreign('id_partie')->references('id')->on('parties')->onUpdate('cascade')->onDelete('cascade');
+            $table->unsignedBigInteger('partie_id');
+            $table->foreign('partie_id')->references('id')->on('parties')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

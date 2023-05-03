@@ -21,8 +21,8 @@ return new class extends Migration
             $table->string('option3');
             $table->string('option4');
             
-            $table->unsignedBigInteger('id_quiz');
-            $table->foreign('id_quiz')->references('id')->on('quizzes')->onUpdate('cascade')->onDelete('cascade');
+            $table->unsignedBigInteger('quiz_id');
+            $table->foreign('quiz_id')->references('id')->on('quizzes')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
