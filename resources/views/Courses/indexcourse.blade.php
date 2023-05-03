@@ -12,7 +12,7 @@ E-Learning courses
         
         <div class="d-flex flex-between-center">
           <div class="d-flex gap-2 flex-xl-grow-1 align-items-center justify-content-xl-between">
-            <h5 class="mb-0 text-700 d-flex align-items-center" id="filterOffcanvasLabel"><span class="fas fa-filter fs--1 me-1"></span><span>Filter</span></h5><button class="btn btn-sm btn-outline-secondary">Reset</button>
+            <h5 class="mb-0 text-700 d-flex align-items-center" id="filterOffcanvasLabel"><span class="fas fa-filter fs--1 me-1"></span><span>Filter</span></h5> <a href="{{ route('courses.index') }}" ><button class="btn btn-sm btn-outline-secondary">Reset</button></a> 
             
           </div><button class="btn-close text-reset d-xl-none shadow-none" type="button" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
@@ -24,7 +24,7 @@ E-Learning courses
                 
                 
                     <li>
-                        <div class="form-check d-flex ps-0"><label class="form-check-label fs--1 flex-1 text-truncate" for="filter-category-on-sale"><span class="fas fa-tags fs--2 me-3"></span>{{$categorie->Nom_categorie}}</label><input class="form-check-input" type="checkbox"  name="on-sale" id="filter-category-on-sale" /></div>
+                        <div class="form-check d-flex ps-0"><label class="form-check-label fs--1 flex-1 text-truncate " for="filter-category-on-sale"><span  class="fas fa-tags fs--2 me-3 "></span>{{$categorie->Nom_categorie}} </label><a href="{{route('courses.by_category',['category_id'=>$categorie->id])}}"class="nav-link"><span class=""><i class="bi bi-eye bi-2x " style="font-size:20px;"></i></a></div>
                     </li>
                 @endforeach
                 
@@ -66,7 +66,7 @@ E-Learning courses
           </div>
         </div>
       </div>
-      <div class="row mb-3 g-3">
+      <div class="row mb-3 g-3" id="allcourses">
         @foreach ($courses as $course)
         <input type="hidden" name='courses[]' value='{{$course->id}}'  onclick="myFunction()"> 
         <article class="col-md-6 col-xxl-4">
@@ -125,6 +125,20 @@ E-Learning courses
       </div>
     </div>
   </div>
+  <script>
+    const allCourses = document.getElementById('allcourses');
+    const filterCheckbox = document.getElementById('filter-category-on-sale');
+
+    filterCheckbox.addEventListener('change', function() {
+      if (this.checked) {
+        allCourses.style.display = 'none';
+      } else {
+        allCourses.style.display = 'block';
+      }
+    });
+
+    
+</script>
   <script>
     function myFunction() {
   // Get the checkbox

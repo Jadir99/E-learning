@@ -42,3 +42,7 @@ Route::get('/', function () {
 Route::resource('courses', CourseController::class);
 Route::resource('users', UserController::class);
 Route::resource('parties', PartieController::class);
+
+Route::get('/courses/category_id/{category_id}', [CourseController::class, 'courses_by_category'])->name('courses.by_category');
+
+// Route::get('/home', [PagesControllers::class, 'index'])->name('pages.index');

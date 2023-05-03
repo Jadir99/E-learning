@@ -118,7 +118,16 @@ class CourseController extends Controller
         $to_delete->delete();
         return redirect()->route('courses.index'); 
     }
+    public function courses_by_category($category_id){
+      
+        $courses_by_category=categorie::findOrfail($category_id);
+        // dd($courses_by_category->courses);
+        return view('Courses.indexcourse',['courses'=>$courses_by_category->courses,'categories'=>categorie::all()]);
+
+    }
 }
+
+
 // {
 //     $request->validate([
 //             'name' => 'required',
