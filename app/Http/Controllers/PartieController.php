@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Partie;
+use App\Models\Devoir;
+use App\Models\Quiz;
+use App\Models\Conetent;
 class PartieController extends Controller
 {
     /**
@@ -49,6 +52,12 @@ class PartieController extends Controller
                 // $devoir=
                 // $quiz=
                 // ee
+
+                $partie_id= Partie::latest('id')->first()->id;
+                $devoir=new Devoir();
+                $devoir->devoir_title=$request->input('devoir_title');
+                $devoir->id_partie	=$partie_id;
+                $devoir->save();
 
                 return redirect()->route('courses.edit',['course'=>$request->input('course')]);
     }

@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();            
             $table->string('devoir_title');
+            // $table->string('enonce');
             $table->unsignedBigInteger('id_partie');
             $table->foreign('id_partie')->references('id')->on('parties')->onUpdate('cascade')->onDelete('cascade');
         });
