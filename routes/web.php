@@ -44,5 +44,8 @@ Route::resource('users', UserController::class);
 Route::resource('parties', PartieController::class);
 
 Route::get('/courses/category_id/{category_id}', [CourseController::class, 'courses_by_category'])->name('courses.by_category');
+Route::get('/courses/course_id/{course_id}', [CourseController::class, 'ask_for_course'])->name('courses.demand');
+Route::get('/courses/access/{coure_user_id}/{access}', [CourseController::class, 'update_acces_of_course'])->name('courses.update_acces_of_course');
+// Route::get('/courses.layoutt', [CourseController::class, 'show_all_demands']);
 
 // Route::get('/home', [PagesControllers::class, 'index'])->name('pages.index');

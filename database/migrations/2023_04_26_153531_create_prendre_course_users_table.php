@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->date('date_review');
             $table->decimal('review');
+            $table->string('access');
 
             
             $table->unsignedBigInteger('course_id');

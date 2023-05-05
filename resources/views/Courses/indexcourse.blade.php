@@ -84,6 +84,7 @@ E-Learning courses
                 <div class="col ps-3">
                   <h4 class="fs-1 text-warning d-flex align-items-center"> <span>{{$course->user->name	}}</span></h4>
                   <p class="mb-0 fs--1 text-800"><a class="dropdown-item" href="{{route('courses.show',['course'=>$course->id])}}"><span class="text-primary opacity-70">More details</span></a></p>
+                  <p class="mb-0 fs--1 text-800"><a class="dropdown-item" href="{{route('courses.demand',['course_id'=>$course->id])}}"><span class="text-primary opacity-70">Ask for the course</span></a></p>
                   @if (Auth::user()->id==$course->user->id)
                     <p class="mb-0 fs--1 text-800"><a class="dropdown-item" href="{{route('courses.edit',['course'=>$course->id])}}"><span class="text-primary opacity-70">Update course</span></a></p>
                   <form action="{{route('courses.destroy',['course'=>$course->id ])}}" method="post" >

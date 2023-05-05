@@ -585,5 +585,22 @@ E-Learning detail
         </div>
       </div>
     </div>
+    <div>
+      @foreach ($course_users as $user)
+      
+      @if ($user->pivot->access=='confirmer')
+              {{ __('yessss')}}
+              {{$user->pivot->review}}
+              {{$user->pivot->date_review}}
+              
+              {{-- {{dd($user)}} --}}
+          @else
+              {{ __('noooooooooooooooooooooooooooooo')}}
+          @endif
+      @endforeach
+      {{-- {{var_dump($course_users)}} --}}
+      <h1>kjbikkkkkkkkkkkkkkkkkk</h1>
+      
+    </div>
     
 @endsection

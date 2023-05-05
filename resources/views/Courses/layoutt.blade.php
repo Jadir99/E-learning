@@ -1,14 +1,5 @@
-{{-- hello  jadir ;
 
-{{print_r($courses)}}
-
-<div>
-    @foreach ($courses as $course)
-        {{$course->title}}<br>
-        {{$course->description}}<br>
-        {{$course->image}}<br>
-    @endforeach
-</div> --}}
+<span class="d-none">KJKHOI{{$demands=App\Http\Controllers\CourseController::show_all_demands()}}</span>
 <!DOCTYPE html>
 <html class="navbar-vertical-collapsed" data-bs-theme="light" lang="en-US" dir="ltr">
 
@@ -111,19 +102,31 @@
                   <div class="scrollbar-overlay" style="max-height:19rem">
                     <div class="list-group list-group-flush fw-normal fs--1">
                       <div class="list-group-title border-bottom">NEW</div>
+                      @foreach ($demands as $demand)
+                          
                       <div class="list-group-item">
-                        <a class="notification notification-flush notification-unread" href="#!">
+                        <div class="notification notification-flush notification-unread" >
                           <div class="notification-avatar">
                             <div class="avatar avatar-2xl me-3">
                               <img class="rounded-circle" src="../../../assets/img/team/1-thumb.png" alt="" />
                             </div>
                           </div>
                           <div class="notification-body">
-                            <p class="mb-1"><strong>Emma Watson</strong> replied to your comment : "Hello world 😍"</p>
-                            <span class="notification-time"><span class="me-2" role="img" aria-label="Emoji">💬</span>Just now</span>
+                            <p class="mb-1"><strong>{{$demand->coure_user_id}}</strong> Send demand to allow to the <strong>{{$demand->title}}</strong> course😍"</p>
+                            <a href="{{route('courses.update_acces_of_course',['coure_user_id'=>$demand->coure_user_id,'access'=>'confirm'])}}">
+                              <button type="button" class="btn btn-primary">Confirm</button>
+                            </a>
+                            <a href="{{route('courses.update_acces_of_course',['coure_user_id'=>$demand->coure_user_id,'access'=>'refuse'])}}">
+                              <button type="button" class="btn btn-danger">Refuse</button>
+                            </a>
+                            <span class="notification-time"><span class="me-2" role="img" aria-label="Emoji"></span>{{$demand->date_review}}</span>
+                            
+                            
                           </div>
-                        </a>
+                        </div>  
                       </div>
+                      @endforeach  
+                    
                       <div class="list-group-item">
                         <a class="notification notification-flush notification-unread" href="#!">
                           <div class="notification-avatar">

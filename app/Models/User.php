@@ -44,16 +44,16 @@ class User extends Authenticatable
 
 
     //many courses to learn
-    public function learner()
+    public function former()
     {
         return $this->hasMany(course::class);
     }
-
+    
 
     //many courses to publish
-    public function former()
+    public function learner()
     {
-        return $this->belongsToMany(course::class,'prendre_course_users');
+        return $this->belongsToMany(course::class,'prendre_course_users','course_id','user_id')->withPivot('date_review', 'review','access');
     }
 
 

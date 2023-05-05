@@ -6,9 +6,11 @@ use Illuminate\Http\Request;
 use App\Models\course;
 use App\Models\categorie;
 use App\Models\Partie;
+use App\Models\Prendre_course_user;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Termwind\Components\Dd;
+use Illuminate\Support\Facades\DB;
 
 class CourseController extends Controller
 {
@@ -17,7 +19,23 @@ class CourseController extends Controller
      */
     public function index()
     {
+        // $all=Auth::user()->join('Prendre_course_user','user.id','=','Prendre_course_user.user_id')
+    //     ->select('user.*,Prendre_course_user.*');
+    //     DB::table('')
+    // ->join('table2', 'table1.column_name', '=', 'table2.column_name')
+    // ->select('table1.*', 'table2.column_name')
+    // ->get();
+
+    // $courses_demandes=Auth::user()->former;
+    // dd($courses_demandes->join('Prendre_course_user','user.id','=','Prendre_course_user.user_id')->select('Prendre_course_user.course_id'));
+    // dd($courses_demandes);
+    
+        
         return view('Courses.indexcourse',['courses'=>course::all(),'categories'=>categorie::all()]);
+
+
+         
+    
     }
 
     /**
@@ -62,8 +80,13 @@ class CourseController extends Controller
     public function show( $id)
     {
         $course= course::findOrFail($id);
+        // dd($course->learner);
+        // foreach ($course->learner as $learner){
+        //     echo $learner->pivot->created_at;
+        // }
+        $learner=$course->learner->where('id', '=', $course->user->id);
     if ($course !=false )
-    return view('courses.course_detail',['course' => $course]);
+    return view('courses.course_detail',['course' => $course,'course_users'=>$learner]);
     }
 
     /**
@@ -125,6 +148,47 @@ class CourseController extends Controller
         return view('Courses.indexcourse',['courses'=>$courses_by_category->courses,'categories'=>categorie::all()]);
 
     }
+    
+    //ask for course (ajouter review )
+    public function ask_for_course ($course_id,) {
+        $demand_access=new Prendre_course_user();
+        $demand_access->course_id=$course_id;
+        $demand_access->user_id=Auth::user()->id;
+        $demand_access->access='in progress';
+        $demand_access->review='0.0';
+        $demand_access->date_review='2023-05-03';
+        $demand_access->save();
+
+        return redirect()->route('courses.index')->with('status', 'the demand was been send!');
+
+    }
+
+    // update the acces from in progress to refuse or confirm
+    public function update_acces_of_course($coure_user_id,$access){
+
+        $update_demand=Prendre_course_user::FindOrFail($coure_user_id);
+        $update_demand->access=$access;
+        $update_demand->update();
+        return redirect()->route('courses.index')->with('status', 'the demand was been send!');
+    }
+    
+    // showing the invitaion for the users whos askin for the course
+    public static function show_all_demands(){
+
+        $users = DB::table('users as u1')->where('u1.id','=',Auth::user()->id)
+        ->join('courses', 'u1.id', '=', 'courses.user_id')
+        ->join('prendre_course_users', 'courses.id', '=', 'prendre_course_users.course_id')
+        ->where('prendre_course_users.access','like','in progress')
+        ->join('users as u2','prendre_course_users.user_id','u2.id')
+        ->select('*','prendre_course_users.id as coure_user_id')
+        ->where('u2.id','!=',Auth::user()->id)
+        ->get();
+        return $users;
+    // dd($users);
+    // return view('courses.layoutt',$users);
+    }
+
+    
 }
 
 
