@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
 
 use Illuminate\Http\Request;
 
@@ -13,7 +16,11 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('users.home',['users'=>User::all()]);
+        $user_courses=DB::table('users as u1')->where('u1.id','=',Auth::user()->id)
+        ->join('courses', 'u1.id', '=', 'courses.user_id')
+        ->select('*','courses.id as course_id')
+        ->get();
+        return view('users.home',['user_courses'=>$user_courses]);
     }
 
     /**

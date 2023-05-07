@@ -175,7 +175,7 @@ class CourseController extends Controller
     // showing the invitaion for the users whos askin for the course
     public static function show_all_demands(){
 
-        $users = DB::table('users as u1')->where('u1.id','=',Auth::user()->id)
+        $course_user = DB::table('users as u1')->where('u1.id','=',Auth::user()->id)
         ->join('courses', 'u1.id', '=', 'courses.user_id')
         ->join('prendre_course_users', 'courses.id', '=', 'prendre_course_users.course_id')
         ->where('prendre_course_users.access','like','in progress')
@@ -183,10 +183,25 @@ class CourseController extends Controller
         ->select('*','prendre_course_users.id as coure_user_id')
         ->where('u2.id','!=',Auth::user()->id)
         ->get();
-        return $users;
+        return $course_user;
     // dd($users);
     // return view('courses.layoutt',$users);
     }
+    // show the coursses of on user 
+    public static function show_courses_allowed(){
+        
+
+        $course_user = DB::table('prendre_course_users as p')
+        ->where('p.user_id','=',Auth::user()->id)
+        ->where('p.access','like','confirm')
+        ->join('courses', 'p.course_id', '=', 'courses.id')
+        ->join('users as u','courses.user_id','=','u.id')
+        ->select('*','u.id as id_former','u.name as name_former','p.user_id as learner_id')
+        ->get();
+        // dd($course_user)
+        return $course_user;
+    }
+
 
     
 }

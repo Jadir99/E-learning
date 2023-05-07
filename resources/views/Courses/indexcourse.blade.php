@@ -77,7 +77,7 @@ E-Learning courses
                 </div>
                 <div class="p-2 pb-1 ">
                   <h5 class="fs-0 mb-2"><a class="text-dark" href="course-details.html"></a></h5>
-                  <h5 class="fs-0"><a href="{{route('courses.show',['course'=>$course->id])}}"> {{$course->title}}</a></h5>
+                  <h5 class="fs-0"><a href="{{route('courses.show',['course'=>$course->id])}}"> {{$course->title}}</a></h5><br>
                 </div>
               </div>
               <div class="row g-0 mb-3 align-items-end">
@@ -100,6 +100,7 @@ E-Learning courses
                 </div>
                 <div class="col-auto pe-3">
                   <a class="btn btn-sm btn-falcon-default me-2 hover-danger" href="#!" data-bs-toggle="tooltip" data-bs-placement="top" title="Add to Wishlist"><span class="far fa-heart" data-fa-transform="down-2"></span></a>
+                  <a class="btn btn-sm btn-falcon-default me-2 hover-danger" href="{{route('courses.demand',['course_id'=>$course->id])}}" data-bs-toggle="tooltip" data-bs-placement="top" title="Add to Wishlist"><span class="fas fa-plus" data-fa-transform="down-2"></span></a>
                 </div>
               </div>
             </div>
