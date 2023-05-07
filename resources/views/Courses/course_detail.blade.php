@@ -82,20 +82,6 @@ E-Learning detail
         </div>
         <div class="card mb-3">
           <div class="card-header bg-light">
-            <div class="d-flex flex-between-center">
-              <h5 class="mb-0 text-truncate">This Course Will Teach You</h5><button class="btn btn-falcon-primary btn-sm" type="button"><span class="d-none d-sm-inline-block align-middle me-1">Preview</span><span class="fas fa-caret-right align-middle"></span></button>
-            </div>
-          </div>
-          <div class="card-body position-relative">
-            <div class="bg-holder bg-card d-none d-md-block" style="background-image:url(../../../assets/img/icons/spot-illustrations/corner-6.png);"></div>
-            <!--/.bg-holder-->
-            <ul class="list-unstyled position-relative row g-2 fs--1 mb-0 p-0">
-              <li class="col-md-6 d-flex gap-2"><span class="fas fa-circle mt-1" data-fa-transform="shrink-8"></span><span>{{$course->description}}</span></li>
-            </ul>
-          </div>
-        </div>
-        <div class="card mb-3">
-          <div class="card-header bg-light">
             <h5 class="mb-0">Lesson Plans</h5>
           </div>
           <div class="card-body p-0">
@@ -181,50 +167,6 @@ E-Learning detail
             </div>
           </div>
           <div class="card-footer text-end py-1 bg-light"><a class="btn btn-link btn-sm py-2 px-0" href="#!">Full Lesson Plan<span class="fas fa-chevron-down ms-1 fs--2"></span></a></div>
-        </div>
-        <div class="card mb-3">
-          <div class="card-header bg-light">
-            <h5 class="mb-0">Requirements</h5>
-          </div>
-          <div class="card-body position-relative">
-            <div class="bg-holder bg-card d-none d-md-block" style="background-image:url(../../../assets/img/icons/spot-illustrations/corner-7.png);"></div>
-            <!--/.bg-holder-->
-            <ul class="list-unstyled position-relative fs--1 p-0 m-0">
-              <li class="mb-2">
-                <div class="d-flex"><span class="fas fa-circle me-2 mt-1" data-fa-transform="shrink-8"></span><span>This course requires profieciency in English language as the Lessons are prepared in English.</span></div>
-              </li>
-              <li class="mb-2">
-                <div class="d-flex"><span class="fas fa-circle me-2 mt-1" data-fa-transform="shrink-8"></span><span>Learners with following skills might be more benefited, but little extra work is all that’ll take to catch up to experts’ level</span></div>
-                <ol class="bullet-inside mt-2">
-                  <li class="mb-2">Comfortable with Computer</li>
-                  <li class="mb-2">Access to Internet and Computer</li>
-                  <li class="mb-2">Background in Fine Arts or Any Creative Field</li>
-                  <li class="mb-2">Digital Drawing Experience</li>
-                </ol>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="card mb-3">
-          <div class="card-header d-flex flex-between-center">
-            <h5 class="mb-0">Trainer</h5><button class="btn btn-falcon-primary btn-sm" type="button"><span class="fas fa-user-plus"></span><span class="d-none d-sm-inline-block align-middle ms-1">Follow</span></button>
-          </div>
-          <div class="card-body bg-light">
-            <div class="row g-4 text-center text-md-start">
-              <div class="col-md-auto"><a href="../trainer-profile.html">
-                  <div class="avatar avatar-4xl">
-                    <img class="rounded-circle" src="../../../assets/img/team/5-thumb.png" alt="" />
-                  </div>
-                </a></div>
-              <div class="col">
-                <h5 class="mb-2"> <a href="../trainer-profile.html">Bill Finger</a></h5>
-                <h6 class="fs--1 text-800 fw-normal mb-3">Artist | Professional Comic Writer</h6>
-                <p class="fs--1 text-700">Finger, an aspiring writer and part-time shoe salesperson, joined Kane's fledgling studio in 1938. Finger was inducted into the Jack Kirby Hall of Fame in 1994 and the <strong>Will Eisner Award Hall of Fame</strong>in 1999 after death. Finger was named one of the awardees in the company's 50th anniversary edition <strong>Fifty Who Made DC </strong>Great in 1985. In his honor, Comic-Con International created the <strong>Bill Finger Award for Excellence </strong>in Comic Book Writing in 2005. In 2014, Finger got a posthumous <strong>Inkpot Award. </strong></p>
-                <div class="d-flex flex-wrap gap-2 justify-content-center justify-content-md-start"><span class="badge rounded-pill badge-subtle-light border border-300 text-secondary py-2 px-3"><span class="fas fa-star me-1" data-fa-transform="shrink-4"></span><span>4.95</span></span><span class="badge rounded-pill badge-subtle-light border border-300 text-secondary py-2 px-3"><span class="fas fa-graduation-cap me-1" data-fa-transform="shrink-4"></span><span>35,400</span></span><span class="badge rounded-pill badge-subtle-light border border-300 text-secondary py-2 px-3"><span class="fas fa-file-alt me-1" data-fa-transform="shrink-4"></span><span>15</span></span><span class="badge rounded-pill badge-subtle-light border border-300 text-secondary py-2 px-3"><span class="fas fa-map-pin me-1" data-fa-transform="shrink-4"></span><span>5,700</span></span></div>
-              </div>
-            </div>
-          </div>
-          <div class="card-footer text-end py-1"><a class="btn btn-link btn-sm fw-medium py-2 px-0" href="course-list.html">View all his courses<span class="fas fa-external-link-alt ms-1"></span></a></div>
         </div>
         <div class="card mb-3">
           <div class="card-header bg-light d-flex flex-between-center">
@@ -586,20 +528,7 @@ E-Learning detail
       </div>
     </div>
     <div>
-      @foreach ($course_users as $user)
       
-      @if ($user->pivot->access=='confirmer')
-              {{ __('yessss')}}
-              {{$user->pivot->review}}
-              {{$user->pivot->date_review}}
-              
-              {{-- {{dd($user)}} --}}
-          @else
-              {{ __('noooooooooooooooooooooooooooooo')}}
-          @endif
-      @endforeach
-      {{-- {{var_dump($course_users)}} --}}
-      <h1>kjbikkkkkkkkkkkkkkkkkk</h1>
       
     </div>
     

@@ -3,11 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Console\View\Components\Alert;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 
 use Illuminate\Http\Request;
+use Symfony\Contracts\Service\Attribute\Required;
+
+use function PHPUnit\Framework\isEmpty;
 
 class UserController extends Controller
 {
@@ -50,9 +55,9 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit( $id)
     {
-        //
+        return view('users.settings');
     }
 
     /**
@@ -60,7 +65,45 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'name'=>'Required',
+            'email'=>'Required',
+            'tele'=>'Required',
+            'description'=>'Required',
+        ]);
+
+        
+
+
+echo 'jadir';
+        $update_user=User::FindOrFail($id);
+        $update_user->tele =$request->input('tele');
+        $update_user->email =$request->input('email');
+        $update_user->name =$request->input('name');
+        $update_user->Description_about_u =$request->input('description');
+        
+        $profile_image=$request->file('profile_image');
+        if ($profile_image){
+            $slug=Str::slug($request->name,'-');
+            $newImageProfile=uniqid().'-'.$slug.'.'.$profile_image->extension() ;
+            $profile_image->move(public_path('images/users'), $newImageProfile);
+            $update_user->profile_image_path=$newImageProfile;
+
+        }
+        $cover_image=$request->file('cover_image');
+        if ( $cover_image){
+            $slug=Str::slug($request->name,'-');
+            $newImageCover=uniqid().'-'.$slug.'.'.$cover_image->extension() ;
+            $cover_image->move(public_path('images/users'), $newImageCover);
+            $update_user->cover_image_path=$newImageCover;
+
+        }
+        // echo $request->file('cover_image')->getClientOriginalName();
+        // $update_user->cover_image_path=$request->cover_image;
+        // $update_user->profile_image_path=$request->profile_image;
+
+        $update_user->update();
+        return redirect()->back();
     }
 
     /**

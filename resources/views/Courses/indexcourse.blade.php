@@ -68,7 +68,6 @@ E-Learning courses
       </div>
       <div class="row mb-3 g-3" id="allcourses">
         @foreach ($courses as $course)
-        <input type="hidden" name='courses[]' value='{{$course->id}}'  onclick="myFunction()"> 
         <article class="col-md-6 col-xxl-4">
           <div class="card h-100 overflow-hidden">
             <div class="card-body p-0 d-flex flex-column justify-content-between">
