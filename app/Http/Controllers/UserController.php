@@ -75,11 +75,13 @@ class UserController extends Controller
         
 
 
-echo 'jadir';
         $update_user=User::FindOrFail($id);
         $update_user->tele =$request->input('tele');
         $update_user->email =$request->input('email');
         $update_user->name =$request->input('name');
+        $update_user->job =$request->input('job');
+        $update_user->city =$request->input('city');
+        $update_user->contry =$request->input('contry');
         $update_user->Description_about_u =$request->input('description');
         
         $profile_image=$request->file('profile_image');

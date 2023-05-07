@@ -13,9 +13,11 @@ return new class extends Migration
     {
         Schema::create('prendre_course_users', function (Blueprint $table) {
             $table->id();
+            $table->string('access');
             $table->date('date_review');
             $table->decimal('review');
-            $table->string('access');
+            $table->string('comment');
+            $table->date('date_comment');
 
             
             $table->unsignedBigInteger('course_id');

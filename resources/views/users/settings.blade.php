@@ -39,11 +39,13 @@ Profile settings
       </div>
       <div class="card-body bg-light">
         
-          <div class="col-lg-6"> <label class="form-label" for="first-name">First Name</label><input class="form-control" id="first-name" type="text" value="{{Auth::user()->name}}"  name='name'/></div>
+          <div class="col-lg-6"> <label class="form-label" for="first-name">User-Name</label><input class="form-control" id="first-name" type="text" value="{{Auth::user()->name}}"  name='name'/></div>
           {{-- <div class="col-lg-6"> <label class="form-label" for="last-name">Last Name</label><input class="form-control" id="last-name" type="text" value="{{Auth::user()->name}}" name='Name' /></div> --}}
           <div class="col-lg-6"> <label class="form-label" for="email1">Email</label><input class="form-control" id="email1" type="text" value="{{Auth::user()->email}}" name='email' /></div>
           <div class="col-lg-6"> <label class="form-label" for="email2">Phone</label><input class="form-control" id="email2" type="text" value="{{Auth::user()->tele}}" name='tele' /></div>
-          {{-- <div class="col-lg-12"><label class="form-label" for="email3">Heading</label><input class="form-control" id="email3" type="text" value="Software Engineer"  name='Name'/></div> --}}
+          <div class="col-lg-12"><label class="form-label" for="email3">Job</label><input class="form-control" id="email3" type="text"  value="{{Auth::user()->job}}" name='job'   /></div>
+          <div class="col-lg-12"><label class="form-label" for="email3">Contry</label><input class="form-control" id="email3" type="text"  name='city'  value="{{Auth::user()->city}}" /></div>
+          <div class="col-lg-12"><label class="form-label" for="email3">City</label><input class="form-control" id="email3" type="text"  name='contry' value="{{Auth::user()->contry}}" /></div>
           <div class="col-lg-12"> <label class="form-label" for="intro">Intro</label><textarea class="form-control" id="intro"  cols="30" rows="13" name='description'>{{Auth::user()->Description_about_u}}</textarea></div>
           <div class="col-12 d-flex justify-content-end"><button class="btn btn-primary" type="submit">Update </button></div>
         </form>

@@ -35,13 +35,14 @@ E-Learning courses
           <div class="card">
             <div class="card-body">
               <div class="row g-3 align-items-center">
-                <div class="col-md-6 col-lg-12 text-center"><img class="img-fluid rounded-3" src="\iamges\jadir.JPG" alt="" /></div>
+                <div class="col-md-6 col-lg-12 text-center"><img class="img-fluid rounded-3" src="\images\users\{{Auth::user()->profile_image_path}}" alt="" /></div>
                 <div class="col-md-6 col-lg-12">
                   <div class="row row-cols-1 g-0">
                     <div class="col text-center">
                       <h4>{{Auth::user()->name}} </h4>
-                      <h5 class="mb-1 text-800 fs-0">Artist | Comic Writer</h5>
-                      <p class="mb-0 fs--1">National Comics Publications, NY, USA</p>
+                      <h5 class="mb-1 text-800 fs-0">{{Auth::user()->job}}</h5>
+                      <h5 class="mb-1 text-800 fs-0">{{Auth::user()->tele}}</ >
+                      <p class="mb-0 fs--1">  {{Auth::user()->city}} in {{Auth::user()->contry}} </p>
                     </div>
                     <div class="col mt-4 mt-md-5 mt-lg-4 order-md-1 order-lg-0"><button class="btn btn-falcon-default btn-md mb-2 w-100" type="button"><span class="fas fa-comment me-1"> </span>Message</button><button class="btn btn-primary btn-md w-100" type="button"><span class="fas fa-heart me-1"> </span>Follow</button></div>
                     <div class="col mt-4 mt-md-5 mt-lg-4">
@@ -66,14 +67,12 @@ E-Learning courses
       <div class="col-lg-8 col-xl-9">
         <div class="card mb-3">
           <div class="card-header bg-light">
-            <h6 class="mb-0">Introduction</h6>
+            <h6 class="mb-0">About me </h6>
           </div>
           <div class="card-body">
             <div class="row flex-between-center">
               <div class="col-xxl-9 text-1000">
-                <p>Milton Finger (born February 8, 1914), better known as Bill Finger, was an American comic strip, comic book, film, and television writer who co-created the DC Comics superhero character Batman (along with Bob Kane).</p>
-                <p>A young, promising writer and part-time shoe dealer Finger, joined Kane's fledgling studio in 1938. Despite his significant (and often iconic) contributions as an imaginative writer, visionary mythos/world builder, and illustration creator, Finger was frequently reduced to ghostwriter status on a number of comics, including Batman and Green Lantern (Original Version).</p>
-                <p>In 1994, Finger was welcomed into the Jack Kirby Hall of Fame, and in 1999, he was inducted into the Will Eisner Award Hall of Fame. In 1985, the company recognised Finger as one of the awardees in their 50th anniversary edition of Fifty Who Made DC Great. In 2014, Finger was posthumously awarded The Inkpot Award.</p>
+                <p>{{Auth::user()->Description_about_u}}.</p>
               </div>
               <div class="col-xxl-3 mt-4 mt-xxl-0 d-flex justify-content-center">
                 <ul class="list-unstyled mb-0 d-flex flex-wrap flex-xxl-column gap-3 justify-content-center">
