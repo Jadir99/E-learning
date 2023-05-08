@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('delivery_user_partie__devoirs', function (Blueprint $table) {
             $table->id();
-            $table->string('path_travail');
+            $table->string('path_travail')->nullable();
             $table->date('date_remise');
             $table->decimal('note_devoir');
 
-            $table->id();
+            
             
 
             

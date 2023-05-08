@@ -85,85 +85,39 @@ E-Learning detail
             <h5 class="mb-0">Lesson Plans</h5>
           </div>
           <div class="card-body p-0">
-            <div class="d-flex align-items-center px-x1 py-2 border-bottom border-200">
-              <div class="hoverbox me-3 my-1"><a class="text-decoration-none" href="../../../assets/video/beach.mp4" data-gallery="attachment-bg">
-                  <div class="bg-attachment bg-attachment-square">
-                    <div class="bg-holder" style="background-image:url(../../../assets/img/elearning/lessons/intro.png);"></div>
-                    <!--/.bg-holder-->
-                  </div>
-                </a>
-                <div class="hoverbox-content flex-center pe-none bg-holder overlay overlay-1 rounded">
-                  <div class="position-relative fs-2 text-white" data-bs-theme="light"><span class="fas fa-play-circle"></span></div>
-                </div>
-              </div>
-              <div class="flex-1">
-                <h5 class="fs-0"><a class="text-decoration-none" href="../../../assets/video/beach.mp4" data-gallery="attachment-title">Intro</a></h5>
-                <p class="fs--1 mb-0">Introduction and Course Objectives</p>
-              </div><button class="btn btn-falcon-default btn-sm" type="button"><span class="d-none d-sm-inline-block me-1">Take a Peek</span><span class="fas fa-chevron-down fs--2"></span></button>
-            </div>
-            <div class="d-flex align-items-center px-x1 py-2 border-bottom border-200">
-              <div class="hoverbox me-3 my-1"><a class="text-decoration-none" href="../../../assets/video/beach.mp4" data-gallery="attachment-bg">
-                  <div class="bg-attachment bg-attachment-square">
-                    <div class="bg-holder" style="background-image:url(../../../assets/img/elearning/lessons/chapter1.png);"></div>
-                    <!--/.bg-holder-->
-                  </div>
-                </a>
-                <div class="hoverbox-content flex-center pe-none bg-holder overlay overlay-1 rounded">
-                  <div class="position-relative fs-2 text-white" data-bs-theme="light"><span class="fas fa-play-circle"></span></div>
-                </div>
-              </div>
-              <div class="flex-1">
-                <h5 class="fs-0"><a class="text-decoration-none" href="../../../assets/video/beach.mp4" data-gallery="attachment-title">Chapter 1</a></h5>
-                <p class="fs--1 mb-0">Tools, nothing more, nothing less</p>
-              </div><span class="fas fa-lock fs--1 text-secondary"></span>
-            </div>
-            <div class="d-flex align-items-center px-x1 py-2 border-bottom border-200">
-              <div class="hoverbox me-3 my-1"><a class="text-decoration-none" href="../../../assets/video/beach.mp4" data-gallery="attachment-bg">
-                  <div class="bg-attachment bg-attachment-square">
-                    <div class="bg-holder" style="background-image:url(../../../assets/img/elearning/lessons/chapter2.png);"></div>
-                    <!--/.bg-holder-->
-                  </div>
-                </a>
-                <div class="hoverbox-content flex-center pe-none bg-holder overlay overlay-1 rounded">
-                  <div class="position-relative fs-2 text-white" data-bs-theme="light"><span class="fas fa-play-circle"></span></div>
-                </div>
-              </div>
-              <div class="flex-1">
-                <h5 class="fs-0"><a class="text-decoration-none" href="../../../assets/video/beach.mp4" data-gallery="attachment-title">Chapter 2</a></h5>
-                <p class="fs--1 mb-0">Choosing the Right Tool</p>
-              </div><span class="fas fa-lock fs--1 text-secondary"></span>
-            </div>
-            <div class="d-flex align-items-center px-x1 py-2 border-bottom border-200">
-              <div class="hoverbox me-3 my-1"><a class="text-decoration-none" href="../../../assets/video/beach.mp4" data-gallery="attachment-bg">
-                  <div class="bg-attachment bg-attachment-square">
-                    <div class="bg-holder" style="background-image:url(../../../assets/img/elearning/lessons/chapter3.png);"></div>
-                    <!--/.bg-holder-->
-                  </div>
-                </a>
-                <div class="hoverbox-content flex-center pe-none bg-holder overlay overlay-1 rounded">
-                  <div class="position-relative fs-2 text-white" data-bs-theme="light"><span class="fas fa-play-circle"></span></div>
-                </div>
-              </div>
-              <div class="flex-1">
-                <h5 class="fs-0"><a class="text-decoration-none" href="../../../assets/video/beach.mp4" data-gallery="attachment-title">Chapter 3</a></h5>
-                <p class="fs--1 mb-0">Getting Comfortable</p>
-              </div><span class="fas fa-lock fs--1 text-secondary"></span>
-            </div>
-            <div class="d-flex align-items-center px-x1 py-2">
-              <div class="hoverbox me-3 my-1"><a class="text-decoration-none" href="../../../assets/video/beach.mp4" data-gallery="attachment-bg">
-                  <div class="bg-attachment bg-attachment-square">
-                    <div class="bg-holder" style="background-image:url(../../../assets/img/elearning/lessons/chapter4.png);"></div>
-                    <!--/.bg-holder-->
-                  </div>
-                </a>
-                <div class="hoverbox-content flex-center pe-none bg-holder overlay overlay-1 rounded">
-                  <div class="position-relative fs-2 text-white" data-bs-theme="light"><span class="fas fa-play-circle"></span></div>
-                </div>
-              </div>
-              <div class="flex-1">
-                <h5 class="fs-0"><a class="text-decoration-none" href="../../../assets/video/beach.mp4" data-gallery="attachment-title">Chapter 4</a></h5>
-                <p class="fs--1 mb-0">Exploring Beyond Comfort</p>
-              </div><span class="fas fa-lock fs--1 text-secondary"></span>
+            <div class="table-responsive scrollbar">
+              <table class="table table-borderless mb-0 fs--1 overflow-hidden">
+                <tbody>
+                  @foreach ($parties as $part)
+      
+                  <tr class="btn-reveal-trigger bg-light">
+                    <td class="align-middle white-space-nowrap">
+                      <div class="d-flex gap-3 align-items-center position-relative"><img class="rounded-1 border border-200" src="../../../assets/img/elearning/lessons/intro.png" width="60" alt="" />
+                        <div>
+                          <h5 class="fs-0 text-primary"><a href="{{route('parties.show',['party'=>$part->id])}}">{{$part->title_partie}}</a><span data-bs-toggle="tooltip" data-bs-placement="top" title="Requirement fulfilled"><span class="text-primary fs-0 ms-2 fas fa-check-circle"></span></span></h5>
+                          <p class="fs--1 text-900 mb-0">{{$part->description_partie}}</p>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="align-middle white-space-nowrap fs--1 text-700">
+                      <p class="mb-1">create at {{$part->date_pub_partie}}</p>
+                    </td>
+                    @if ($course->user_id==Auth::user()->id)
+
+                    <td class="align-middle white-space-nowrap text-end">
+                      <div class="dropdown font-sans-serif position-static d-inline-block btn-reveal-trigger"><button class="btn btn-link text-600 btn-sm dropdown-toggle btn-reveal dropdown-caret-none float-end" type="button" id="dropdown-0" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs--1"></span></button>
+                        <div class="dropdown-menu dropdown-menu-end border py-2" aria-labelledby="dropdown-0"><a class="dropdown-item" href="{{route('parties.show',['party'=>$part->id])}}">View</a><a class="dropdown-item" href="#!">Edit</a>
+                          <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Delete</a>
+                        </div>
+                      </div>
+                    </td>
+                        
+                    @endif
+                  </tr>
+                      
+                  @endforeach
+                </tbody>
+              </table>
             </div>
           </div>
           <div class="card-footer text-end py-1 bg-light"><a class="btn btn-link btn-sm py-2 px-0" href="#!">Full Lesson Plan<span class="fas fa-chevron-down ms-1 fs--2"></span></a></div>

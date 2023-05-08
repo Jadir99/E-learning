@@ -95,7 +95,7 @@ class PartieController extends Controller
     {
         $party= Partie::findOrFail($id);
         if ($party !=false )
-        return view('parties.party_detail',['party'=>$party,'devoirs'=>$party->devoir]);
+        return view('parties.party_detail',['party'=>$party]);
     }
 
     /**

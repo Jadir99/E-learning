@@ -86,7 +86,7 @@ class CourseController extends Controller
         // }
         $learner=$course->learner->where('id', '=', $course->user->id);
     if ($course !=false )
-    return view('courses.course_detail',['course' => $course,'course_users'=>$learner]);
+    return view('courses.course_detail',['course' => $course,'course_users'=>$learner,'parties'=>$course->partie]);
     }
 
     /**
@@ -156,7 +156,9 @@ class CourseController extends Controller
         $demand_access->user_id=Auth::user()->id;
         $demand_access->access='in progress';
         $demand_access->review='0.0';
+        $demand_access->comment='this is amazing';
         $demand_access->date_review='2023-05-03';
+        $demand_access->date_comment='2023-05-03';
         $demand_access->save();
 
         return redirect()->route('courses.index')->with('status', 'the demand was been send!');
