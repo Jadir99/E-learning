@@ -47,6 +47,8 @@ Route::get('/courses/category_id/{category_id}', [CourseController::class, 'cour
 Route::get('/courses/course_id/{course_id}', [CourseController::class, 'ask_for_course'])->name('courses.demand');
 Route::get('/courses/access/{coure_user_id}/{access}', [CourseController::class, 'update_acces_of_course'])->name('courses.update_acces_of_course');
 Route::post('/partie/Homework submissions', [PartieController::class, 'remise_devoir'])->name('parties.remise_devoir');
+
+Route::post('/courses/review', [CourseController::class, 'insert_review'])->name('courses.insert_review_comment');
 // Route::get('/courses.layoutt', [CourseController::class, 'show_all_demands']);
 
 // Route::get('/home', [PagesControllers::class, 'index'])->name('pages.index');

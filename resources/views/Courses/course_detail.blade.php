@@ -152,7 +152,9 @@ E-Learning detail
                   <div class="col-12">
                     <div class="fs--2 text-600 d-flex flex-column flex-md-row align-items-center gap-2">
                       <h6 class="fs--2 text-600 mb-0">3 days ago</h6>
-                      <p class="mb-0 ms-1">230 people found this helpful</p>
+                      <p class="mb-0 ms-1">230 people found this helpful <span class="far fa-star text-warning star-icon"></span>
+                      </p>
+                      
                     </div>
                   </div>
                 </div>
@@ -248,7 +250,8 @@ E-Learning detail
                   <div class="col-12">
                     <div class="fs--2 text-600 d-flex flex-column flex-md-row align-items-center gap-2">
                       <h6 class="fs--2 text-600 mb-0">8 days ago</h6>
-                      <p class="mb-0 ms-1">0 people found this helpful</p>
+                      <p class="mb-0 ms-1">0 people found this helpful <h6> <span class="fa fa-star text-warning"></span>gggggggg<span class="far fa-star text-warning "></span> </h6>
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -256,7 +259,57 @@ E-Learning detail
               <div class="col-md-auto d-flex justify-content-center gap-2"><button class="btn btn-falcon-default icon-item focus-bg-primary"><span class="fs--2 fas fa-thumbs-up"></span></button><button class="btn btn-falcon-default icon-item focus-bg-secondary"><span class="fs--2 fas fa-thumbs-up" data-fa-transform="rotate-180"></span></button></div>
             </div>
           </div>
-          <div class="card-footer bg-light text-end py-1"><a class="btn btn-link btn-sm py-2 px-0" href="#!">See All Reviewes<span class="fas fa-external-link-alt ms-1"></span></a></div>
+            <div class=" ">
+              <div class="container">
+                <h2>Rating Star</h2>
+                <p>Click on a star to rate:</p>
+                <!-- <span class="far fa-star text-warning " id="star1" onclick="rate(1)"></span> -->
+                  
+                  <span class="far fa-star text-warning "id="star1" onclick="rate(1)"></span> 
+              <span class="far fa-star text-warning " id="star2" onclick="rate(2)"></span>
+              <span class="far fa-star text-warning " id="star3" onclick="rate(3)"></span>
+              <span class="far fa-star text-warning " id="star4" onclick="rate(4)"></span>
+              <span class="far fa-star text-warning " id="star5" onclick="rate(5)"></span>
+              {{-- <p>Your rating is: <span id="rating"></span></p> --}}
+            </div>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+            
+
+            <form action="{{route('courses.insert_review_comment')}}" method="post">
+              @csrf
+              {{-- @method('put') --}}
+              <input type="hidden" name="review" id="rating" value="">
+              <input type="hidden" name="course_id" value="{{$course->id}}">
+              <textarea name="comment" id=""  cols="80%"placeholder="print your comment"></textarea>
+              {{-- <div class="emojiarea-editor outline-none scrollbar" contenteditable="true"></div>
+              <div class="btn btn-link emoji-icon" data-picmo="data-picmo" data-picmo-input-target=".emojiarea-editor"><span class="far fa-laugh-beam"></span></div> --}}
+              <button type='submit'>kkkkkkkkkk</button>
+            </form>
+            <form action="{{route('courses.insert_review_comment')}}" method="post" enctype="multipart/form-data">
+              @csrf
+              {{-- @method('put')  --}}
+              <button type="submit">nnnnnnnn</button>
+            </form>
+            <script>
+              // Define a function to handle rating
+              function rate(star) {
+                for (var i = 1; i <= 5; i++) {
+                  if (i <= star) {
+                    $('#star' + i).removeClass('far fa-star text-warning').addClass('fa fa-star text-warning');
+                  } else {
+                    $('#star' + i).removeClass('fa fa-star text-warning').addClass('far fa-star text-warning');
+                  }
+                }
+                // Set the rating value as 20% per star
+                var rating1 = star * 20;
+                // Update the rating display
+                $('#rating').val(rating1);
+                
+                
+              }
+            </script>
+          </div>
+
         </div>
         <div class="card">
           <div class="card-header">

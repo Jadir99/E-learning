@@ -203,7 +203,46 @@ class CourseController extends Controller
         // dd($course_user)
         return $course_user;
     }
+    public function insert_review(request $request){
 
+    
+        // $review=DB::table('prendre_course_users')
+        // ->where('user_id','=',Auth::user()->id)
+        // // ->where('access','like','confirm')
+        // ->where('course_id','=',$request->course_id)
+        // ->first();
+
+        $review = Prendre_course_user::
+        where('user_id', Auth::user()->id)
+        ->where('course_id', $request->course_id)
+        ->first();
+
+        // echo $request->course_id;
+        // echo $request->comment;
+        // echo $request->review;  
+
+
+        $review=Prendre_course_user::FindOrFail($review->id);
+
+
+        // dd($request);
+
+
+            
+
+
+            $review->date_comment = date('Y-m-d H:i');
+            $review->date_review = date('Y-m-d H:i');
+            $review->comment = $request->comment;
+            $review->review = $request->review;
+            $review->update();
+        // echo 'jijbkl';  
+
+        
+
+        
+
+    }
 
     
 }
