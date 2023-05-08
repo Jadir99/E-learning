@@ -70,10 +70,15 @@ the party
 
             <div class='notification'>
                  {{$devoir->enonce}} &ensp; 
-                 <form action="">
-                    @csrf
-                <input type="file" name="" id="">
-                <input type="button" value="File submissions">
+                 <form action="{{route('parties.remise_devoir')}}" method="POST" enctype="multipart/form-data">
+            
+                  @csrf
+                  {{-- @method('put') --}}
+                <input type="file" name="devoir" id="">
+                <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
+                <input type="hidden" name="devoir_id"  value="{{$devoir->id}}">
+                <input type="hidden" name="partie_id" value="{{$party->id}}">
+                <input type="submit" value="File submissions">
                  </form>
             </div>
             <span class="text-secondary"> <br>{{$devoir->created_at}}</span>

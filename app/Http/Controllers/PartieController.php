@@ -8,6 +8,7 @@ use App\Models\Devoir;
 use App\Models\Quiz;
 use App\Models\Conetent;
 use Illuminate\Support\Str;
+use App\Models\Delivery_user_partie_Devoir;
 class PartieController extends Controller
 {
     /**
@@ -91,7 +92,7 @@ class PartieController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $id )
     {
         $party= Partie::findOrFail($id);
         if ($party !=false )
@@ -120,5 +121,29 @@ class PartieController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function remise_devoir(Request $request){
+                // dd($request);
+
+                $date_delevry =date('Y-m-d');
+                $request->validate([
+                            'devoir' => 'required ',
+                    ]);
+                // adding document
+                $add_devoir= new Delivery_user_partie_Devoir();
+
+                $slug=Str::slug('devoir','-');
+                $new_document=uniqid().'-'.$slug.'.'.$request->devoir->extension() ;
+                $request->devoir->move(public_path('documents'), $new_document);
+                $add_devoir->path_travail=$new_document;
+                $add_devoir->partie_id=$request->partie_id;
+                $add_devoir->user_id=$request->user_id;
+                $add_devoir->devoir_id=$request->devoir_id;
+                $add_devoir->date_remise=$date_delevry;
+                $add_devoir->note_devoir='0.0';
+                $add_devoir->save();
+
+                return redirect()->back();
     }
 }

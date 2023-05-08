@@ -108,7 +108,7 @@
                         <div class="notification notification-flush notification-unread" >
                           <div class="notification-avatar">
                             <div class="avatar avatar-2xl me-3">
-                              <img class="rounded-circle" src="../../../assets/img/team/1-thumb.png" alt="" />
+                              <img class="rounded-circle" src="\images\users\{{$demand->profile_image_path}}" alt="" />
                             </div>
                           </div>
                           <div class="notification-body">
