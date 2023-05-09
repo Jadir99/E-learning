@@ -5,8 +5,8 @@ E-Learning courses
 @endsection
     
 @section('courses')
-
-    
+ 
+    {{-- ml,lm --}}
 <div class="row g-3">
     <div class="col-xxl-2 col-xl-3">
       <aside class="scrollbar-overlay font-sans-serif p-4 p-xl-3 ps-xl-0 offcanvas offcanvas-start offcanvas-filter-sidebar" tabindex="-1" id="filterOffcanvas" aria-labelledby="filterOffcanvasLabel">
@@ -104,6 +104,7 @@ E-Learning courses
                           <span class="far fa-star text-warning"></span>
                         @endfor
                         <span class="text-info ms-2">({{$review->sum_reviews}})</span></p>
+                        
                       @endif
                     @endforeach
                     
