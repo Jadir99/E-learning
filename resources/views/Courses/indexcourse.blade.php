@@ -78,38 +78,53 @@ E-Learning courses
             @endif
         @endforeach
         <article class="col-md-6 col-xxl-4">
-          <div class="card h-100 overflow-hidden">
+          <div class="card h-101 overflow-hidden">
             <div class="card-body p-0 d-flex flex-column justify-content-between">
               <div>
                 <div class="hoverbox text-center"><a class="text-decoration-none" href="\iamges\{{$course->image}}" data-gallery="attachment-bg"><img class="w-100 h-100 object-fit-cover" src="\iamges\{{$course->image}}" alt="" /></a>
                 </div>
-                <div class="p-2 pb-1 ">
-                  <h5 class="fs-0 mb-2"><a class="text-dark" href="course-details.html"></a></h5>
-                  <h5 class="fs-0"><a href="{{route('courses.show',['course'=>$course->id])}}"> {{$course->title}}</a></h5><br>
+                <div class=" ps-3">
+                  <h5 class="fs-0 mt-2"><a class="text-dark" href="{{route('courses.show',['course'=>$course->id])}}">{{$course->title}}</a></h5>
+                  <h5 class="fs-0 "><a href="#profile"> {{$course->user->name	}}</a></h5><br>
                 </div>
               </div>
-              <div class="row g-0 mb-3 align-items-end">
-                <div class="col ps-3">
-                  <h4 class="fs-1 text-warning d-flex align-items-center"> <span>{{$course->user->name	}}</span></h4>
-                  <p class="mb-0 fs--1 text-800"><a class="dropdown-item" href="{{route('courses.show',['course'=>$course->id])}}"><span class="text-primary opacity-70">More details</span></a></p>
-                  @if ($is_existe==0)
-                    <p class="mb-0 fs--1 text-800"><a class="dropdown-item" href="{{route('courses.demand',['course_id'=>$course->id])}}"><span class="text-primary opacity-70">Ask for the course</span></a></p>
-                  @endif
-                  @if (Auth::user()->id==$course->user->id)
-                    <p class="mb-0 fs--1 text-800"><a class="dropdown-item" href="{{route('courses.edit',['course'=>$course->id])}}"><span class="text-primary opacity-70">Update course</span></a></p>
-                  <form action="{{route('courses.destroy',['course'=>$course->id ])}}" method="post" >
-                      @csrf
-                      @method('delete')
-                      <button type="submit" ><p class="mb-0 fs--1 text-800-danger"><span class="text-danger">Delete course</span></p>  </button>
-                        
-                  </form>
+              <div class="row g-0 mb-2 align-items-end">
+                <div class="col ps-3 ">
+                  <h6 class="fs-1 text-warning d-flex align-items-center"> 
+                  <span class="">
+                    @foreach ($reviews as $review)
+                      <span class="d-none">{{$review->course_id}}</span>
+                      @if ($review->course_id==$course->id)
+                      {{-- show the stars --}}
+                      <span class="d-none">{{$nbr=$review->avg_reviews/20}}</span>
+                        @for ($i = 0; $i < $nbr; $i++)
+                          <span class="fa fa-star text-warning"></span>
+                        @endfor
+                        @for ($i = 0; $i < 5-$nbr; $i++)
+                          <span class="far fa-star text-warning"></span>
+                        @endfor
+                        <span class="text-info ms-2">({{$review->sum_reviews}})</span></p>
+                      @endif
+                    @endforeach
                     
-                  @endif
-                  
-                  
+                  </span></h6>
                 </div>
                 <div class="col-auto pe-3">
                   <a class="btn btn-sm btn-falcon-default me-2 hover-danger" href="#!" data-bs-toggle="tooltip" data-bs-placement="top" title="Add to Wishlist"><span class="far fa-heart" data-fa-transform="down-2"></span></a>
+                  
+                  
+                    <button class="btn btn-link text-600 btn-sm dropdown-toggle btn-reveal dropdown-caret-none float-end" type="button" id="dropdown-0" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs--1"></span></button>
+                      <div class="dropdown-menu dropdown-menu-end border py-2" aria-labelledby="dropdown-0">
+                        <a class="dropdown-item" href="{{route('courses.show',['course'=>$course->id])}}">View</a>
+                        @if (Auth::user()->id==$course->user->id)
+                        <a class="dropdown-item" href="{{route('courses.edit',['course'=>$course->id])}}">Edit</a>
+                        <form action="{{route('courses.destroy',['course'=>$course->id ])}}" method="post" >
+                          @csrf
+                          @method('delete')
+                        <div class="dropdown-divider"></div> <button type="submit" class="dropdown-item text-danger">Delete</button> 
+                        </form>
+                        @endif
+                      </div>
                   @if ($is_existe==0)
                   <a class="btn btn-sm btn-falcon-default me-2 hover-danger" href="{{route('courses.demand',['course_id'=>$course->id])}}" data-bs-toggle="tooltip" data-bs-placement="top" title="Add to Wishlist"><span class="fas fa-plus" data-fa-transform="down-2"></span></a>
                   @endif

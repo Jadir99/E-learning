@@ -24,9 +24,24 @@ class CourseController extends Controller
         ->where('p.user_id','=',Auth::user()->id)
         ->where('p.access','like','confirm')
         ->get();
+
+
+        // show the reviews 
+        // reviews
+        $reviews=DB::table('courses')
+        ->join('prendre_course_users as p','p.course_id','=','courses.id')
+        ->where('p.access','like','confirm')
+        ->where('p.comment','like','_%')
+        ->select('p.course_id',DB::raw('AVG(p.review) as avg_reviews'),DB::raw('count(p.review) as sum_reviews'))
+        ->groupBy('p.course_id')
+        ->get();
+
         
         
-        return view('Courses.indexcourse',['courses'=>course::all(),'categories'=>categorie::all(),'existes'=>$existe]);
+        
+        
+        
+        return view('Courses.indexcourse',['courses'=>course::all(),'categories'=>categorie::all(),'existes'=>$existe,'reviews'=>$reviews]);
     }
 
     /**
