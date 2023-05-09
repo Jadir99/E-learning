@@ -28,7 +28,6 @@ E-Learning courses
         navbarDoubleTop.remove(navbarDoubleTop);
       }
     </script>
-    <h1><a href="{{route('users.edit',['user'=>'settings'])}}">test</a></h1>
     <div class="row g-3 ">
       <div class="col-lg-4 col-xl-3">
         <div class="sticky-sidebar top-navbar-height">

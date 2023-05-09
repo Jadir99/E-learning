@@ -79,20 +79,44 @@ class CourseController extends Controller
      */
     public function show( $id)
     {
+        // reviews
         $reviews=DB::table('courses')->where('courses.id','=',$id)
         ->join('prendre_course_users as p','p.course_id','=','courses.id')
         ->where('p.access','like','confirm')
         ->where('p.comment','like','_%')
         ->join('users as u','u.id','=','p.user_id')->get();
         
+        // calcul moyenne ds rating stars
+        $sum=0;
+        foreach ($reviews as $review){
+                $sum+=$review->review;
+                
+        }
+        
+        
+        if (count($reviews)!=0)
+            $avg= $sum/count($reviews);
+        else
+            $avg=0;
+
+        $sum_learners=DB::table('courses')->where('courses.id','=',$id)
+        ->join('prendre_course_users as p','p.course_id','=','courses.id')
+        ->where('p.access','like','confirm')->get();
+
+
+        $sum=0;
+        foreach ($sum_learners as $learner){
+             $learner;
+                $sum+=1;
+        }
+        // echo $sum;
+
+
+        // courses 
         $course= course::findOrFail($id);
-        // dd($course->learner);
-        // foreach ($course->learner as $learner){
-        //     echo $learner->pivot->created_at;
-        // }
         $learner=$course->learner->where('id', '=', $course->user->id);
     if ($course !=false )
-    return view('courses.course_detail',['course' => $course,'course_users'=>$learner,'parties'=>$course->partie,'reviews'=>$reviews]);
+    return view('courses.course_detail',['course' => $course,'course_users'=>$learner,'parties'=>$course->partie,'reviews'=>$reviews,'avg'=>$avg,'sum_learners'=>$sum]);
     }
 
     /**
@@ -167,7 +191,7 @@ class CourseController extends Controller
         $demand_access->date_comment='2023-05-03';
         $demand_access->save();
 
-        return redirect()->route('courses.index')->with('status', 'the demand was been send!');
+        return redirect()->back();
 
     }
 
