@@ -79,6 +79,12 @@ class CourseController extends Controller
      */
     public function show( $id)
     {
+        $reviews=DB::table('courses')->where('courses.id','=',$id)
+        ->join('prendre_course_users as p','p.course_id','=','courses.id')
+        ->where('p.access','like','confirm')
+        ->where('p.comment','like','_%')
+        ->join('users as u','u.id','=','p.user_id')->get();
+        
         $course= course::findOrFail($id);
         // dd($course->learner);
         // foreach ($course->learner as $learner){
@@ -86,7 +92,7 @@ class CourseController extends Controller
         // }
         $learner=$course->learner->where('id', '=', $course->user->id);
     if ($course !=false )
-    return view('courses.course_detail',['course' => $course,'course_users'=>$learner,'parties'=>$course->partie]);
+    return view('courses.course_detail',['course' => $course,'course_users'=>$learner,'parties'=>$course->partie,'reviews'=>$reviews]);
     }
 
     /**
@@ -171,7 +177,7 @@ class CourseController extends Controller
         $update_demand=Prendre_course_user::FindOrFail($coure_user_id);
         $update_demand->access=$access;
         $update_demand->update();
-        return redirect()->route('courses.index')->with('status', 'the demand was been send!');
+        return redirect()->back();
     }
     
     // showing the invitaion for the users whos askin for the course
@@ -205,40 +211,21 @@ class CourseController extends Controller
     }
     public function insert_review(request $request){
 
-    
-        // $review=DB::table('prendre_course_users')
-        // ->where('user_id','=',Auth::user()->id)
-        // // ->where('access','like','confirm')
-        // ->where('course_id','=',$request->course_id)
-        // ->first();
 
         $review = Prendre_course_user::
         where('user_id', Auth::user()->id)
         ->where('course_id', $request->course_id)
         ->first();
 
-        // echo $request->course_id;
-        // echo $request->comment;
-        // echo $request->review;  
 
 
-        $review=Prendre_course_user::FindOrFail($review->id);
-
-
-        // dd($request);
-
-
-            
-
-
-            $review->date_comment = date('Y-m-d H:i');
-            $review->date_review = date('Y-m-d H:i');
-            $review->comment = $request->comment;
-            $review->review = $request->review;
-            $review->update();
-        // echo 'jijbkl';  
-
-        
+        $review=Prendre_course_user::FindOrFail($review->id);          
+        $review->date_comment = date('Y-m-d H:i');
+        $review->date_review = date('Y-m-d H:i');
+        $review->comment = $request->comment;
+        $review->review = $request->review;
+        $review->update();
+        return redirect()->back();
 
         
 

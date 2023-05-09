@@ -134,25 +134,37 @@ E-Learning detail
                 </select></div>
             </div>
           </div>
-          <div class="card-body py-0">
+        <div class="card-body py-0">
+
+          @foreach ($reviews as $review)
+              
+          
             <div class="row g-3 align-items-center text-center text-md-start py-3 border-bottom border-200">
+
               <div class="col-md-auto"><a href="#!">
                   <div class="avatar avatar-3xl">
-                    <img class="rounded-circle" src="../../../assets/img/team/11.jpg" alt="" />
+                    <img class="rounded-circle" src="\images\users\{{$review->profile_image_path}}" alt="" />
                   </div>
                 </a></div>
               <div class="col px-x1 py-2">
                 <div class="row">
                   <div class="col-12">
-                    <h6 class="fs-0"><a class="me-2" href="#!">Jim Lee</a><span class="fa fa-star text-warning"></span><span class="fa fa-star text-warning"></span><span class="fa fa-star text-warning"></span><span class="fa fa-star text-warning"></span><span class="fa fa-star-half-alt text-warning star-icon"></span></h6>
+                    <h6 class="fs-0"><a class="me-2" href="#!">{{$review->name}}</a>
+                      <span class="d-none">{{$nbr=$review->review/20}}</span>
+                      @for ($i = 0; $i < $nbr; $i++)
+                        <span class="fa fa-star text-warning"></span>
+                      @endfor
+                      @for ($i = 0; $i < 5-$nbr; $i++)
+                        <span class="far fa-star text-warning"></span>
+                      @endfor
+                    </h6>
                   </div>
                   <div class="col-md-10">
-                    <p class="fs--1 text-800">Excellent Course for any beginner like me :p The trainer was very generous and helped whenever DMed.</p>
+                    <p class="fs--1 text-800"> {{$review->comment}}.</p>
                   </div>
                   <div class="col-12">
                     <div class="fs--2 text-600 d-flex flex-column flex-md-row align-items-center gap-2">
-                      <h6 class="fs--2 text-600 mb-0">3 days ago</h6>
-                      <p class="mb-0 ms-1">230 people found this helpful <span class="far fa-star text-warning star-icon"></span>
+                      <h6 class="fs--2 text-600 mb-0">At {{$review->date_review}} </h6>
                       </p>
                       
                     </div>
@@ -161,115 +173,19 @@ E-Learning detail
               </div>
               <div class="col-md-auto d-flex justify-content-center gap-2"><button class="btn btn-falcon-default icon-item focus-bg-primary"><span class="fs--2 fas fa-thumbs-up"></span></button><button class="btn btn-falcon-default icon-item focus-bg-secondary"><span class="fs--2 fas fa-thumbs-up" data-fa-transform="rotate-180"></span></button></div>
             </div>
-            <div class="row g-3 align-items-center text-center text-md-start py-3 border-bottom border-200">
-              <div class="col-md-auto"><a href="#!">
-                  <div class="avatar avatar-3xl">
-                    <img class="rounded-circle" src="../../../assets/img/team/2-thumb.png" alt="" />
-                  </div>
-                </a></div>
-              <div class="col px-x1 py-2">
-                <div class="row">
-                  <div class="col-12">
-                    <h6 class="fs-0"><a class="me-2" href="#!">Greg Capullo</a><span class="fa fa-star text-warning"></span><span class="fa fa-star text-warning"></span><span class="fa fa-star text-warning"></span><span class="fa fa-star text-warning"></span><span class="fa fa-star text-warning"></span></h6>
-                  </div>
-                  <div class="col-md-10">
-                    <p class="fs--1 text-800">Very Sophisticated Content. Helped me a great amount. Going to follow this guy and his other contents.</p>
-                  </div>
-                  <div class="col-12">
-                    <div class="fs--2 text-600 d-flex flex-column flex-md-row align-items-center gap-2">
-                      <h6 class="fs--2 text-600 mb-0">5 days ago</h6>
-                      <p class="mb-0 ms-1">670 people found this helpful</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-auto d-flex justify-content-center gap-2"><button class="btn btn-falcon-default icon-item focus-bg-primary"><span class="fs--2 fas fa-thumbs-up"></span></button><button class="btn btn-falcon-default icon-item focus-bg-secondary"><span class="fs--2 fas fa-thumbs-up" data-fa-transform="rotate-180"></span></button></div>
-            </div>
-            <div class="row g-3 align-items-center text-center text-md-start py-3 border-bottom border-200">
-              <div class="col-md-auto"><a href="#!">
-                  <div class="avatar avatar-3xl">
-                    <img class="rounded-circle" src="../../../assets/img/team/7.jpg" alt="" />
-                  </div>
-                </a></div>
-              <div class="col px-x1 py-2">
-                <div class="row">
-                  <div class="col-12">
-                    <h6 class="fs-0"><a class="me-2" href="#!">Frank Miller</a><span class="fa fa-star text-warning"></span><span class="fa fa-star text-warning"></span><span class="fa fa-star text-warning"></span><span class="fa fa-star text-warning"></span><span class="fa fa-star text-warning"></span></h6>
-                  </div>
-                  <div class="col-md-10">
-                    <p class="fs--1 text-800">BEST COURSE EVER in this topic. Going to use the knowledge I’ve gathered here. Great content and clear, contextual lessons.</p>
-                  </div>
-                  <div class="col-12">
-                    <div class="fs--2 text-600 d-flex flex-column flex-md-row align-items-center gap-2">
-                      <h6 class="fs--2 text-600 mb-0">5 days ago</h6>
-                      <p class="mb-0 ms-1">17 people found this helpful</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-auto d-flex justify-content-center gap-2"><button class="btn btn-falcon-default icon-item focus-bg-primary"><span class="fs--2 fas fa-thumbs-up"></span></button><button class="btn btn-falcon-default icon-item focus-bg-secondary"><span class="fs--2 fas fa-thumbs-up" data-fa-transform="rotate-180"></span></button></div>
-            </div>
-            <div class="row g-3 align-items-center text-center text-md-start py-3 border-bottom border-200">
-              <div class="col-md-auto"><a href="#!">
-                  <div class="avatar avatar-3xl">
-                    <img class="rounded-circle" src="../../../assets/img/team/4-thumb.png" alt="" />
-                  </div>
-                </a></div>
-              <div class="col px-x1 py-2">
-                <div class="row">
-                  <div class="col-12">
-                    <h6 class="fs-0"><a class="me-2" href="#!">Scott Snyder</a><span class="fa fa-star text-warning"></span><span class="fa fa-star text-warning"></span><span class="fa fa-star text-warning"></span><span class="fa fa-star text-warning"></span><span class="fa fa-star text-warning"></span></h6>
-                  </div>
-                  <div class="col-md-10">
-                    <p class="fs--1 text-800">I was confused about what tool is good for me and this finally course helped me a lot. I’m definitely going to refer it to my peers.</p>
-                  </div>
-                  <div class="col-12">
-                    <div class="fs--2 text-600 d-flex flex-column flex-md-row align-items-center gap-2">
-                      <h6 class="fs--2 text-600 mb-0">7 days ago</h6>
-                      <p class="mb-0 ms-1">68 people found this helpful</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-auto d-flex justify-content-center gap-2"><button class="btn btn-falcon-default icon-item focus-bg-primary"><span class="fs--2 fas fa-thumbs-up"></span></button><button class="btn btn-falcon-default icon-item focus-bg-secondary"><span class="fs--2 fas fa-thumbs-up" data-fa-transform="rotate-180"></span></button></div>
-            </div>
-            <div class="row g-3 align-items-center text-center text-md-start py-3">
-              <div class="col-md-auto"><a href="#!">
-                  <div class="avatar avatar-3xl">
-                    <img class="rounded-circle" src="../../../assets/img/team/10.jpg" alt="" />
-                  </div>
-                </a></div>
-              <div class="col px-x1 py-2">
-                <div class="row">
-                  <div class="col-12">
-                    <h6 class="fs-0"><a class="me-2" href="#!">Bob Kane</a><span class="fa fa-star text-warning"></span><span class="fa fa-star text-warning"></span><span class="fa fa-star text-warning"></span><span class="fa fa-star-half-alt text-warning star-icon"></span><span class="fa fa-star text-300"></span></h6>
-                  </div>
-                  <div class="col-md-10">
-                    <p class="fs--1 text-800">This course changed my life. I changed my profession and now I’m living a happy life where I’m in charge. Thanks to both Bill and Falcon.</p>
-                  </div>
-                  <div class="col-12">
-                    <div class="fs--2 text-600 d-flex flex-column flex-md-row align-items-center gap-2">
-                      <h6 class="fs--2 text-600 mb-0">8 days ago</h6>
-                      <p class="mb-0 ms-1">0 people found this helpful <h6> <span class="fa fa-star text-warning"></span>gggggggg<span class="far fa-star text-warning "></span> </h6>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-auto d-flex justify-content-center gap-2"><button class="btn btn-falcon-default icon-item focus-bg-primary"><span class="fs--2 fas fa-thumbs-up"></span></button><button class="btn btn-falcon-default icon-item focus-bg-secondary"><span class="fs--2 fas fa-thumbs-up" data-fa-transform="rotate-180"></span></button></div>
-            </div>
+
+          @endforeach
           </div>
             <div class=" ">
               <div class="container">
-                <h2>Rating Star</h2>
                 <p>Click on a star to rate:</p>
                 <!-- <span class="far fa-star text-warning " id="star1" onclick="rate(1)"></span> -->
                   
-                  <span class="far fa-star text-warning "id="star1" onclick="rate(1)"></span> 
-              <span class="far fa-star text-warning " id="star2" onclick="rate(2)"></span>
-              <span class="far fa-star text-warning " id="star3" onclick="rate(3)"></span>
-              <span class="far fa-star text-warning " id="star4" onclick="rate(4)"></span>
-              <span class="far fa-star text-warning " id="star5" onclick="rate(5)"></span>
+                <span class="far fa-star text-warning "id="star1" onclick="rate(1)"></span> 
+                <span class="far fa-star text-warning " id="star2" onclick="rate(2)"></span>
+                <span class="far fa-star text-warning " id="star3" onclick="rate(3)"></span>
+                <span class="far fa-star text-warning " id="star4" onclick="rate(4)"></span>
+                <span class="far fa-star text-warning " id="star5" onclick="rate(5)"></span>
               {{-- <p>Your rating is: <span id="rating"></span></p> --}}
             </div>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
