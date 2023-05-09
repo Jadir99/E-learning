@@ -19,23 +19,14 @@ class CourseController extends Controller
      */
     public function index()
     {
-        // $all=Auth::user()->join('Prendre_course_user','user.id','=','Prendre_course_user.user_id')
-    //     ->select('user.*,Prendre_course_user.*');
-    //     DB::table('')
-    // ->join('table2', 'table1.column_name', '=', 'table2.column_name')
-    // ->select('table1.*', 'table2.column_name')
-    // ->get();
-
-    // $courses_demandes=Auth::user()->former;
-    // dd($courses_demandes->join('Prendre_course_user','user.id','=','Prendre_course_user.user_id')->select('Prendre_course_user.course_id'));
-    // dd($courses_demandes);
-    
+        // this for testing if the learner has been already enrolled or not   
+        $existe= DB::table('prendre_course_users as p')
+        ->where('p.user_id','=',Auth::user()->id)
+        ->where('p.access','like','confirm')
+        ->get();
         
-        return view('Courses.indexcourse',['courses'=>course::all(),'categories'=>categorie::all()]);
-
-
-         
-    
+        
+        return view('Courses.indexcourse',['courses'=>course::all(),'categories'=>categorie::all(),'existes'=>$existe]);
     }
 
     /**
@@ -172,10 +163,16 @@ class CourseController extends Controller
         return redirect()->route('courses.index'); 
     }
     public function courses_by_category($category_id){
-      
+
+        
+        // this for testing if the learner has been already enrolled or not   
+        $existe= DB::table('prendre_course_users as p')
+        ->where('p.user_id','=',Auth::user()->id)
+        ->where('p.access','like','confirm')
+        ->get();
         $courses_by_category=categorie::findOrfail($category_id);
         // dd($courses_by_category->courses);
-        return view('Courses.indexcourse',['courses'=>$courses_by_category->courses,'categories'=>categorie::all()]);
+        return view('Courses.indexcourse',['courses'=>$courses_by_category->courses,'categories'=>categorie::all(),'existes'=>$existe]);
 
     }
     
@@ -213,7 +210,6 @@ class CourseController extends Controller
         ->where('prendre_course_users.access','like','in progress')
         ->join('users as u2','prendre_course_users.user_id','u2.id')
         ->select('*','prendre_course_users.id as coure_user_id')
-        ->where('u2.id','!=',Auth::user()->id)
         ->get();
         return $course_user;
     // dd($users);

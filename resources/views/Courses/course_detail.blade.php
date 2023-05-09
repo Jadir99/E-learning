@@ -5,7 +5,7 @@
 E-Learning detail
 @endsection
 
-
+<span class="d-none">{{$if_is_learner=0}}</span>
 @section('courses')
     
 <div class="content">
@@ -76,13 +76,24 @@ E-Learning detail
             <div class="table-responsive scrollbar">
               <table class="table table-borderless mb-0 fs--1 overflow-hidden">
                 <tbody>
+                  @foreach ($reviews as $review)
+                  <span class="d-none">{{$review->review}}</span>
+                      @if ($review->user_id==Auth::user()->id)
+                          <span class="d-none">{{$if_is_learner=1}}</span>
+                      @endif
+                  @endforeach
                   @foreach ($parties as $part)
       
                   <tr class="btn-reveal-trigger bg-light">
                     <td class="align-middle white-space-nowrap">
                       <div class="d-flex gap-3 align-items-center position-relative"><img class="rounded-1 border border-200" src="\iamges\{{$course->image}}" width="60" alt="" />
                         <div>
-                          <h5 class="fs-0 text-primary"><a href="{{route('parties.show',['party'=>$part->id])}}">{{$part->title_partie}}</a><span data-bs-toggle="tooltip" data-bs-placement="top" title="Requirement fulfilled"><span class="text-primary fs-0 ms-2 fas fa-check-circle"></span></span></h5>
+                          <h5 class="fs-0 text-primary"><a
+                          @if ($if_is_learner==1)
+                            href="{{route('parties.show',['party'=>$part->id])}}">
+                          @else
+                              href="#"> 
+                          @endif {{$part->title_partie}}</a><span data-bs-toggle="tooltip" data-bs-placement="top" title="Requirement fulfilled"><span class="text-primary fs-0 ms-2 fas fa-check-circle"></span></span></h5>
                           <p class="fs--1 text-900 mb-0">{{$part->description_partie}}</p>
                         </div>
                       </div>
@@ -153,9 +164,7 @@ E-Learning detail
                   <div class="col-12">
                     <div class="fs--2 text-600 d-flex flex-column flex-md-row align-items-center gap-2">
                       <h6 class="fs--2 text-600 mb-0">At {{$review->date_review}} </h6>
-                      @if ($review->user_id==Auth::user()->id)
-                          <span class="d_none">{{$nbr=1}}</span>
-                      @endif
+                      
                       </p>
                       
                     </div>
@@ -167,8 +176,7 @@ E-Learning detail
 
           @endforeach
           </div>
-          @if ($nbr==1)
-              
+          @if ($if_is_learner==1)
             <div class=" ">
               <div class="container text-center mt-4">
                 <p>Click on a star to rate:</p>
@@ -195,6 +203,7 @@ E-Learning detail
               <button type='submit'class="btn btn-primary me-1 mb-1">Add comment <i class="bi bi-caret-right-fill"></i></button>
             </form>
           @else
+          
           <div class="card-footer text-center py-1 bg-light">
             <p class="mb-0 fs--1 "><a class="text-danger opacity-70" href="{{route('courses.demand',['course_id'=>$course->id])}}"> <h3 class="">Ask for the course !</h3></span></a></p>
           </div>
@@ -235,5 +244,8 @@ E-Learning detail
       
       
     </div>
+    @if ($if_is_learner!=1)
+    <script> alert('you don t ask for the course !!!, so u can not access to the content')</script>
+    @endif
     
 @endsection

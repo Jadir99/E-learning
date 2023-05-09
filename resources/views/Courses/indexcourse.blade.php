@@ -5,6 +5,7 @@ E-Learning courses
 @endsection
     
 @section('courses')
+
     
 <div class="row g-3">
     <div class="col-xxl-2 col-xl-3">
@@ -68,6 +69,14 @@ E-Learning courses
       </div>
       <div class="row mb-3 g-3" id="allcourses">
         @foreach ($courses as $course)
+
+        {{-- this is for testing if the learner has already been enrolled in this course --}}
+        <span class="d-none">{{$is_existe=0}}</span>
+        @foreach ($existes as $existe)
+            @if ($existe->course_id == $course->id)
+                <span class="d-none">{{$is_existe=1}}</span>
+            @endif
+        @endforeach
         <article class="col-md-6 col-xxl-4">
           <div class="card h-100 overflow-hidden">
             <div class="card-body p-0 d-flex flex-column justify-content-between">
@@ -83,7 +92,9 @@ E-Learning courses
                 <div class="col ps-3">
                   <h4 class="fs-1 text-warning d-flex align-items-center"> <span>{{$course->user->name	}}</span></h4>
                   <p class="mb-0 fs--1 text-800"><a class="dropdown-item" href="{{route('courses.show',['course'=>$course->id])}}"><span class="text-primary opacity-70">More details</span></a></p>
-                  <p class="mb-0 fs--1 text-800"><a class="dropdown-item" href="{{route('courses.demand',['course_id'=>$course->id])}}"><span class="text-primary opacity-70">Ask for the course</span></a></p>
+                  @if ($is_existe==0)
+                    <p class="mb-0 fs--1 text-800"><a class="dropdown-item" href="{{route('courses.demand',['course_id'=>$course->id])}}"><span class="text-primary opacity-70">Ask for the course</span></a></p>
+                  @endif
                   @if (Auth::user()->id==$course->user->id)
                     <p class="mb-0 fs--1 text-800"><a class="dropdown-item" href="{{route('courses.edit',['course'=>$course->id])}}"><span class="text-primary opacity-70">Update course</span></a></p>
                   <form action="{{route('courses.destroy',['course'=>$course->id ])}}" method="post" >
@@ -99,8 +110,9 @@ E-Learning courses
                 </div>
                 <div class="col-auto pe-3">
                   <a class="btn btn-sm btn-falcon-default me-2 hover-danger" href="#!" data-bs-toggle="tooltip" data-bs-placement="top" title="Add to Wishlist"><span class="far fa-heart" data-fa-transform="down-2"></span></a>
-                  
+                  @if ($is_existe==0)
                   <a class="btn btn-sm btn-falcon-default me-2 hover-danger" href="{{route('courses.demand',['course_id'=>$course->id])}}" data-bs-toggle="tooltip" data-bs-placement="top" title="Add to Wishlist"><span class="fas fa-plus" data-fa-transform="down-2"></span></a>
+                  @endif
                 </div>
               </div>
             </div>
