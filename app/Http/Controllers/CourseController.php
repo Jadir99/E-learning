@@ -77,7 +77,7 @@ class CourseController extends Controller
                 $course->date_pub=$date_published;
 
                 $course->save();
-                return redirect()->route('courses.index');
+                return redirect()->route('courses.index')->with('status', 'u added the course');
     }
 
     /**
@@ -165,7 +165,7 @@ class CourseController extends Controller
         $course_update->description=$request->input('description');
         $course_update->update();
         // dd($course_update);
-        return redirect()->route('courses.show',['course' => $course_update->id]); 
+        return redirect()->route('courses.show',['course' => $course_update->id])->with('status','u had been edit this course succesfly');; 
     }
 
     /**
@@ -203,7 +203,7 @@ class CourseController extends Controller
         $demand_access->date_comment='2023-05-03';
         $demand_access->save();
 
-        return redirect()->back();
+        return redirect()->route('courses.index')->with('status', 'Demand sent succesfly');
 
     }
 

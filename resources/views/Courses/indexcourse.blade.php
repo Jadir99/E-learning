@@ -5,6 +5,12 @@ E-Learning courses
 @endsection
     
 @section('courses')
+@if (session('status'))
+  <div class="alert alert-info border-2 d-flex align-items-center" role="alert">
+    <div class="bg-info me-3 icon-item"><span class="fas fa-info-circle text-white fs-3"></span></div>
+    <p class="mb-0 flex-1">{{ session('status') }}</p><button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+@endif
  
     {{-- ml,lm --}}
 <div class="row g-3">
@@ -155,6 +161,7 @@ E-Learning courses
       </div>
     </div>
   </div>
+  
   <script>
     const allCourses = document.getElementById('allcourses');
     const filterCheckbox = document.getElementById('filter-category-on-sale');

@@ -144,6 +144,6 @@ class PartieController extends Controller
                 $add_devoir->note_devoir='0.0';
                 $add_devoir->save();
 
-                return redirect()->back();
+                return redirect()->back()->with('status','the devoir is remise');
     }
 }

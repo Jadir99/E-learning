@@ -114,7 +114,7 @@ class UserController extends Controller
         // $update_user->profile_image_path=$request->profile_image;
 
         $update_user->update();
-        return redirect()->back();
+        return redirect()->back()->with('status','youre informations are update');
     }
 
     /**
