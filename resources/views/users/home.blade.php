@@ -99,20 +99,37 @@ E-Learning courses
             
             @foreach ($courses as $course)
             <article class="col-md-6 col-xxl-4">
-              <div class="card h-100 overflow-hidden">
+              <div class="card h-101 overflow-hidden">
                 <div class="card-body p-0 d-flex flex-column justify-content-between">
                   <div>
                     <div class="hoverbox text-center"><a class="text-decoration-none" href="\iamges\{{$course->image}}" data-gallery="attachment-bg"><img class="w-100 h-100 object-fit-cover" src="\iamges\{{$course->image}}" alt="" /></a>
                     </div>
                     <div class="p-2 pb-1 ">
-                      <h5 class="fs-0 mb-2"><a class="text-dark" href="course-details.html"></a></h5>
-                      <h5 class="fs-0"><a href="{{route('courses.show',['course'=>$course->course_id])}}"> {{$course->title}}</a></h5><br>
+                      <h5 class="fs-0 mb-2"><a class="text-dark" href="{{route('courses.show',['course'=>$course->course_id])}}"> {{$course->title}}</a></h5>
+                      <h5 class="fs-0"><a href="">{{$course->name_former	}}</a></h5><br>
                     </div>
                   </div>
-                  <div class="row g-0 mb-3 align-items-end">
+                  <div class="row g-0 mb-2 align-items-end">
                     <div class="col ps-3">
-                      <h4 class="fs-1 text-warning d-flex align-items-center"> <span>{{$course->name_former	}}</span></h4> <br>
-                      <p class="mb-0 fs--1 text-800"><a class="dropdown-item" href="{{route('courses.show',['course'=>$course->course_id])}}"><span class="text-primary opacity-70">More details</span></a></p>
+                      <h4 class="fs-1 text-warning d-flex align-items-center"> 
+                        <span>
+                          
+                  @foreach ($reviews as $review)
+                  <span class="d-none">{{$review->course_id}}</span>
+                  @if ($review->course_id==$course->id)
+                  {{-- show the stars --}}
+                  <span class="d-none">{{$nbr=$review->avg_reviews/20}}</span>
+                    @for ($i = 0; $i < $nbr; $i++)
+                      <span class="fa fa-star text-warning"></span>
+                    @endfor
+                    @for ($i = 0; $i < 5-$nbr; $i++)
+                      <span class="far fa-star text-warning"></span>
+                    @endfor
+                    <span class="text-info ms-2">({{$review->sum_reviews}})</span></p>
+                    
+                  @endif
+                @endforeach
+                        </span></h4> 
                     </div>
                     <div class="col-auto pe-3">
                       <a class="btn btn-sm btn-falcon-default me-2 hover-danger" href="#!" data-bs-toggle="tooltip" data-bs-placement="top" title="Add to Wishlist"><span class="far fa-heart" data-fa-transform="down-2"></span></a>
@@ -142,27 +159,38 @@ E-Learning courses
             
             @foreach ($user_courses as $course)
             <article class="col-md-6 col-xxl-4">
-              <div class="card h-100 overflow-hidden">
+              <div class="card h-120 overflow-hidden">
                 <div class="card-body p-0 d-flex flex-column justify-content-between">
                   <div>
                     <div class="hoverbox text-center"><a class="text-decoration-none" href="\iamges\{{$course->image}}" data-gallery="attachment-bg"><img class="w-100 h-100 object-fit-cover" src="\iamges\{{$course->image}}" alt="" /></a>
                     </div>
                     <div class="p-2 pb-1 ">
-                      <h5 class="fs-0 mb-2"><a class="text-dark" href="course-details.html"></a></h5>
-                      <h5 class="fs-0"><a href="{{route('courses.show',['course'=>$course->course_id])}}"> {{$course->title}}</a></h5><br>
+                      <h5 class="fs-0 mb-2"><a class="text-dark" href="{{route('courses.show',['course'=>$course->course_id])}}"> {{$course->title}}</a></h5>
+                      <h5 class="fs-0"><a href="">{{$course->name	}}</a></h5><br>
                     </div>
                   </div>
                   <div class="row g-0 mb-3 align-items-end">
                     <div class="col ps-3">
-                      <h4 class="fs-1 text-warning d-flex align-items-center"> <span>{{$course->name	}}</span></h4> <br>
-                      <p class="mb-0 fs--1 text-800"><a class="dropdown-item" href="{{route('courses.show',['course'=>$course->course_id])}}"><span class="text-primary opacity-70">More details</span></a></p>
-                      <p class="mb-0 fs--1 text-800"><a class="dropdown-item" href="{{route('courses.edit',['course'=>$course->id])}}"><span class="text-primary opacity-70">Update course</span></a></p>
-                        <form action="{{route('courses.destroy',['course'=>$course->id ])}}" method="post" >
-                            @csrf
-                            @method('delete')
-                            <button type="submit" ><p class="mb-0 fs--1 text-800-danger"><span class="text-danger">Delete course</span></p>  </button>
-                              
-                        </form>
+                      <h4 class="fs-1 text-warning d-flex align-items-center"> 
+                        <span>
+                        
+                          @foreach ($reviews as $review)
+                          <span class="d-none">{{$review->course_id}}</span>
+                          @if ($review->course_id==$course->id)
+                          {{-- show the stars --}}
+                          <span class="d-none">{{$nbr=$review->avg_reviews/20}}</span>
+                            @for ($i = 0; $i < $nbr; $i++)
+                              <span class="fa fa-star text-warning"></span>
+                            @endfor
+                            @for ($i = 0; $i < 5-$nbr; $i++)
+                              <span class="far fa-star text-warning"></span>
+                            @endfor
+                            <span class="text-info ms-2">({{$review->sum_reviews}})</span></p>
+                            
+                          @endif
+                        @endforeach
+                      </span></h4> <br>
+                      
                     </div>
                     <div class="col-auto pe-3">
                       <a class="btn btn-sm btn-falcon-default me-2 hover-danger" href="#!" data-bs-toggle="tooltip" data-bs-placement="top" title="Add to Wishlist"><span class="far fa-heart" data-fa-transform="down-2"></span></a>

@@ -21,11 +21,20 @@ class UserController extends Controller
      */
     public function index()
     {
+        // the reviews
+        $reviews=DB::table('courses')
+        ->join('prendre_course_users as p','p.course_id','=','courses.id')
+        ->where('p.access','like','confirm')
+        ->where('p.comment','like','_%')
+        ->select('p.course_id',DB::raw('AVG(p.review) as avg_reviews'),DB::raw('count(p.review) as sum_reviews'))
+        ->groupBy('p.course_id')
+        ->get();
+
         $user_courses=DB::table('users as u1')->where('u1.id','=',Auth::user()->id)
         ->join('courses', 'u1.id', '=', 'courses.user_id')
         ->select('*','courses.id as course_id')
         ->get();
-        return view('users.home',['user_courses'=>$user_courses]);
+        return view('users.home',['user_courses'=>$user_courses,'reviews'=>$reviews]);
     }
 
     /**

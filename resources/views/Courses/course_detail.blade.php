@@ -29,7 +29,7 @@ E-Learning detail
     <div class="card overflow-hidden mb-3" data-bs-theme="light">
       <div class="card-body bg-black">
         {{-- l'image de toutes les choses --}}
-        <div class="bg-holder rounded-3 bg-dark" style="background-image:url('../../../assets/img/icons/spot-illustrations/course-details-bg.png');" ></div>
+        <div class="bg-holder rounded-3" style="background-image:url('');" ></div>
         <!--/.bg-holder-->
         <div class="row">
           <div class="col-xl-8 position-relative">
@@ -43,12 +43,15 @@ E-Learning detail
                 </div>
               </div>
               <div class="col-lg-7">
-                <h6 class="fw-semi-bold text-400">A {{$course->title}} course by <a class="text-info" href="../trainer-profile.html">{{$course->user->name}}</a></h6>
-                <p class="mb-0 fw-medium text-400"> {{$course->description}} ...<a class="text-info" href="#!"> See more</a></p>
+                <h3 class="fw-semi-bold text-400 text-white">A {{$course->title}} course by <a class="text-info" href="../trainer-profile.html">{{$course->user->name}}</a>
+                
+                </h3>
+               <h5><p class="mb-0 fw-medium text-400 text-white"> {{$course->description}} ...<a class="text-info" href="#!"> See more</a></p></h5> 
               </div>
             </div>
             <hr class="text-secondary text-opacity-50" />
             <ul class="list-unstyled d-flex flex-wrap gap-3 fs--1 fw-semi-bold text-300 mt-3 mb-0">
+              
               <li><span class="fas fa-graduation-cap text-white me-1"> </span> {{$sum_learners}} Learners </li>
               <p class="text-white fw-semi-bold fs--1"><span class="me-1"><span class="fas fa-user-graduate text-white me-1"> </span>rate :  {{$avg }} % </span>
                 <span class="d-none">{{$nbr=$avg/20}}</span>
@@ -59,6 +62,7 @@ E-Learning detail
                       <span class="far fa-star text-warning"></span>
                     @endfor
                 <span class="text-info ms-2">( {{count($reviews)}} reviews)</span></p>
+
             </ul>
           </div>
         </div>

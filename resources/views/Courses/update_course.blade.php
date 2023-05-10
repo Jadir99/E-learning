@@ -57,9 +57,9 @@ E-Learning update course
 
             <tr class="btn-reveal-trigger bg-light">
               <td class="align-middle white-space-nowrap">
-                <div class="d-flex gap-3 align-items-center position-relative"><img class="rounded-1 border border-200" src="../../../assets/img/elearning/lessons/intro.png" width="60" alt="" />
+                <div class="d-flex gap-3 align-items-center position-relative"><img class="rounded-1 border border-200" src="\iamges\{{$course->image}}" width="60" alt="" />
                   <div>
-                    <h5 class="fs-0 text-primary">{{$part->title_partie}}<span data-bs-toggle="tooltip" data-bs-placement="top" title="Requirement fulfilled"><span class="text-primary fs-0 ms-2 fas fa-check-circle"></span></span></h5>
+                    <h5 class="fs-0 text-primary"><a href="{{route('parties.show',['party'=>$part->id])}}">{{$part->title_partie}}</a><span data-bs-toggle="tooltip" data-bs-placement="top" title="Requirement fulfilled"><span class="text-primary fs-0 ms-2 fas fa-check-circle"></span></span></h5>
                     <p class="fs--1 text-900 mb-0">{{$part->description_partie}}</p>
                   </div>
                 </div>
