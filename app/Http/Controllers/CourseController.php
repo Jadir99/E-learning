@@ -7,6 +7,8 @@ use App\Models\course;
 use App\Models\categorie;
 use App\Models\Partie;
 use App\Models\Prendre_course_user;
+use Illuminate\Database\Eloquent\Builder;
+
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Termwind\Components\Dd;
@@ -26,22 +28,44 @@ class CourseController extends Controller
         ->get();
 
 
-        // show the reviews 
-        // reviews
-        $reviews=DB::table('courses')
-        ->join('prendre_course_users as p','p.course_id','=','courses.id')
-        ->where('p.access','like','confirm')
-        ->where('p.comment','like','_%')
-        ->select('p.course_id',DB::raw('AVG(p.review) as avg_reviews'),DB::raw('count(p.review) as sum_reviews'))
-        ->groupBy('p.course_id')
+      
+
+        //test 
+// to do!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        // $parties=Partie::where('id',1)->first();
+        // $parties=$parties->users_devoir;
+        // $parties=$parties->where('user_id',1);
+        // dd($parties);
+
+// show reviews of each course 
+        $courses=course::whereHas('learner',function(Builder $query){
+            $query->where('access', 'like', 'confirm')
+            ->where('comment','like','_%')
+            ->select('course_id',DB::raw('AVG(review) as avg_reviews'),DB::raw('count(review) as sum_reviews'))
+            ->groupBy('course_id');
+        })
         ->get();
+// foreach ($courses as $course) {
+//             // echo $course->title;
+//             // echo $course->learner->first()->avg_reviews;
+//             echo $course->learner->avg('pivot.review');
+//             echo $course->avg_reviews;
+//             foreach ($course->learner as $review) {
+//                 // echo $review->pivot->access;
+//                 // echo $review->name;
+//                 echo $review->course_id;
+//                 echo $review->pivot->avg_reviews;
+//             }
+//         }
+
+
 
         
         
         
         
         
-        return view('Courses.indexcourse',['courses'=>course::all(),'categories'=>categorie::all(),'existes'=>$existe,'reviews'=>$reviews]);
+        return view('Courses.indexcourse',['courses'=>$courses,'categories'=>categorie::all(),'existes'=>$existe]);
     }
 
     /**
@@ -179,7 +203,17 @@ class CourseController extends Controller
     }
     public function courses_by_category($category_id){
 
-        
+        // show the reviews 
+        // reviews
+        $reviews=DB::table('courses')
+        ->join('prendre_course_users as p','p.course_id','=','courses.id')
+        ->where('p.access','like','confirm')
+        ->where('p.comment','like','_%')
+        ->select('p.course_id',DB::raw('AVG(p.review) as avg_reviews'),DB::raw('count(p.review) as sum_reviews'))
+        ->groupBy('p.course_id')
+        ->get();
+
+
         // this for testing if the learner has been already enrolled or not   
         $existe= DB::table('prendre_course_users as p')
         ->where('p.user_id','=',Auth::user()->id)
@@ -187,7 +221,7 @@ class CourseController extends Controller
         ->get();
         $courses_by_category=categorie::findOrfail($category_id);
         // dd($courses_by_category->courses);
-        return view('Courses.indexcourse',['courses'=>$courses_by_category->courses,'categories'=>categorie::all(),'existes'=>$existe]);
+        return view('Courses.indexcourse',['courses'=>$courses_by_category->courses,'categories'=>categorie::all(),'existes'=>$existe,'reviews'=>$reviews]);
 
     }
     

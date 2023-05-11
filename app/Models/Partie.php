@@ -31,7 +31,7 @@ class Partie extends Model
     //*******************************************************************for delivery table between partie user devoir********************* */
     public function devoirs()
     {
-        return $this->belongsToMany(Devoir::class,'delivery_user_partie__devoirs');
+        return $this->hasMany(Devoir::class);
     }
 
     //many learners

@@ -98,22 +98,14 @@ E-Learning courses
                 <div class="col ps-3 ">
                   <h6 class="fs-1 text-warning d-flex align-items-center"> 
                   <span class="">
-                    @foreach ($reviews as $review)
-                      <span class="d-none">{{$review->course_id}}</span>
-                      @if ($review->course_id==$course->id)
-                      {{-- show the stars --}}
-                      <span class="d-none">{{$nbr=$review->avg_reviews/20}}</span>
+                      <span class="">{{$nbr=$course->learner->avg('pivot.review')/20}}</span>
                         @for ($i = 0; $i < $nbr; $i++)
                           <span class="fa fa-star text-warning"></span>
                         @endfor
                         @for ($i = 0; $i < 5-$nbr; $i++)
                           <span class="far fa-star text-warning"></span>
                         @endfor
-                        <span class="text-info ms-2">({{$review->sum_reviews}})</span></p>
-                        
-                      @endif
-                    @endforeach
-                    
+                        <span class="text-info ms-2">({{$course->learner->count('pivot.review')}})</span></p>
                   </span></h6>
                 </div>
                 <div class="col-auto pe-3">
