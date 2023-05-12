@@ -148,4 +148,6 @@ class PartieController extends Controller
 
                 return redirect()->back()->with('status','the devoir is remise');
     }
+
+    
 }

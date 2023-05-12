@@ -5,6 +5,7 @@ E-Learning courses
 @endsection
     
 @section('courses')
+<h1><a href="{{route('users.profile',['profile_id'=>Auth::user()->id])}}">test</a></h1>
 @if (session('status'))
   <div class="alert alert-info border-2 d-flex align-items-center" role="alert">
     <div class="bg-info me-3 icon-item"><span class="fas fa-info-circle text-white fs-3"></span></div>
@@ -95,7 +96,7 @@ E-Learning courses
                 </div>
                 <div class=" ps-3">
                   <h5 class="fs-0 mt-2"><a class="text-dark" href="{{route('courses.show',['course'=>$course->id])}}">{{$course->title}}</a></h5>
-                  <h5 class="fs-0 "><a href="#profile"> {{$course->user->name	}}</a></h5><br>
+                  <h5 class="fs-0 "><a href="{{route('users.profile',['profile_id'=>$course->user->id])}}"> {{$course->user->name	}}</a></h5><br>
                 </div>
               </div>
               <div class="row g-0 mb-2 align-items-end">

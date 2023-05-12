@@ -225,7 +225,7 @@
                 <div class=" rounded-2 py-2">
                   <a class="dropdown-item" href="#!">{{Auth::user()->name}}</a>
                   <a class="dropdown-item" href="#!">Set status</a>
-                  <a class="dropdown-item" href="{{route('users.index')}}">Profile &amp; account</a>
+                  <a class="dropdown-item" href="{{route('users.profile',['profile_id'=>Auth::user()->id])}}">Profile &amp; account</a>
                   <a class="dropdown-item" href="#!">Feedback</a>
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="{{route('users.edit',['user'=>'settings'])}}">Settings</a>

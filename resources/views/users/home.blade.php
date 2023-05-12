@@ -177,7 +177,7 @@ E-Learning courses
                           
                             @foreach ($reviews as $review)
                               <span class="d-none">{{$review->course_id}}</span>
-                              @if ($review->id==$course->id)
+                              @if ($review->id==$item->id)
                               {{-- show the stars --}}
                               <span class="d-none">{{$nbr=$review->learner->avg('pivot.review') /20}}</span>
                                 @for ($i = 0; $i < $nbr; $i++)
@@ -190,7 +190,7 @@ E-Learning courses
                                 
                               @endif
                             @endforeach
-                        @endforeach
+              
                       </span></h4> <br>
                       
                     </div>
@@ -201,6 +201,7 @@ E-Learning courses
                 </div>
               </div>
             </article>
+            @endforeach
             @endforeach
     
           </div>

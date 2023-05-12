@@ -50,7 +50,7 @@ E-Learning detail
                 </div>
               </div>
               <div class="col-lg-7">
-                <h3 class="fw-semi-bold text-400 text-white">A {{$course->title}} course by <a class="text-info" href="../trainer-profile.html">{{$course->user->name}}</a>
+                <h3 class="fw-semi-bold text-400 text-white">A {{$course->title}} course by <a class="text-info" href="{{route('users.profile',['profile_id'=>$course->user->id])}}">{{$course->user->name}}</a>
                 
                 </h3>
                <h5><p class="mb-0 fw-medium text-400 text-white"> {{$course->description}} ...<a class="text-info" href="#!"> See more</a></p></h5> 
@@ -169,7 +169,7 @@ E-Learning detail
               <div class="col px-x1 py-2">
                 <div class="row">
                   <div class="col-12">
-                    <h6 class="fs-0"><a class="me-2" href="#!">{{$review->name}}</a>
+                    <h6 class="fs-0"><a class="me-2" href="{{route('users.profile',['profile_id'=>$review->id])}}">{{$review->name}}</a>
                       <span class="d-none">{{$nbr=$review->pivot->review/20}}</span>
                       @for ($i = 0; $i < $nbr; $i++)
                         <span class="fa fa-star text-warning"></span>

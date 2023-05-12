@@ -129,7 +129,7 @@ class UserController extends Controller
         // $update_user->profile_image_path=$request->profile_image;
 
         $update_user->update();
-        return redirect()->back()->with('status','youre informations are update');
+        return redirect()->route('users.profile',['profile_id'=>$id])->with('status','youre informations are update');
     }
 
     /**
@@ -138,5 +138,26 @@ class UserController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function profile($id){
+        $profile_courses=User::FindOrFail($id);
+
+        // show reviews of each course 
+        $reviews=course::whereHas('learner',function(Builder $query){
+            $query->where('access', 'like', 'confirm')
+            ->where('comment','like','_%')
+            ->select('course_id',DB::raw('AVG(review) as avg_reviews'),DB::raw('count(review) as sum_reviews'))
+            ->groupBy('course_id');
+        })
+        ->get();
+
+        $existe=course::whereHas('learner',function(Builder $query){
+            $query->where('users.id',Auth::user()->id)
+            ->where('access','like','confirm');
+        })->get();
+
+        return view('users.profile',['profile'=>$profile_courses,'reviews'=>$reviews,'existes'=>$existe]);
+        
     }
 }
