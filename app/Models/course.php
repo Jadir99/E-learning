@@ -27,7 +27,7 @@ class course extends Model
     public function learner()
     {
         return $this->belongsToMany(User::class,'prendre_course_users','course_id','user_id')
-        ->withPivot('date_review', 'review','access','comment','date_comment');
+        ->withPivot('date_review', 'review','access','comment','date_comment','id');
     }
 
     // every comment has course and user 

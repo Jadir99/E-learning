@@ -58,17 +58,24 @@ E-Learning detail
             </div>
             <hr class="text-secondary text-opacity-50" />
             <ul class="list-unstyled d-flex flex-wrap gap-3 fs--1 fw-semi-bold text-300 mt-3 mb-0">
-              
-              <li><span class="fas fa-graduation-cap text-white me-1"> </span> {{$sum_learners}} Learners </li>
-              <p class="text-white fw-semi-bold fs--1"><span class="me-1"><span class="fas fa-user-graduate text-white me-1"> </span>rate :  {{$avg }} % </span>
-                <span class="d-none">{{$nbr=$avg/20}}</span>
-                    @for ($i = 0; $i < $nbr; $i++)
-                      <span class="fa fa-star text-warning"></span>
-                    @endfor
-                    @for ($i = 0; $i < 5-$nbr; $i++)
-                      <span class="far fa-star text-warning"></span>
-                    @endfor
-                <span class="text-info ms-2">( {{count($reviews)}} reviews)</span></p>
+                    @foreach ($reviews as $review)
+                      <li><span class="fas fa-graduation-cap text-white me-1"> </span> {{$review->learner->count('pivot.review')}} Learners </li>
+                      <p class="text-white fw-semi-bold fs--1"><span class="me-1"><span class="fas fa-user-graduate text-white me-1"> </span>rate :  {{$nbr=$review->learner->avg('pivot.review') }} % </span>
+                
+                      <span class="d-none">{{$review->course_id}}</span>
+                      
+                      {{-- show the stars --}}
+                        @for ($i = 0; $i < $nbr/20; $i++)
+                          <span class="fa fa-star text-warning"></span>
+                        @endfor
+                        @for ($i = 0; $i < 5-$nbr/20 ; $i++)
+                          <span class="far fa-star text-warning"></span>
+                        @endfor
+
+                        <span class="text-info ms-2">( {{$review->learner->count('pivot.review')}} reviews)</span></p>
+                        
+                      
+                    @endforeach
 
             </ul>
           </div>
@@ -87,11 +94,13 @@ E-Learning detail
             <div class="table-responsive scrollbar">
               <table class="table table-borderless mb-0 fs--1 overflow-hidden">
                 <tbody>
-                  @foreach ($reviews as $review)
-                  <span class="d-none">{{$review->review}}</span>
-                      @if ($review->user_id==Auth::user()->id)
-                          <span class="d-none">{{$if_is_learner=1}}</span>
-                      @endif
+                  @foreach ($reviews as $existe)
+                    @foreach ($existe->learner as $review)
+                    <span class="d-none">{{$review->pivot->review}}</span>
+                        @if ($review->id==Auth::user()->id)
+                            <span class="d-none">{{$if_is_learner=1}}</span>
+                        @endif
+                    @endforeach
                   @endforeach
                   @foreach ($parties as $part)
       
@@ -146,7 +155,8 @@ E-Learning detail
           </div>
         <div class="card-body py-0">
 
-          @foreach ($reviews as $review)
+          @foreach ($reviews as $comment)
+          @foreach ($comment->learner as $review)
               
           
             <div class="row g-3 align-items-center text-center text-md-start py-3 border-bottom border-200">
@@ -160,7 +170,7 @@ E-Learning detail
                 <div class="row">
                   <div class="col-12">
                     <h6 class="fs-0"><a class="me-2" href="#!">{{$review->name}}</a>
-                      <span class="d-none">{{$nbr=$review->review/20}}</span>
+                      <span class="d-none">{{$nbr=$review->pivot->review/20}}</span>
                       @for ($i = 0; $i < $nbr; $i++)
                         <span class="fa fa-star text-warning"></span>
                       @endfor
@@ -170,11 +180,11 @@ E-Learning detail
                     </h6>
                   </div>
                   <div class="col-md-10">
-                    <p class="fs--1 text-800"> {{$review->comment}}.</p>
+                    <p class="fs--1 text-800"> {{$review->pivot->comment}}.</p>
                   </div>
                   <div class="col-12">
                     <div class="fs--2 text-600 d-flex flex-column flex-md-row align-items-center gap-2">
-                      <h6 class="fs--2 text-600 mb-0">At {{$review->date_review}} </h6>
+                      <h6 class="fs--2 text-600 mb-0">At {{$review->pivot->date_review}} </h6>
                       
                       </p>
                       
@@ -185,6 +195,7 @@ E-Learning detail
               <div class="col-md-auto d-flex justify-content-center gap-2"><button class="btn btn-falcon-default icon-item focus-bg-primary"><span class="fs--2 fas fa-thumbs-up"></span></button><button class="btn btn-falcon-default icon-item focus-bg-secondary"><span class="fs--2 fas fa-thumbs-up" data-fa-transform="rotate-180"></span></button></div>
             </div>
 
+          @endforeach
           @endforeach
           </div>
           @if ($if_is_learner==1)

@@ -78,11 +78,15 @@ E-Learning courses
 
         {{-- this is for testing if the learner has already been enrolled in this course --}}
         <span class="d-none">{{$is_existe=0}}</span>
-        @foreach ($existes as $existe)
-            @if ($existe->course_id == $course->id)
-                <span class="d-none">{{$is_existe=1}}</span>
-            @endif
-        @endforeach
+
+          @foreach ($existes as $existe)
+           
+            {{-- {{$existe->id}} --}}
+              @if ($existe->id == $course->id)
+                  <span class="d-none">{{$is_existe=1}}</span>
+              @endif
+            
+          @endforeach
         <article class="col-md-6 col-xxl-4">
           <div class="card h-101 overflow-hidden">
             <div class="card-body p-0 d-flex flex-column justify-content-between">
@@ -98,14 +102,22 @@ E-Learning courses
                 <div class="col ps-3 ">
                   <h6 class="fs-1 text-warning d-flex align-items-center"> 
                   <span class="">
-                      <span class="">{{$nbr=$course->learner->avg('pivot.review')/20}}</span>
+                    @foreach ($reviews as $review)
+                      <span class="d-none">{{$review->course_id}}</span>
+                      @if ($review->id==$course->id)
+                      {{-- show the stars --}}
+                      <span class="d-none">{{$nbr=$review->learner->avg('pivot.review') /20}}</span>
                         @for ($i = 0; $i < $nbr; $i++)
                           <span class="fa fa-star text-warning"></span>
                         @endfor
                         @for ($i = 0; $i < 5-$nbr; $i++)
                           <span class="far fa-star text-warning"></span>
                         @endfor
-                        <span class="text-info ms-2">({{$course->learner->count('pivot.review')}})</span></p>
+                        <span class="text-info ms-2">({{$review->learner->count('pivot.review')}})</span></p>
+                        
+                      @endif
+                    @endforeach
+                    
                   </span></h6>
                 </div>
                 <div class="col-auto pe-3">

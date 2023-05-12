@@ -53,7 +53,7 @@ class User extends Authenticatable
     //many courses to publish
     public function learning()
     {
-        return $this->belongsToMany(course::class,'prendre_course_users','course_id','user_id')->withPivot('date_review', 'review','access');
+        return $this->belongsToMany(course::class,'prendre_course_users','course_id','user_id')->withPivot('date_review', 'review','access','id');
     }
 
 

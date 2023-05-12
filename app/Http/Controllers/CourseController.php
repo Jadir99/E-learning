@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\course;
 use App\Models\categorie;
-use App\Models\Partie;
+use App\Models\User;
 use App\Models\Prendre_course_user;
 use Illuminate\Database\Eloquent\Builder;
 
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
+use SebastianBergmann\CodeCoverage\Driver\Selector;
 use Termwind\Components\Dd;
 use Illuminate\Support\Facades\DB;
 
@@ -21,51 +22,27 @@ class CourseController extends Controller
      */
     public function index()
     {
+        
         // this for testing if the learner has been already enrolled or not   
-        $existe= DB::table('prendre_course_users as p')
-        ->where('p.user_id','=',Auth::user()->id)
-        ->where('p.access','like','confirm')
-        ->get();
+        
+        $existe=course::whereHas('learner',function(Builder $query){
+            $query->where('users.id',Auth::user()->id)
+            ->where('access','like','confirm');
+        })->get();
 
 
-      
 
-        //test 
-// to do!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        // $parties=Partie::where('id',1)->first();
-        // $parties=$parties->users_devoir;
-        // $parties=$parties->where('user_id',1);
-        // dd($parties);
 
 // show reviews of each course 
-        $courses=course::whereHas('learner',function(Builder $query){
+        $reviews=course::whereHas('learner',function(Builder $query){
             $query->where('access', 'like', 'confirm')
             ->where('comment','like','_%')
             ->select('course_id',DB::raw('AVG(review) as avg_reviews'),DB::raw('count(review) as sum_reviews'))
             ->groupBy('course_id');
         })
         ->get();
-// foreach ($courses as $course) {
-//             // echo $course->title;
-//             // echo $course->learner->first()->avg_reviews;
-//             echo $course->learner->avg('pivot.review');
-//             echo $course->avg_reviews;
-//             foreach ($course->learner as $review) {
-//                 // echo $review->pivot->access;
-//                 // echo $review->name;
-//                 echo $review->course_id;
-//                 echo $review->pivot->avg_reviews;
-//             }
-//         }
-
-
-
         
-        
-        
-        
-        
-        return view('Courses.indexcourse',['courses'=>$courses,'categories'=>categorie::all(),'existes'=>$existe]);
+    return view('Courses.indexcourse',['courses'=>course::all(),'categories'=>categorie::all(),'existes'=>$existe,'reviews'=>$reviews]);
     }
 
     /**
@@ -109,44 +86,35 @@ class CourseController extends Controller
      */
     public function show( $id)
     {
-        // reviews
-        $reviews=DB::table('courses')->where('courses.id','=',$id)
-        ->join('prendre_course_users as p','p.course_id','=','courses.id')
-        ->where('p.access','like','confirm')
-        ->where('p.comment','like','_%')
-        ->join('users as u','u.id','=','p.user_id')->get();
         
-        // calcul moyenne ds rating stars
-        $sum=0;
-        foreach ($reviews as $review){
-                $sum+=$review->review;
-                
+// show reviews of each course 
+        $reviews=course::whereHas('learner',function(Builder $query){
+            $query->where('access', 'like', 'confirm')
+            ->where('comment','like','_%')
+            ->select('course_id',DB::raw('AVG(review) as avg_reviews'),DB::raw('count(review) as sum_reviews'))
+            ->groupBy('course_id');
+        })
+        ->where('courses.id',$id)
+        ->get();
+        
+        foreach ($reviews as $course) {
+            // echo $reviews->title;
+            // echo $course->learner->first()->avg_reviews;
+            echo $course->learner->avg('pivot.review');
+            echo $course->avg_reviews;
+            foreach ($course->learner as $review) {
+                // echo $review->pivot->access;
+                // echo $review->name;
+                echo $review->course_id;
+                echo $review->pivot->avg_reviews;
+            }
         }
         
-        
-        if (count($reviews)!=0)
-            $avg= $sum/count($reviews);
-        else
-            $avg=0;
-
-        $sum_learners=DB::table('courses')->where('courses.id','=',$id)
-        ->join('prendre_course_users as p','p.course_id','=','courses.id')
-        ->where('p.access','like','confirm')->get();
-
-
-        $sum=0;
-        foreach ($sum_learners as $learner){
-             $learner;
-                $sum+=1;
-        }
-        // echo $sum;
-
 
         // courses 
         $course= course::findOrFail($id);
-        $learner=$course->learner->where('id', '=', $course->user->id);
     if ($course !=false )
-    return view('courses.course_detail',['course' => $course,'course_users'=>$learner,'parties'=>$course->partie,'reviews'=>$reviews,'avg'=>$avg,'sum_learners'=>$sum]);
+    return view('courses.course_detail',['course' => $course,'parties'=>$course->partie,'reviews'=>$reviews]);
     }
 
     /**
@@ -203,30 +171,34 @@ class CourseController extends Controller
     }
     public function courses_by_category($category_id){
 
-        // show the reviews 
-        // reviews
-        $reviews=DB::table('courses')
-        ->join('prendre_course_users as p','p.course_id','=','courses.id')
-        ->where('p.access','like','confirm')
-        ->where('p.comment','like','_%')
-        ->select('p.course_id',DB::raw('AVG(p.review) as avg_reviews'),DB::raw('count(p.review) as sum_reviews'))
-        ->groupBy('p.course_id')
-        ->get();
-
-
+      
         // this for testing if the learner has been already enrolled or not   
-        $existe= DB::table('prendre_course_users as p')
-        ->where('p.user_id','=',Auth::user()->id)
-        ->where('p.access','like','confirm')
+        
+        $existe=course::whereHas('learner',function(Builder $query){
+            $query->where('users.id',Auth::user()->id)
+            ->where('access','like','confirm');
+        })->get();
+
+
+
+
+// show reviews of each course 
+        $reviews=course::whereHas('learner',function(Builder $query){
+            $query->where('access', 'like', 'confirm')
+            ->where('comment','like','_%')
+            ->select('course_id',DB::raw('AVG(review) as avg_reviews'),DB::raw('count(review) as sum_reviews'))
+            ->groupBy('course_id');
+        })
         ->get();
         $courses_by_category=categorie::findOrfail($category_id);
+        
         // dd($courses_by_category->courses);
         return view('Courses.indexcourse',['courses'=>$courses_by_category->courses,'categories'=>categorie::all(),'existes'=>$existe,'reviews'=>$reviews]);
 
     }
     
     //ask for course (ajouter review )
-    public function ask_for_course ($course_id,) {
+    public function ask_for_course ($course_id) {
         $demand_access=new Prendre_course_user();
         $demand_access->course_id=$course_id;
         $demand_access->user_id=Auth::user()->id;
@@ -253,14 +225,75 @@ class CourseController extends Controller
     // showing the invitaion for the users whos askin for the course
     public static function show_all_demands(){
 
-        $course_user = DB::table('users as u1')->where('u1.id','=',Auth::user()->id)
-        ->join('courses', 'u1.id', '=', 'courses.user_id')
-        ->join('prendre_course_users', 'courses.id', '=', 'prendre_course_users.course_id')
-        ->where('prendre_course_users.access','like','in progress')
-        ->join('users as u2','prendre_course_users.user_id','u2.id')
-        ->select('*','prendre_course_users.id as coure_user_id')
+        // $course_user = DB::table('users as u1')->where('u1.id','=',Auth::user()->id)
+        // ->join('courses', 'u1.id', '=', 'courses.user_id')
+        // ->join('prendre_course_users', 'courses.id', '=', 'prendre_course_users.course_id')
+        // ->where('prendre_course_users.access','like','in progress')
+        // ->join('users as u2','prendre_course_users.user_id','u2.id')
+        // ->select('*','prendre_course_users.id as coure_user_id')
+        // ->get();
+        // // dd($course_user);echo '<br>';
+        // $course_user=User::where('users.id',Auth::user()->id)->whereHas('learning',function (Builder $query) {
+        //     $query
+        //     ->where('prendre_course_users.access','in progress');
+        //     // ->where('courses.user_id',Auth::user()->id);
+        // })
+        // ->get();
+
+        $test_course_user_owner=User::FindOrFail(Auth::user()->id)
+        ->whereHas('former',function (Builder $query) {
+            $query->whereHas('learner',function(Builder $query) {
+                $query
+                ->where('access','like','in progress');
+            });
+        })
         ->get();
-        return $course_user;
+
+        
+foreach ($test_course_user_owner as $formers){
+    foreach ($formers->former as $former){
+if ($former->user_id==Auth::user()->id){
+    // echo $former->id; echo '<br>';
+        
+            echo 'title of course : ';echo $former->title;echo '<br>';
+            foreach ($former->learner as $learner){
+                if ($learner->pivot->access=='in progress'){
+                    echo $learner->pivot->id;echo '<br>';
+    
+                }
+    
+        
+}
+            
+        }
+        // var_dump ($former);
+        // echo $former->title;echo '<br>';
+
+    }
+}
+
+        // foreach ($course_user as $item){
+        //     echo $item->id; echo '<br>';
+        //     // echo $item->learning->count('*'); echo '<br>';
+
+        //     // echo $item->id; echo '<br>';
+        //     if ( $item->id==Auth::user()->id){
+        //     foreach ($item->learning as $user){
+        //         echo 'title : ';   echo $user->title;echo '<br>';
+        //     echo 'acces : ';echo  $user->pivot->access; echo '<br>';
+        //     echo 'user_id : ';echo  $user->pivot->user_id; echo '<br>';
+        //     // echo 'user_id_enrolled : ';$user->pivot->review; echo '<br>';
+        //     // echo $user->id; echo '<br>';
+
+        //     }   
+
+        //     }
+        // }
+
+
+
+
+        return $test_course_user_owner;
     // dd($users);
     // return view('courses.layoutt',$users);
     }
@@ -302,81 +335,3 @@ class CourseController extends Controller
 
     
 }
-
-
-// {
-//     $request->validate([
-//             'name' => 'required',
-//             'price' => 'required',
-//             'origin' => 'required ',' integer',
-//     ]);
-//     $computer=new Computer();
-//     $computer->name=$request->input('name');
-//     $computer->prince=$request->input('price');
-//     $computer->origin=$request->input('origin');
-//     $computer->save();
-//     return redirect()->route('computers.index');
-// }
-
-// /**
-//  * Display the specified resource.
-//  */
-// public function show($computer)
-// {
-    
-//     $comp= Computer::findOrFail($computer);
-//     // $computer= Computer::find($computer);
-
-
-//     // $index=array_search($computer,array_column($computers,'computer'));
-//     //this metod return l index of value in computers 
-//     if ($computer !=false )
-//     return view('computers.show',['computer' => $comp]);
-// }
-
-// /**
-//  * Show the form for editing the specified resource.
-//  */
-// public function edit($computer)
-// {
-    
-//     $comp= Computer::findOrFail($computer);
-//     // $computer= Computer::find($id);
-
-
-//     // $index=array_search($id,array_column($computers,'id'));
-//     //this metod return l index of value in computers 
-//     if ($computer !=false )
-//     return view('computers.edit',['computer' => $comp]);
-// }
-
-// /**
-//  * Update the specified resource in storage.
-//  */
-// public function update(Request $request, string $id)
-// {
-//     $request->validate([
-//         'name' => 'required',
-//         'price' => 'required',
-//         'origin' => 'required ',' integer',
-// ]);
-// $to_update= Computer::findOrFail($id);
-
-
-// $to_update->name=$request->input('name');
-// $to_update->prince=$request->input('price');
-// $to_update->origin=$request->input('origin');
-// $to_update->update();
-// return redirect()->route('computers.show',['computer'=>$to_update]); 
-// }
-
-// /**
-//  * Remove the specified resource from storage.
-//  */
-// public function destroy( $id)
-// {
-//     $to_delete= Computer::findOrFail($id);
-//     $to_delete->delete();
-//     return redirect()->route('computers.index'); 
-    
-// }
