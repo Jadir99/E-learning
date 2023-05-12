@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\course;
 use Illuminate\Console\View\Components\Alert;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Builder;
+
 
 
 use Illuminate\Http\Request;
@@ -21,19 +24,31 @@ class UserController extends Controller
      */
     public function index()
     {
-        // the reviews
-        $reviews=DB::table('courses')
-        ->join('prendre_course_users as p','p.course_id','=','courses.id')
-        ->where('p.access','like','confirm')
-        ->where('p.comment','like','_%')
-        ->select('p.course_id',DB::raw('AVG(p.review) as avg_reviews'),DB::raw('count(p.review) as sum_reviews'))
-        ->groupBy('p.course_id')
+        // show reviews of each course 
+        $reviews=course::whereHas('learner',function(Builder $query){
+            $query->where('access', 'like', 'confirm')
+            ->where('comment','like','_%')
+            ->select('course_id',DB::raw('AVG(review) as avg_reviews'),DB::raw('count(review) as sum_reviews'))
+            ->groupBy('course_id');
+        })
         ->get();
 
-        $user_courses=DB::table('users as u1')->where('u1.id','=',Auth::user()->id)
-        ->join('courses', 'u1.id', '=', 'courses.user_id')
-        ->select('*','courses.id as course_id')
-        ->get();
+        // $user_courses=DB::table('users as u1')->where('u1.id','=',Auth::user()->id)
+        // ->join('courses', 'u1.id', '=', 'courses.user_id')
+        // ->select('*','courses.id as course_id')
+        // ->get();
+
+        $user_courses=User::FindOrFail(Auth::user()->id)->get();
+
+        // var_dump($user_courses->course);
+
+        // foreach ($user_courses as $user_course){
+        //     foreach ($user_course->former as $item){
+        //         echo $item->title;
+        //     }
+        // }
+
+
         return view('users.home',['user_courses'=>$user_courses,'reviews'=>$reviews]);
     }
 

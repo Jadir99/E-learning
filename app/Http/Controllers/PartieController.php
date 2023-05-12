@@ -86,7 +86,7 @@ class PartieController extends Controller
                 $document->save();
 
 
-                return redirect()->route('courses.edit',['course'=>$request->input('course')]);
+                return redirect()->route('courses.edit',['course'=>$request->input('course')])->with('status','u had been your chapter');
     }
 
     /**

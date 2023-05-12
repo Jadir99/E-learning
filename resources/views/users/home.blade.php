@@ -114,21 +114,21 @@ E-Learning courses
                       <h4 class="fs-1 text-warning d-flex align-items-center"> 
                         <span>
                           
-                  @foreach ($reviews as $review)
-                  <span class="d-none">{{$review->course_id}}</span>
-                  @if ($review->course_id==$course->id)
-                  {{-- show the stars --}}
-                  <span class="d-none">{{$nbr=$review->avg_reviews/20}}</span>
-                    @for ($i = 0; $i < $nbr; $i++)
-                      <span class="fa fa-star text-warning"></span>
-                    @endfor
-                    @for ($i = 0; $i < 5-$nbr; $i++)
-                      <span class="far fa-star text-warning"></span>
-                    @endfor
-                    <span class="text-info ms-2">({{$review->sum_reviews}})</span></p>
-                    
-                  @endif
-                @endforeach
+                        @foreach ($reviews as $review)
+                          <span class="d-none">{{$review->course_id}}</span>
+                          @if ($review->id==$course->id)
+                          {{-- show the stars --}}
+                          <span class="d-none">{{$nbr=$review->learner->avg('pivot.review') /20}}</span>
+                            @for ($i = 0; $i < $nbr; $i++)
+                              <span class="fa fa-star text-warning"></span>
+                            @endfor
+                            @for ($i = 0; $i < 5-$nbr; $i++)
+                              <span class="far fa-star text-warning"></span>
+                            @endfor
+                            <span class="text-info ms-2">({{$review->learner->count('pivot.review')}})</span></p>
+                            
+                          @endif
+                        @endforeach
                         </span></h4> 
                     </div>
                     <div class="col-auto pe-3">
@@ -157,37 +157,39 @@ E-Learning courses
           </div>
           <div class="row mb-3 g-3" id="allcourses">
             
-            @foreach ($user_courses as $course)
-            <article class="col-md-6 col-xxl-4">
-              <div class="card h-120 overflow-hidden">
-                <div class="card-body p-0 d-flex flex-column justify-content-between">
-                  <div>
-                    <div class="hoverbox text-center"><a class="text-decoration-none" href="\iamges\{{$course->image}}" data-gallery="attachment-bg"><img class="w-100 h-100 object-fit-cover" src="\iamges\{{$course->image}}" alt="" /></a>
+            @foreach ($user_courses as $user_course)
+              @foreach ($user_course->former as $item)
+              <article class="col-md-6 col-xxl-4">
+                <div class="card h-120 overflow-hidden">
+                  <div class="card-body p-0 d-flex flex-column justify-content-between">
+                    <div>
+                      <div class="hoverbox text-center"><a class="text-decoration-none" href="\iamges\{{$item->image}}" data-gallery="attachment-bg"><img class="w-100 h-100 object-fit-cover" src="\iamges\{{$item->image}}" alt="" /></a>
+                      </div>
+                      <div class="p-2 pb-1 ">
+                        <h5 class="fs-0 mb-2"><a class="text-dark" href="{{route('courses.show',['course'=>$item->id])}}"> {{$item->title}}</a></h5>
+                        <h5 class="fs-0"><a href="">{{Auth::user()->name	}}</a></h5><br>
+                      </div>
                     </div>
-                    <div class="p-2 pb-1 ">
-                      <h5 class="fs-0 mb-2"><a class="text-dark" href="{{route('courses.show',['course'=>$course->course_id])}}"> {{$course->title}}</a></h5>
-                      <h5 class="fs-0"><a href="">{{$course->name	}}</a></h5><br>
-                    </div>
-                  </div>
-                  <div class="row g-0 mb-3 align-items-end">
-                    <div class="col ps-3">
-                      <h4 class="fs-1 text-warning d-flex align-items-center"> 
-                        <span>
-                        
-                          @foreach ($reviews as $review)
-                          <span class="d-none">{{$review->course_id}}</span>
-                          @if ($review->course_id==$course->id)
-                          {{-- show the stars --}}
-                          <span class="d-none">{{$nbr=$review->avg_reviews/20}}</span>
-                            @for ($i = 0; $i < $nbr; $i++)
-                              <span class="fa fa-star text-warning"></span>
-                            @endfor
-                            @for ($i = 0; $i < 5-$nbr; $i++)
-                              <span class="far fa-star text-warning"></span>
-                            @endfor
-                            <span class="text-info ms-2">({{$review->sum_reviews}})</span></p>
-                            
-                          @endif
+                    <div class="row g-0 mb-3 align-items-end">
+                      <div class="col ps-3">
+                        <h4 class="fs-1 text-warning d-flex align-items-center"> 
+                          <span>
+                          
+                            @foreach ($reviews as $review)
+                              <span class="d-none">{{$review->course_id}}</span>
+                              @if ($review->id==$course->id)
+                              {{-- show the stars --}}
+                              <span class="d-none">{{$nbr=$review->learner->avg('pivot.review') /20}}</span>
+                                @for ($i = 0; $i < $nbr; $i++)
+                                  <span class="fa fa-star text-warning"></span>
+                                @endfor
+                                @for ($i = 0; $i < 5-$nbr; $i++)
+                                  <span class="far fa-star text-warning"></span>
+                                @endfor
+                                <span class="text-info ms-2">({{$review->learner->count('pivot.review')}})</span></p>
+                                
+                              @endif
+                            @endforeach
                         @endforeach
                       </span></h4> <br>
                       

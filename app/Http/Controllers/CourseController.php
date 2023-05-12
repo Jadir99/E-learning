@@ -97,18 +97,18 @@ class CourseController extends Controller
         ->where('courses.id',$id)
         ->get();
         
-        foreach ($reviews as $course) {
-            // echo $reviews->title;
-            // echo $course->learner->first()->avg_reviews;
-            echo $course->learner->avg('pivot.review');
-            echo $course->avg_reviews;
-            foreach ($course->learner as $review) {
-                // echo $review->pivot->access;
-                // echo $review->name;
-                echo $review->course_id;
-                echo $review->pivot->avg_reviews;
-            }
-        }
+        // foreach ($reviews as $course) {
+        //     // echo $reviews->title;
+        //     // echo $course->learner->first()->avg_reviews;
+        //     echo $course->learner->avg('pivot.review');
+        //     echo $course->avg_reviews;
+        //     foreach ($course->learner as $review) {
+        //         // echo $review->pivot->access;
+        //         // echo $review->name;
+        //         echo $review->course_id;
+        //         echo $review->pivot->avg_reviews;
+        //     }
+        // }
         
 
         // courses 
@@ -250,27 +250,27 @@ class CourseController extends Controller
         ->get();
 
         
-foreach ($test_course_user_owner as $formers){
-    foreach ($formers->former as $former){
-if ($former->user_id==Auth::user()->id){
-    // echo $former->id; echo '<br>';
+// foreach ($test_course_user_owner as $formers){
+//     foreach ($formers->former as $former){
+// if ($former->user_id==Auth::user()->id){
+//     // echo $former->id; echo '<br>';
         
-            echo 'title of course : ';echo $former->title;echo '<br>';
-            foreach ($former->learner as $learner){
-                if ($learner->pivot->access=='in progress'){
-                    echo $learner->pivot->id;echo '<br>';
+//             echo 'title of course : ';echo $former->title;echo '<br>';
+//             foreach ($former->learner as $learner){
+//                 if ($learner->pivot->access=='in progress'){
+//                     echo $learner->pivot->id;echo '<br>';
     
-                }
+//                 }
     
         
-}
+// }
             
-        }
-        // var_dump ($former);
-        // echo $former->title;echo '<br>';
+//         }
+//         // var_dump ($former);
+//         // echo $former->title;echo '<br>';
 
-    }
-}
+//     }
+// }
 
         // foreach ($course_user as $item){
         //     echo $item->id; echo '<br>';
