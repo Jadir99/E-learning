@@ -120,7 +120,9 @@ class PartieController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $delete_party=Partie::FindOrFail($id);
+        $delete_party->delete();
+        return redirect()->back()->with('status','the cahpter has been deleted');
     }
 
     public function remise_devoir(Request $request){
