@@ -16,7 +16,24 @@ class PartieController extends Controller
      */
     public function index()
     {
-        
+        // this is devoirs of all learner in all courses;
+        $user=User::FindOrFail(1);
+
+        // foreach ($user->former as $course){
+        //     // echo 'title: ';echo $course->title;echo '<br>';
+        //     foreach($course->partie as $parties){
+        //         // echo 'partie:' ;echo $parties->title_partie;echo '<br>';
+        //         foreach($parties->devoirs as $devoir){
+        //             // echo 'devoir:' ;echo $devoir->devoir_title;echo '<br>';
+        //             // var_dump($devoir->users_devoir);
+        //             foreach($devoir->users_devoir as $user_devoir){
+        //                 echo 'date ::::'.$user_devoir->pivot->date_remise.'<br>';
+        //                 echo 'date ::::'.$user_devoir->name.'<br>';
+        //             }
+        //         }
+        //     }
+        // }
+        return view('parties.devoirs',['devoirs'=>$user]);
     }
 
     /**
