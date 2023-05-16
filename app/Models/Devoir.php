@@ -18,7 +18,7 @@ class Devoir extends Model
     //many learners
     public function users_devoir()
     {
-        return $this->belongsToMany(User::class,'delivery_user_partie__devoirs');
+        return $this->belongsToMany(User::class,'delivery_user_partie__devoirs')->withPivot('id','path_travail','date_remise','note_devoir','partie_id','devoir_id','user_id');
     }
     //*******************************************************************end of  delivery table between partie user devoir********************* */
 

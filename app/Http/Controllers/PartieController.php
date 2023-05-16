@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Partie;
 use App\Models\Devoir;
-use App\Models\Quiz;
+use App\Models\User;
 use App\Models\Conetent;
 use Illuminate\Support\Str;
 use App\Models\Delivery_user_partie_Devoir;
@@ -16,7 +16,7 @@ class PartieController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
