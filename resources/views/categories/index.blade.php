@@ -82,7 +82,8 @@ E-Learning categories
                     <div class="row ">
                         
                         <div class="col "> 
-                            <form action="" method="post" >
+                            <form action="{{route('categories.destroy',['category'=>$category->id])}}" method="post" >
+                                @csrf
                                 @method('delete')
                                 <button class="btn btn-secondary mx-2 bg-transparent border-0" style="background-color:#edf2f9" type="submit" ><i class="bi bi-trash " style="font-size:20px;color:#5e6e82"></i></button>
                             </form>
