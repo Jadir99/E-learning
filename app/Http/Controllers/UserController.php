@@ -160,4 +160,14 @@ class UserController extends Controller
         return view('users.profile',['profile'=>$profile_courses,'reviews'=>$reviews,'existes'=>$existe]);
         
     }
+    public function all_users(){
+        return view('users.All_Users',['users'=>User::all()]);
+    }
+
+    public function add_admin($id){
+        $add_admin=user::FindOrFail($id);
+        $add_admin->role='admin';
+        $add_admin->save();
+        return redirect()->back()->with('status', 'u add the new admin');
+    }
 }

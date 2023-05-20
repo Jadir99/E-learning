@@ -49,7 +49,9 @@ Route::get('/courses/access/{coure_user_id}/{access}', [CourseController::class,
 Route::post('/partie/Homework submissions', [PartieController::class, 'remise_devoir'])->name('parties.remise_devoir');
 Route::post('/courses/review', [CourseController::class, 'insert_review'])->name('courses.insert_review_comment');
 
+Route::get('/users.all_users', [UserController::class, 'all_users'])->name('users.all_users');
 Route::get('/users/profile/{profile_id}',[UserController::class, 'profile'])->name('users.profile');
+Route::get('/users/add_admin/{user}',[UserController::class, 'add_admin'])->name('users.add_admin');
 // Route::get('/courses.layoutt', [CourseController::class, 'show_all_demands']);
 
 // Route::get('/home', [PagesControllers::class, 'index'])->name('pages.index');

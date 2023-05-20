@@ -85,6 +85,11 @@
             <li class="nav-item pt-3">            
             <h6 class="dropdown-header fw-medium text-uppercase px-x1 fs--2 pt-0 pb-2"><a class="dropdown-item fs--1 px-x1 py-1 hover-primary" href="{{route('courses.create')}}">New course</a></h6>
             </li>
+            @if (Auth::User()->role=='admin')
+            <li class="nav-item pt-3">            
+              <h6 class="dropdown-header fw-medium text-uppercase px-x1 fs--2 pt-0 pb-2"><a class="dropdown-item fs--1 px-x1 py-1 hover-primary" href="{{route('users.all_users')}}">Users</a></h6>
+              </li>
+            @endif
             <li class="nav-item pt-3">            
               <h6 class="dropdown-header fw-medium text-uppercase px-x1 fs--2 pt-0 pb-2"><a class="dropdown-item fs--1 px-x1 py-1 hover-primary" href="{{route('parties.index')}}">See homework</a></h6>
               </li>
@@ -220,7 +225,7 @@
               </div>
             </li>
             <li class="nav-item dropdown"><a class="nav-link pe-0 ps-2" id="navbarDropdownUser" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <div class="avatar avatar-xl">
+                <div class="avatar avatar-xl">    
                   <img class="rounded-circle" src="\images\users\{{Auth::user()->profile_image_path}}" alt="" />
                 </div>
               </a>
