@@ -69,7 +69,7 @@
     <!--    Favicons-->
     <!-- ===============================================-->
     
-    
+    <link rel="icon" sizes="16x16" type="image/x-icon" href="\images\logo_yaneCode.png">
 </head>
 <body class="bg-white">
     <main class="main " id="top">

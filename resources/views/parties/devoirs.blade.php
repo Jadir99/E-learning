@@ -47,7 +47,9 @@ E-Learning add chapter
                                 <td class="Party"> {{$partie->title_partie}} </td>
                                 <td class="Devoir"> {{$devoir->devoir_title}} </td>
                                 <td class="email"> {{$item->email}} </td>
-                                <td class="Note"> {{$item->pivot->note_devoir}} </td>
+                                <td class="Note"><div class="">
+                                  <input class="form-control text-center" type="text"  aria-label=".form-control-lg example" value=" {{$item->pivot->note_devoir}} "style=" width: 80px;height:30px" /></div>
+                                </td>
                                 <td class="Date_remise">{{$item->pivot->date_remise}}</td>
                                 <td class="path_travail text-center"><a href="\documents\{{$item->pivot->path_travail}}"target="_blank" ><span id="boot-icon" class="bi bi-eye text-center" style="font-size: 27px; color:#2444bb"></span></a></td>
                             </tr> 

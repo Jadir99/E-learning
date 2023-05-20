@@ -5,7 +5,6 @@ E-Learning courses
 @endsection
     
 @section('courses')
-<h1><a href="{{route('users.profile',['profile_id'=>Auth::user()->id])}}">test</a></h1>
 @if (session('status'))
   <div class="alert alert-info border-2 d-flex align-items-center" role="alert">
     <div class="bg-info me-3 icon-item"><span class="fas fa-info-circle text-white fs-3"></span></div>
@@ -128,7 +127,7 @@ E-Learning courses
                     <button class="btn btn-link text-600 btn-sm dropdown-toggle btn-reveal dropdown-caret-none float-end" type="button" id="dropdown-0" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs--1"></span></button>
                       <div class="dropdown-menu dropdown-menu-end border py-2" aria-labelledby="dropdown-0">
                         <a class="dropdown-item" href="{{route('courses.show',['course'=>$course->id])}}">View</a>
-                        @if (Auth::user()->id==$course->user->id)
+                        @if (Auth::user()->id==$course->user->id || Auth::user()->role=='admin')
                         <a class="dropdown-item" href="{{route('courses.edit',['course'=>$course->id])}}">Edit</a>
                         <form action="{{route('courses.destroy',['course'=>$course->id ])}}" method="post" >
                           @csrf

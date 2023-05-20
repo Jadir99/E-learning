@@ -85,6 +85,9 @@
             <li class="nav-item pt-3">            
             <h6 class="dropdown-header fw-medium text-uppercase px-x1 fs--2 pt-0 pb-2"><a class="dropdown-item fs--1 px-x1 py-1 hover-primary" href="{{route('courses.create')}}">New course</a></h6>
             </li>
+            <li class="nav-item pt-3">            
+              <h6 class="dropdown-header fw-medium text-uppercase px-x1 fs--2 pt-0 pb-2"><a class="dropdown-item fs--1 px-x1 py-1 hover-primary" href="{{route('parties.index')}}">See homework</a></h6>
+              </li>
             <li class="nav-item pt-3">
               <h6 class="dropdown-header fw-medium text-uppercase px-x1 fs--2 pt-0 pb-2"><a class="dropdown-item fs--1 px-x1 py-1 hover-primary" href="{{route('users.index')}}">Home</a></h6></li>
             <li class="nav-item px-2">

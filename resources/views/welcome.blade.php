@@ -1,3 +1,9 @@
+@section('title')
+@section('title')
+Landing page
+@endsection
+
+
 @extends('layouts.app')
 @section('content')
     
