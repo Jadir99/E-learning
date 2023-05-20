@@ -45,7 +45,7 @@ class CategoryController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        
     }
 
     /**
@@ -53,7 +53,13 @@ class CategoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+    
+        $category_update=categorie::FindOrFail($id);
+        $category_update->Nom_categorie=$request->category;
+        $category_update->save();
+
+        return redirect()->back()->with('status', 'u have been updated the category');
+
     }
 
     /**

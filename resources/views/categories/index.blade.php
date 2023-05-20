@@ -29,7 +29,53 @@ E-Learning categories
             @foreach ($categories as $category)
             <tr>
                 <td class="course text-center"> {{$category->Nom_categorie}}</td>
-                <td class="Party text-center"> <i class="bi bi-trash " style="font-size:20px;color:red"></i><i class="bi bi-pencil-square" style="font-size:20px;color:blue"></i></td>
+                <td class="Party text-center ">
+                    <div class="row ">
+                        
+                        <div class="col "> 
+                            <form action="" method="post" >
+                                @method('delete')
+                                <button class="btn btn-secondary mx-2 " style="background-color:#edf2f9" type="submit" ><i class="bi bi-trash " style="font-size:20px;color:#5e6e82"></i></button>
+                            </form>
+                        </div>
+                        <div class="col">
+                            <button class="btn btn-secondary mx-2" type="button" data-bs-toggle="modal" data-bs-target="#error-modal"  style="background-color:#edf2f9"><i class="bi bi-pencil-square" style="font-size:20px;color:#5e6e82"></i></button>
+                            <div class="modal fade" id="error-modal" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 500px">
+                                    <div class="modal-content position-relative">
+                                    <div class="position-absolute top-0 end-0 mt-2 me-2 z-1">
+                                        <button class="btn-close btn btn-sm btn-circle d-flex flex-center transition-base" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+
+                                    {{-- modal  --}}
+                                    <div class="modal-body p-0">
+                                        <div class="rounded-top-3 py-3 ps-4 pe-6 bg-light">
+                                        <h4 class="mb-1" id="modalExampleDemoLabel">update the categorie </h4>
+                                        </div>
+                                        <div class="p-4 pb-0">
+                                        <form action="{{route('categories.update',['category'=>$category->id])}}" method="post">
+                                            @csrf
+                                            @method('put')
+                                            <div class="mb-3">
+                                                <label class="col-form-label" for="category-name">Name category:</label>
+                                                <input class="form-control" value="{{$category->Nom_categorie}}" id="category-name" type="text" name="category" required  />
+                                            </div>
+                                            <button class="btn btn-primary" type="submit">Update </button>
+                                        </form>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Close</button>
+                                        
+                                    </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </td>
             </tr> 
             @endforeach
         </tbody>
