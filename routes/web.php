@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CourseController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PagesControllers;
@@ -42,6 +43,7 @@ Route::get('/', function () {
 Route::resource('courses', CourseController::class);
 Route::resource('users', UserController::class);
 Route::resource('parties', PartieController::class);
+Route::resource('categories', CategoryController::class);
 
 Route::get('/courses/category_id/{category_id}', [CourseController::class, 'courses_by_category'])->name('courses.by_category');
 Route::get('/courses/course_id/{course_id}', [CourseController::class, 'ask_for_course'])->name('courses.demand');
