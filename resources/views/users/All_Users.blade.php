@@ -32,7 +32,7 @@ E-Learning users
             
         <div class="col-6 col-md-4 col-lg-3 col-xxl-2 mb-1">
             <div class="bg-white dark__bg-1100 p-3 h-100"><a href="{{route('users.profile',['profile_id'=>$user->id])}}"><img class="img-thumbnail img-fluid rounded-circle mb-3 shadow-sm" src="\images\users\{{$user->profile_image_path}}" alt="" width="100" /></a>
-              <h6 class="mb-1"><a href="{{route('users.profile',['profile_id'=>$user->id])}}"> {{$user->name}} </a></h6>
+              <h6 class="mb-1"><a href="{{route('users.profile',['profile_id'=>$user->id])}}"  data-sort="name"> {{$user->name}} </a></h6>
               <p class="fs--2 mb-1 ">
                {{$user->role}}
               </p>
