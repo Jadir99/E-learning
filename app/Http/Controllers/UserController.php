@@ -172,4 +172,29 @@ class UserController extends Controller
         $add_admin->save();
         return redirect()->back()->with('status', 'u add the new admin');
     }
+
+    public function dashboard(){
+        $courses = course::selectRaw('COUNT(*) as count, MONTH(date_pub) as month')
+        ->groupBy('month')
+        ->get();
+
+        // echo $courses;
+        // for retrieve the count of courses for each month
+        $cours_count=[];
+        foreach ($courses as $course){
+            $cours_count[$course->month]=$course->count;
+        }
+        // remplire les autres tables 
+        $i=1;
+        for ($i=1;$i<=12;$i++){
+            if (!isset($cours_count[$i]))
+            $cours_count[$i]=0;
+        }
+        // var_dump($cours_count);
+        
+        // $courses=$courses->toArray();
+
+        return view('users.dashboeard_admin',['courses'=>$cours_count]);
+
+    }
 }

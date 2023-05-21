@@ -41,6 +41,13 @@ class CourseController extends Controller
             ->groupBy('course_id');
         })
         ->get();
+        $courses = [
+            ['name' => 'Course A', 'avg_reviews' => 4.5],
+            ['name' => 'Course B', 'avg_reviews' => 3.8],
+            ['name' => 'Course C', 'avg_reviews' => 4.2],
+            // Add more courses and review averages as needed
+        ];
+    
         
     return view('Courses.indexcourse',['courses'=>course::all(),'categories'=>categorie::all(),'existes'=>$existe,'reviews'=>$reviews]);
     }

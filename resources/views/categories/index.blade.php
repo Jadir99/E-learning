@@ -89,8 +89,8 @@ E-Learning categories
                             </form>
                         </div>
                         <div class="col">
-                            <button class="btn btn-secondary mx-2 bg-transparent border-0" type="button" data-bs-toggle="modal" data-bs-target="#error-modal"  style="background-color:#edf2f9"><i class="bi bi-pencil-square" style="font-size:20px;color:#5e6e82"></i></button>
-                            <div class="modal fade" id="error-modal" tabindex="-1" role="dialog" aria-hidden="true">
+                            <button class="btn btn-secondary mx-2 bg-transparent border-0" type="button" data-bs-toggle="modal" data-bs-target="#update-modal-{{$category->Nom_categorie}}"  style="background-color:#edf2f9"><i class="bi bi-pencil-square" style="font-size:20px;color:#5e6e82"></i></button>
+                            <div class="modal fade" id="update-modal-{{$category->Nom_categorie}}" tabindex="-1" role="dialog" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 500px">
                                     <div class="modal-content position-relative">
                                     <div class="position-absolute top-0 end-0 mt-2 me-2 z-1">

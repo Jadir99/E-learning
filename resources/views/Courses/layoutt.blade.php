@@ -61,6 +61,7 @@
   </head>
 
   <body class="">
+
     <!-- ===============================================-->
     <!--    Main Content-->
     <!-- ===============================================-->
@@ -82,6 +83,9 @@
           <div class="collapse navbar-collapse scrollbar" id="navbarStandard">
           </div>
           <ul class="navbar-nav navbar-nav-icons ms-auto flex-row align-items-center">
+            <li class="nav-item pt-3">            
+              <h6 class="dropdown-header fw-medium text-uppercase px-x1 fs--2 pt-0 pb-2"><a class="dropdown-item fs--1 px-x1 py-1 hover-primary" href="{{route('users.dashboard')}}"> Dashboard </a></h6>
+              </li>
             <li class="nav-item pt-3">            
             <h6 class="dropdown-header fw-medium text-uppercase px-x1 fs--2 pt-0 pb-2"><a class="dropdown-item fs--1 px-x1 py-1 hover-primary" href="{{route('courses.create')}}">New course</a></h6>
             </li>
@@ -309,7 +313,9 @@
     <script src="../../../vendors/lodash/lodash.min.js"></script>
     <script src="../../../../../../polyfill.io/v3/polyfill.min58be.js?features=window.scroll"></script>
     <script src="../../../vendors/list.js/list.min.js"></script>
-    <script src="../../../assets/js/theme.js"></script>
+    <script src="../vendors/countup/countUp.umd.js"></script>
+    <script src="../assets/js/theme.js"></script>
+    <script src="vendors/chart/chart.min.js"></script>
   </body>
 
 
