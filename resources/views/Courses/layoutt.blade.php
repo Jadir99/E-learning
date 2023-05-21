@@ -28,6 +28,7 @@
     <meta name="theme-color" content="#ffffff">
     <script src="../../../assets/js/config.js"></script>
     <script src="../../../vendors/simplebar/simplebar.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.2.0/dist/echarts.min.js"></script>
 
     <!-- ===============================================-->
     <!--    Stylesheets-->

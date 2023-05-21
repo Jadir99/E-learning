@@ -41,13 +41,6 @@ class CourseController extends Controller
             ->groupBy('course_id');
         })
         ->get();
-        $courses = [
-            ['name' => 'Course A', 'avg_reviews' => 4.5],
-            ['name' => 'Course B', 'avg_reviews' => 3.8],
-            ['name' => 'Course C', 'avg_reviews' => 4.2],
-            // Add more courses and review averages as needed
-        ];
-    
         
     return view('Courses.indexcourse',['courses'=>course::all(),'categories'=>categorie::all(),'existes'=>$existe,'reviews'=>$reviews]);
     }
@@ -211,7 +204,7 @@ class CourseController extends Controller
         $demand_access->user_id=Auth::user()->id;
         $demand_access->access='in progress';
         $demand_access->review='0.0';
-        $demand_access->comment='this is amazing';
+        $demand_access->comment='';
         $demand_access->date_review='2023-05-03';
         $demand_access->date_comment='2023-05-03';
         $demand_access->save();

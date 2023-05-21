@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\course;
+use App\Models\Prendre_course_user;
 use Illuminate\Console\View\Components\Alert;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -173,28 +174,56 @@ class UserController extends Controller
         return redirect()->back()->with('status', 'u add the new admin');
     }
 
-    public function dashboard(){
-        $courses = course::selectRaw('COUNT(*) as count, MONTH(date_pub) as month')
-        ->groupBy('month')
-        ->get();
+    private function search_data($items){
+        
 
-        // echo $courses;
-        // for retrieve the count of courses for each month
-        $cours_count=[];
-        foreach ($courses as $course){
-            $cours_count[$course->month]=$course->count;
+        // echo $items;
+        // for retrieve the count of item$items for each month
+        $count=[];
+        foreach ($items as $item){
+            $count[$item->month]=$item->count;
         }
         // remplire les autres tables 
         $i=1;
         for ($i=1;$i<=12;$i++){
-            if (!isset($cours_count[$i]))
-            $cours_count[$i]=0;
+            if (!isset($count[$i]))
+            $count[$i]=0;
         }
-        // var_dump($cours_count);
-        
-        // $courses=$courses->toArray();
+        return $count;
+    }
 
-        return view('users.dashboeard_admin',['courses'=>$cours_count]);
+    public function dashboard(){
+        // search about the courses of this year
+        $courses = course::selectRaw('COUNT(*) as count, MONTH(date_pub) as month')
+        ->whereYear('date_pub', date('Y'))
+        ->groupBy('month')
+        ->get();
+
+        $cours_count=$this->search_data($courses);
+
+        // search about the users of this year
+        $users = User::selectRaw('COUNT(*) as count, MONTH(created_at) as month')
+        ->whereYear('created_at', date('Y'))
+        ->where('role','user')
+        ->groupBy('month')
+        ->get();
+        $users_count=$this->search_data($users);
+
+        // search about the courses of this year
+        $reviews = Prendre_course_user::selectRaw('COUNT(*) as count, MONTH(date_review) as month')
+        ->whereYear('date_review', date('Y'))
+        ->groupBy('month')
+        ->get();
+
+        $reviews_count=$this->search_data($reviews);
+
+
+        // numbers of courses in this month and the last month
+        
+
+
+
+        return view('users.dashboeard_admin',['courses'=>$cours_count,'users_count'=>$users_count,'reviews_count'=>$reviews_count]);
 
     }
 }
