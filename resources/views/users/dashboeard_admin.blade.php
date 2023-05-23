@@ -127,5 +127,5 @@ E-Learning dashboard
         }
     });
 
-  </script>    
+</script>    
 @endsection

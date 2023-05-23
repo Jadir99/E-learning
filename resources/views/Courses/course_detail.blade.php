@@ -121,7 +121,7 @@ E-Learning detail
                     <td class="align-middle white-space-nowrap fs--1 text-700">
                       <p class="mb-1">create at {{$part->date_pub_partie}}</p>
                     </td>
-                    @if ($course->user_id==Auth::user()->id)
+                    @if ($course->user_id==Auth::user()->id || Auth::user()->role=='admin')
 
                     <td class="align-middle white-space-nowrap text-end">
                       <div class="dropdown font-sans-serif position-static d-inline-block btn-reveal-trigger"><button class="btn btn-link text-600 btn-sm dropdown-toggle btn-reveal dropdown-caret-none float-end" type="button" id="dropdown-0" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs--1"></span></button>
