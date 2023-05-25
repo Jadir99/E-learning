@@ -90,7 +90,6 @@ class CourseController extends Controller
 // show reviews of each course 
         $reviews=course::whereHas('learner',function(Builder $query){
             $query->where('access', 'like', 'confirm')
-            ->where('comment','like','_%')
             ->select('course_id',DB::raw('AVG(review) as avg_reviews'),DB::raw('count(review) as sum_reviews'))
             ->groupBy('course_id');
         })
@@ -225,20 +224,6 @@ class CourseController extends Controller
     // showing the invitaion for the users whos askin for the course
     public static function show_all_demands(){
 
-        // $course_user = DB::table('users as u1')->where('u1.id','=',Auth::user()->id)
-        // ->join('courses', 'u1.id', '=', 'courses.user_id')
-        // ->join('prendre_course_users', 'courses.id', '=', 'prendre_course_users.course_id')
-        // ->where('prendre_course_users.access','like','in progress')
-        // ->join('users as u2','prendre_course_users.user_id','u2.id')
-        // ->select('*','prendre_course_users.id as coure_user_id')
-        // ->get();
-        // // dd($course_user);echo '<br>';
-        // $course_user=User::where('users.id',Auth::user()->id)->whereHas('learning',function (Builder $query) {
-        //     $query
-        //     ->where('prendre_course_users.access','in progress');
-        //     // ->where('courses.user_id',Auth::user()->id);
-        // })
-        // ->get();
 
         $test_course_user_owner=User::FindOrFail(Auth::user()->id)
         ->whereHas('former',function (Builder $query) {
@@ -250,45 +235,6 @@ class CourseController extends Controller
         ->get();
 
         
-// foreach ($test_course_user_owner as $formers){
-//     foreach ($formers->former as $former){
-// if ($former->user_id==Auth::user()->id){
-//     // echo $former->id; echo '<br>';
-        
-//             echo 'title of course : ';echo $former->title;echo '<br>';
-//             foreach ($former->learner as $learner){
-//                 if ($learner->pivot->access=='in progress'){
-//                     echo $learner->pivot->id;echo '<br>';
-    
-//                 }
-    
-        
-// }
-            
-//         }
-//         // var_dump ($former);
-//         // echo $former->title;echo '<br>';
-
-//     }
-// }
-
-        // foreach ($course_user as $item){
-        //     echo $item->id; echo '<br>';
-        //     // echo $item->learning->count('*'); echo '<br>';
-
-        //     // echo $item->id; echo '<br>';
-        //     if ( $item->id==Auth::user()->id){
-        //     foreach ($item->learning as $user){
-        //         echo 'title : ';   echo $user->title;echo '<br>';
-        //     echo 'acces : ';echo  $user->pivot->access; echo '<br>';
-        //     echo 'user_id : ';echo  $user->pivot->user_id; echo '<br>';
-        //     // echo 'user_id_enrolled : ';$user->pivot->review; echo '<br>';
-        //     // echo $user->id; echo '<br>';
-
-        //     }   
-
-        //     }
-        // }
 
 
 

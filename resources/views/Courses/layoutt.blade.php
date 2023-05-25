@@ -84,21 +84,17 @@
           <div class="collapse navbar-collapse scrollbar" id="navbarStandard">
           </div>
           <ul class="navbar-nav navbar-nav-icons ms-auto flex-row align-items-center">
-            <li class="nav-item pt-3">            
-              <h6 class="dropdown-header fw-medium text-uppercase px-x1 fs--2 pt-0 pb-2"><a class="dropdown-item fs--1 px-x1 py-1 hover-primary" href="{{route('users.dashboard')}}"> Dashboard </a></h6>
+            @if (Auth::User()->role=='admin')
+              <li class="nav-item pt-2 dropdown"><a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dashboards">Dashboard</a>
+                <div class="dropdown-menu dropdown-caret dropdown-menu-card border-0 mt-0" aria-labelledby="dashboards">
+                  <div class="bg-white dark__bg-1000 rounded-3 py-2">><a class="dropdown-item link-600 fw-medium" href="{{route('users.all_users')}}">Users</a><a class="dropdown-item link-600 fw-medium" href="{{route('categories.index')}}">Categories</a><a class="dropdown-item link-600 fw-medium" href="{{route('users.dashboard')}}">Dashboards</a></div>
+                </div>
               </li>
+            @endif
+
             <li class="nav-item pt-3">            
             <h6 class="dropdown-header fw-medium text-uppercase px-x1 fs--2 pt-0 pb-2"><a class="dropdown-item fs--1 px-x1 py-1 hover-primary" href="{{route('courses.create')}}">New course</a></h6>
             </li>
-            @if (Auth::User()->role=='admin')
-            <li class="nav-item pt-3">            
-              <h6 class="dropdown-header fw-medium text-uppercase px-x1 fs--2 pt-0 pb-2"><a class="dropdown-item fs--1 px-x1 py-1 hover-primary" href="{{route('users.all_users')}}">Users</a></h6>
-            </li>
-            <li class="nav-item pt-3">            
-              <h6 class="dropdown-header fw-medium text-uppercase px-x1 fs--2 pt-0 pb-2"><a class="dropdown-item fs--1 px-x1 py-1 hover-primary" href="{{route('categories.index')}}">Categories</a></h6>
-            </li>
-              
-            @endif
             <li class="nav-item pt-3">            
               <h6 class="dropdown-header fw-medium text-uppercase px-x1 fs--2 pt-0 pb-2"><a class="dropdown-item fs--1 px-x1 py-1 hover-primary" href="{{route('parties.index')}}">See homework</a></h6>
               </li>

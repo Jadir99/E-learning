@@ -162,6 +162,9 @@ E-Learning detail
           @foreach ($reviews as $comment)
           @foreach ($comment->learner as $review)
               
+         @if ($review->pivot->comment!='')
+             
+         
           
             <div class="row g-3 align-items-center text-center text-md-start py-3 border-bottom border-200">
 
@@ -198,7 +201,9 @@ E-Learning detail
               </div>
               <div class="col-md-auto d-flex justify-content-center gap-2"><button class="btn btn-falcon-default icon-item focus-bg-primary"><span class="fs--2 fas fa-thumbs-up"></span></button><button class="btn btn-falcon-default icon-item focus-bg-secondary"><span class="fs--2 fas fa-thumbs-up" data-fa-transform="rotate-180"></span></button></div>
             </div>
-
+            @else
+            <h4 class="text-center">Empty, there is no comments</h4>
+            @endif
           @endforeach
           @endforeach
           </div>
