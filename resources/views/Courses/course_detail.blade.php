@@ -6,7 +6,6 @@ E-Learning detail
 @endsection
 
 
-
 <span class="d-none">{{$if_is_learner=0}}</span>
 @section('courses')
 @if (session('status'))
@@ -97,11 +96,17 @@ E-Learning detail
                   @foreach ($reviews as $existe)
                     @foreach ($existe->learner as $review)
                     <span class="d-none">{{$review->pivot->review}}</span>
-                        @if ($review->id==Auth::user()->id)
+                    
+                        @if ($review->id==Auth::user()->id )
                             <span class="d-none">{{$if_is_learner=1}}</span>
+                            
                         @endif
                     @endforeach
                   @endforeach
+                  {{-- testing if th user is an admin or the mol coyrs --}}
+                  {{-- @if (Auth::user()->id==$course->user_id || Auth::user()->role=='admin' )
+                  <span class="d-none">{{$if_is_learner=1}}</span>
+                  @endif --}}
                   @foreach ($parties as $part)
       
                   <tr class="btn-reveal-trigger bg-light">
@@ -275,7 +280,7 @@ E-Learning detail
       
       
     </div>
-    @if ($if_is_learner!=1)
+    @if ($if_is_learner==0)
     <script> alert('you don t ask for the course !!!, so u can not access to the content')</script>
     @endif
     

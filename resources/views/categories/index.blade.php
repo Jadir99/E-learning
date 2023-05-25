@@ -39,11 +39,12 @@ E-Learning categories
                                     <label class="col-form-label" for="category-name">Category Name:</label>
                                     <input class="form-control" id="category-name" type="text" name="category" required  />
                                 </div>
-                                <button class="btn btn-primary" type="submit">Save </button>
+                                
                             </form>
                             </div>
                         </div>
                         <div class="modal-footer">
+                            <button class="btn btn-primary" type="submit">Save </button>
                             <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Close</button>
                             
                         </div>
@@ -110,11 +111,12 @@ E-Learning categories
                                                 <label class="col-form-label" for="category-name">Name category:</label>
                                                 <input class="form-control" value="{{$category->Nom_categorie}}" id="category-name" type="text" name="category" required  />
                                             </div>
-                                            <button class="btn btn-primary" type="submit">Update </button>
+                                            
                                         </form>
                                         </div>
                                     </div>
                                     <div class="modal-footer">
+                                        <button class="btn btn-primary" type="submit">Update </button>
                                         <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Close</button>
                                         
                                     </div>

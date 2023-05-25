@@ -75,6 +75,9 @@ the party
 
             <div class='notification'>
                  {{$devoir->enonce}} &ensp; 
+                 @if ()
+                     
+                 @endif
                  <form action="{{route('parties.remise_devoir')}}" method="POST" enctype="multipart/form-data">
             
                   @csrf

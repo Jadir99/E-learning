@@ -237,9 +237,7 @@
               <div class="dropdown-menu dropdown-caret dropdown-caret dropdown-menu-end py-0" aria-labelledby="navbarDropdownUser">
                 <div class=" rounded-2 py-2">
                   <a class="dropdown-item" href="#!">{{Auth::user()->name}}</a>
-                  <a class="dropdown-item" href="#!">Set status</a>
                   <a class="dropdown-item" href="{{route('users.profile',['profile_id'=>Auth::user()->id])}}">Profile &amp; account</a>
-                  <a class="dropdown-item" href="#!">Feedback</a>
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="{{route('users.edit',['user'=>'settings'])}}">Settings</a>
                   <a class="dropdown-item" href="{{ route('logout') }}"
@@ -284,9 +282,6 @@
             <div class="row g-0 justify-content-between fs--1 mt-4 mb-3">
               <div class="col-12 col-sm-auto text-center">
                 <p class="mb-0 text-600">Thank you for creating with Jadir <span class="d-none d-sm-inline-block">| </span><br class="d-sm-none" /> 2023 &copy; Jadir Mohammed</p>
-              </div>
-              <div class="col-12 col-sm-auto text-center">
-                <p class="mb-0 text-600">v3.16.0</p>
               </div>
             </div>
           </footer>
