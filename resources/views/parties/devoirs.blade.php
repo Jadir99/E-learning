@@ -1,7 +1,7 @@
 @extends('Courses.layoutt')
 
 @section('title')
-E-Learning add chapter
+E-Learning see homworks
 @endsection
      
 @section('courses')

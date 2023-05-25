@@ -54,7 +54,7 @@ Route::post('/courses/review', [CourseController::class, 'insert_review'])->name
 Route::get('/users.all_users', [UserController::class, 'all_users'])->name('users.all_users');
 Route::get('/users/profile/{profile_id}',[UserController::class, 'profile'])->name('users.profile');
 Route::get('/users/add_admin/{user}',[UserController::class, 'add_admin'])->name('users.add_admin');
-Route::get('/users/dashboard_admin',[UserController::class, 'dashboard'])->name('users.dashboard');
+Route::get('/users.dashboard_admin',[UserController::class, 'dashboard'])->name('users.dashboard');
 // Route::get('/courses.layoutt', [CourseController::class, 'show_all_demands']);
 
 // Route::get('/home', [PagesControllers::class, 'index'])->name('pages.index');

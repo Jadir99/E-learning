@@ -91,6 +91,7 @@ class CourseController extends Controller
         $reviews=course::whereHas('learner',function(Builder $query){
             $query->where('access', 'like', 'confirm')
             ->where('comment','like','_%')
+            ->where('review','!=','0')
             ->select('course_id',DB::raw('AVG(review) as avg_reviews'),DB::raw('count(review) as sum_reviews'))
             ->groupBy('course_id');
         })

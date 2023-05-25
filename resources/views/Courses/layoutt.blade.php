@@ -308,6 +308,9 @@
     <script src="../vendors/countup/countUp.umd.js"></script>
     <script src="../assets/js/theme.js"></script>
     <script src="vendors/chart/chart.min.js"></script>
+    
+
+    <script src="../../../assets/js/theme.js"></script>
   </body>
 
 

@@ -9,6 +9,8 @@ use App\Models\User;
 use App\Models\Conetent;
 use Illuminate\Support\Str;
 use App\Models\Delivery_user_partie_Devoir;
+use Illuminate\Support\Facades\Auth;
+
 class PartieController extends Controller
 {
     /**
@@ -17,7 +19,7 @@ class PartieController extends Controller
     public function index()
     {
         // this is devoirs of all learner in all courses;
-        $user=User::FindOrFail(1);
+        $user=User::FindOrFail(Auth::user()->id);
 
         // foreach ($user->former as $course){
         //     // echo 'title: ';echo $course->title;echo '<br>';

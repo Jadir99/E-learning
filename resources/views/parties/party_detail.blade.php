@@ -76,9 +76,9 @@ the party
             <div class='notification'>
                  
                 
-                 @if ($devoir->users_devoir)
+                 {{-- @if ($devoir->users_devoir)
                      <h4>U have been put your assignement!! </h4>
-                 @else
+                 @else --}}
                  {{$devoir->enonce}} &ensp; 
                   <form action="{{route('parties.remise_devoir')}}" method="POST" enctype="multipart/form-data">
               
@@ -90,7 +90,7 @@ the party
                     <input type="hidden" name="partie_id" value="{{$party->id}}">
                     <input type="submit" value="File submissions">
                   </form>
-                 @endif
+                 {{-- @endif --}}
                  
             </div>
             <span class="text-secondary"> <br>{{$devoir->created_at}}</span>
