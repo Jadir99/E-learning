@@ -165,51 +165,51 @@ E-Learning detail
         <div class="card-body py-0">
 
           @foreach ($reviews as $comment)
-          @foreach ($comment->learner as $review)
-              
-         @if ($review->pivot->comment!='')
-             
-         
-          
-            <div class="row g-3 align-items-center text-center text-md-start py-3 border-bottom border-200">
+          {{-- test if there any learner  --}}
+            @if ($comment->learner)
+              @foreach ($comment->learner as $review)
+                  
+                @if ($review->pivot->comment!='')
+                    <div class="row g-3 align-items-center text-center text-md-start py-3 border-bottom border-200">
 
-              <div class="col-md-auto"><a href="#!">
-                  <div class="avatar avatar-3xl">
-                    <img class="rounded-circle" src="\images\users\{{$review->profile_image_path}}" alt="" />
-                  </div>
-                </a></div>
-              <div class="col px-x1 py-2">
-                <div class="row">
-                  <div class="col-12">
-                    <h6 class="fs-0"><a class="me-2" href="{{route('users.profile',['profile_id'=>$review->id])}}">{{$review->name}}</a>
-                      <span class="d-none">{{$nbr=$review->pivot->review/20}}</span>
-                      @for ($i = 0; $i < $nbr; $i++)
-                        <span class="fa fa-star text-warning"></span>
-                      @endfor
-                      @for ($i = 0; $i < 5-$nbr; $i++)
-                        <span class="far fa-star text-warning"></span>
-                      @endfor
-                    </h6>
-                  </div>
-                  <div class="col-md-10">
-                    <p class="fs--1 text-800"> {{$review->pivot->comment}}.</p>
-                  </div>
-                  <div class="col-12">
-                    <div class="fs--2 text-600 d-flex flex-column flex-md-row align-items-center gap-2">
-                      <h6 class="fs--2 text-600 mb-0">At {{$review->pivot->date_review}} </h6>
-                      
-                      </p>
-                      
+                      <div class="col-md-auto"><a href="#!">
+                          <div class="avatar avatar-3xl">
+                            <img class="rounded-circle" src="\images\users\{{$review->profile_image_path}}" alt="" />
+                          </div>
+                        </a></div>
+                      <div class="col px-x1 py-2">
+                        <div class="row">
+                          <div class="col-12">
+                            <h6 class="fs-0"><a class="me-2" href="{{route('users.profile',['profile_id'=>$review->id])}}">{{$review->name}}</a>
+                              <span class="d-none">{{$nbr=$review->pivot->review/20}}</span>
+                              @for ($i = 0; $i < $nbr; $i++)
+                                <span class="fa fa-star text-warning"></span>
+                              @endfor
+                              @for ($i = 0; $i < 5-$nbr; $i++)
+                                <span class="far fa-star text-warning"></span>
+                              @endfor
+                            </h6>
+                          </div>
+                          <div class="col-md-10">
+                            <p class="fs--1 text-800"> {{$review->pivot->comment}}.</p>
+                          </div>
+                          <div class="col-12">
+                            <div class="fs--2 text-600 d-flex flex-column flex-md-row align-items-center gap-2">
+                              <h6 class="fs--2 text-600 mb-0">At {{$review->pivot->date_review}} </h6>
+                              
+                              </p>
+                              
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-auto d-flex justify-content-center gap-2"><button class="btn btn-falcon-default icon-item focus-bg-primary"><span class="fs--2 fas fa-thumbs-up"></span></button><button class="btn btn-falcon-default icon-item focus-bg-secondary"><span class="fs--2 fas fa-thumbs-up" data-fa-transform="rotate-180"></span></button></div>
                     </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-auto d-flex justify-content-center gap-2"><button class="btn btn-falcon-default icon-item focus-bg-primary"><span class="fs--2 fas fa-thumbs-up"></span></button><button class="btn btn-falcon-default icon-item focus-bg-secondary"><span class="fs--2 fas fa-thumbs-up" data-fa-transform="rotate-180"></span></button></div>
-            </div>
+                @endif
+              @endforeach
             @else
-            <h4 class="text-center">Empty, there is no comments</h4>
+              <h4 class="text-center">Empty, there is no comments</h4>
             @endif
-          @endforeach
           @endforeach
           </div>
           @if ($if_is_learner==1)
