@@ -50,8 +50,7 @@ class CourseController extends Controller
      */
     public function create()
     {
-        
-        return view('courses.add_course',['categories'=>categorie::all()]);
+        return view('Courses.add_course',['categories'=>categorie::all()]);
     }
 
     /**
@@ -78,7 +77,7 @@ class CourseController extends Controller
                 $course->date_pub=$date_published;
 
                 $course->save();
-                return redirect()->route('courses.index')->with('status', 'u added the course');
+                return redirect()->route('Courses.index')->with('status', 'u added the course');
     }
 
     /**
@@ -115,7 +114,7 @@ class CourseController extends Controller
         // courses 
         $course= course::findOrFail($id);
     if ($course !=false )
-    return view('courses.course_detail',['course' => $course,'parties'=>$course->partie,'reviews'=>$reviews]);
+    return view('Courses.course_detail',['course' => $course,'parties'=>$course->partie,'reviews'=>$reviews]);
     }
 
     /**
@@ -132,7 +131,7 @@ class CourseController extends Controller
 
 
         if ($edit_cours !=false )
-        return view('courses.update_course',['course' => $edit_cours,'categories'=>categorie::all(),'parties'=>$edit_cours->partie]);
+        return view('Courses.update_course',['course' => $edit_cours,'categories'=>categorie::all(),'parties'=>$edit_cours->partie]);
     }
 
     /**
@@ -158,7 +157,7 @@ class CourseController extends Controller
         $course_update->description=$request->input('description');
         $course_update->update();
         // dd($course_update);
-        return redirect()->route('courses.show',['course' => $course_update->id])->with('status','u had been edit this course succesfly');; 
+        return redirect()->route('Courses.show',['course' => $course_update->id])->with('status','u had been edit this course succesfly');; 
     }
 
     /**
