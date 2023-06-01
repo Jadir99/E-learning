@@ -80,11 +80,29 @@ E-Learning update course
                 <div class="dropdown font-sans-serif position-static d-inline-block btn-reveal-trigger"><button class="btn btn-link text-600 btn-sm dropdown-toggle btn-reveal dropdown-caret-none float-end" type="button" id="dropdown-0" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs--1"></span></button>
                   <div class="dropdown-menu dropdown-menu-end border py-2" aria-labelledby="dropdown-0"><a class="dropdown-item" href="{{route('parties.show',['party'=>$part->id])}}">View</a><a class="dropdown-item" href="#!">Edit</a>
                     
-                    <form action="{{route('parties.destroy',['party'=>$part->id ])}}" method="post" >
+                    <form action="{{route('parties.destroy',['party'=>$part->id ])}}" method="post" id="deleteForm-{{$part->id}}" >
                       @csrf
                       @method('delete')
-                    <div class="dropdown-divider"></div> <button type="submit" class="dropdown-item text-danger">Delete</button> 
+                    <div class="dropdown-divider"></div> <button type="button" onclick="confirmation()" class="dropdown-item text-danger">Delete</button> 
                     </form>
+                    {{-- script of confirmation --}}
+                    <script>
+                        function confirmation() {
+                            Swal.fire({
+                          title: 'Are you sure?',
+                          text: "You won't be able to revert this!",
+                          icon: 'warning',
+                          showCancelButton: true,
+                          confirmButtonColor: '#3085d6',
+                          cancelButtonColor: '#d33',
+                          confirmButtonText: 'Yes, delete it!'
+                        }).then((result) => {
+                          if (result.isConfirmed) {
+                            document.getElementById('deleteForm-{{$part->id}}').submit();
+                          }
+                        })
+                        }
+                    </script>
                   </div>
                 </div>
               </td>

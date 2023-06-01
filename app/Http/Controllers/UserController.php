@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Builder;
 
 
 use Illuminate\Http\Request;
+use Illuminate\Routing\Route;
 use PHPUnit\Framework\TestCase;
 use Symfony\Contracts\Service\Attribute\Required;
 
@@ -75,7 +76,7 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        //
+       
     }
 
     /**
@@ -172,7 +173,7 @@ class UserController extends Controller
         $add_admin=user::FindOrFail($id);
         $add_admin->role='admin';
         $add_admin->save();
-        return redirect()->back()->with('status', 'u add the new admin');
+        return redirect()->back()->with('status', 'you add new admin');
     }
 
     private function search_data($items){
@@ -263,5 +264,15 @@ class UserController extends Controller
 
         return view('users.dashboeard_admin',['courses'=>$cours_count,'users_count'=>$users_count,'reviews_count'=>$reviews_count,'nbr_courses'=>$nbr_courses,'nbr_users'=>$nbr_users]);
 
+    }
+
+
+
+
+
+    public static function haslogin(){
+        if (!auth()->check()){
+            return redirect()->route('login')->with('status','you have to login first');
+        }
     }
 }

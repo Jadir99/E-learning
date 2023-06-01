@@ -105,7 +105,7 @@ class PartieController extends Controller
                 $document->save();
 
 
-                return redirect()->route('courses.edit',['course'=>$request->input('course')])->with('status','u had been your chapter');
+                return redirect()->route('courses.edit',['course'=>$request->input('course')])->with('status','You add new chapter');
     }
 
     /**
@@ -165,7 +165,7 @@ class PartieController extends Controller
                 $add_devoir->note_devoir='0.0';
                 $add_devoir->save();
 
-                return redirect()->back()->with('status','the devoir is remise');
+                return redirect()->back()->with('status','the assignement is remise');
     }
 
     

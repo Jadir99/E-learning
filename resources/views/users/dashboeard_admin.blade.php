@@ -1,4 +1,4 @@
-@extends('courses.layoutt')
+@extends('Courses.layoutt')
 
 @section('title')
 E-Learning dashboard

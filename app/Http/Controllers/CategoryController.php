@@ -32,7 +32,7 @@ class CategoryController extends Controller
         $new_category->Nom_categorie=$request->category;
         $new_category->save();
 
-        return redirect()->back()->with('status', 'u have been add new category');
+        return redirect()->back()->with('status', 'You have been add new category');
 
     }
 
@@ -63,7 +63,7 @@ class CategoryController extends Controller
         $category_update->Nom_categorie=$request->category;
         $category_update->save();
 
-        return redirect()->back()->with('status', 'u have been updated the category');
+        return redirect()->back()->with('status', 'You have been updated the category');
 
     }
 
@@ -74,7 +74,7 @@ class CategoryController extends Controller
     {
         $category_delete=categorie::FindOrFail($id);
         $category_delete->delete();
-        return redirect()->back()->with('status', 'u have been deleted the category');
+        return redirect()->back()->with('status', 'You have been deleted the category');
 
     }
 }

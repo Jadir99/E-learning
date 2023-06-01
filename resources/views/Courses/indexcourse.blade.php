@@ -1,5 +1,6 @@
+{{-- <span class="d-none">{{$demands=App\Http\Controllers\UserController::haslogin()}}</span> --}}
+@if (Auth::user()->id)
 @extends('Courses.layoutt')
-
 @section('title')
 E-Learning courses
 @endsection
@@ -240,4 +241,7 @@ E-Learning courses
 
 
   </script>
-@endsection
+@endsection  
+
+    
+@endif

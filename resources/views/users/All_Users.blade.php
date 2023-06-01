@@ -40,21 +40,41 @@ E-Learning users
                {{$user->role}}
               </p>
               <p class="fs--2 mb-1">
-                @if ($user->role !='admin')
+                @if ($user->id !=Auth::user()->id)
                 
                 <div class="col-auto pe-3">
                     <button class="btn btn-link text-600 btn-sm dropdown-toggle btn-reveal dropdown-caret-none float-center" type="button" id="dropdown-0" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs--1"></span></button>
                       <div class="dropdown-menu dropdown-menu-end border py-2" aria-labelledby="dropdown-0">
                        
                         <a class="dropdown-item" href="{{route('users.add_admin',['user'=>$user->id])}}">Add as an admin</a>
-                        <form action="{{route('users.destroy',['user'=>$user->id ])}}" method="post" >
+                        <form action="{{route('users.destroy',['user'=>$user->id ])}}" method="post" id="deleteForm-{{$user->id}}" >
                           @csrf
                           @method('delete')
-                        <div class="dropdown-divider"></div> <button type="submit" class="dropdown-item text-danger">Delete</button> 
+                        <div class="dropdown-divider"></div> <button type="button" onclick="confirmation()" class="dropdown-item text-danger">Delete</button> 
                         </form>
+
                       </div>
                 </div>  
                 @endif
+                {{-- script of confirmation  --}}
+                <script>
+                  function confirmation() {
+                      Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                  }).then((result) => {
+                    if (result.isConfirmed) {
+                      document.getElementById('deleteForm-{{$user->id}}').submit();
+                    }
+                  })
+                  }
+                
+                </script>
                 </p>
             </div>
           </div>    

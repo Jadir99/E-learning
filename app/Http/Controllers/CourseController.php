@@ -77,7 +77,7 @@ class CourseController extends Controller
                 $course->date_pub=$date_published;
 
                 $course->save();
-                return redirect()->route('courses.index')->with('status', 'u added the course');
+                return redirect()->route('courses.index')->with('status', 'You added the course');
     }
 
     /**
@@ -157,7 +157,7 @@ class CourseController extends Controller
         $course_update->description=$request->input('description');
         $course_update->update();
         // dd($course_update);
-        return redirect()->route('courses.show',['course' => $course_update->id])->with('status','u had been edit this course succesfly');; 
+        return redirect()->route('courses.show',['course' => $course_update->id])->with('status','You had been edit this course succesfly');
     }
 
     /**
@@ -167,7 +167,7 @@ class CourseController extends Controller
     {
         $to_delete= course::findOrFail($id);
         $to_delete->delete();
-        return redirect()->route('courses.index'); 
+        return redirect()->route('courses.index')->with('status','You had been edit this course succesfly'); 
     }
     public function courses_by_category($category_id){
 
