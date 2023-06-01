@@ -20,11 +20,20 @@ class CourseController extends Controller
     /**
      * Display a listing of the resource.
      */
+    private function islogin(){
+        if(!Auth::check()){
+            redirect()->route('login')->with('error','You have to login first !!');
+        }
+    }
     public function index()
     {
-        
+        // check if the user has been loggd;
+        $this->islogin();
         // this for testing if the learner has been already enrolled or not   
         
+        if(!Auth::check()){
+            return redirect()->route('login')->with('error','you have to login first!!!');
+        }
         $existe=course::whereHas('learner',function(Builder $query){
             $query->where('users.id',Auth::user()->id)
             ->where('access','like','confirm');
@@ -50,6 +59,8 @@ class CourseController extends Controller
      */
     public function create()
     {
+        // check if the user has been loggd;
+        $this->islogin();
         return view('Courses.add_course',['categories'=>categorie::all()]);
     }
 
@@ -58,6 +69,8 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
+        // check if the user has been loggd;
+        $this->islogin();
         $date_published =date('Y-m-d');
         $request->validate([
                         'title' => 'required',
@@ -85,7 +98,8 @@ class CourseController extends Controller
      */
     public function show( $id)
     {
-        
+        // check if the user has been loggd;
+        $this->islogin();
 // show reviews of each course 
         $reviews=course::whereHas('learner',function(Builder $query){
             $query->where('access', 'like', 'confirm')
@@ -122,6 +136,8 @@ class CourseController extends Controller
      */
     public function edit( $id)
     {
+        // check if the user has been loggd;
+        $this->islogin();
         $edit_cours= course::findOrFail($id);
 
         // // dd($edit_cours->partie());
@@ -139,6 +155,8 @@ class CourseController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        // check if the user has been loggd;
+        $this->islogin();
         
         $request->validate([
                 'title' => 'required',
@@ -165,13 +183,16 @@ class CourseController extends Controller
      */
     public function destroy(string $id)
     {
+        // check if the user has been loggd;
+        $this->islogin();
         $to_delete= course::findOrFail($id);
         $to_delete->delete();
         return redirect()->route('courses.index')->with('status','You had been edit this course succesfly'); 
     }
     public function courses_by_category($category_id){
 
-      
+      // check if the user has been loggd;
+      $this->islogin();
         // this for testing if the learner has been already enrolled or not   
         
         $existe=course::whereHas('learner',function(Builder $query){
@@ -184,6 +205,7 @@ class CourseController extends Controller
 
 // show reviews of each course 
         $reviews=course::whereHas('learner',function(Builder $query){
+            
             $query->where('access', 'like', 'confirm')
             ->where('comment','like','_%')
             ->select('course_id',DB::raw('AVG(review) as avg_reviews'),DB::raw('count(review) as sum_reviews'))
@@ -199,6 +221,8 @@ class CourseController extends Controller
     
     //ask for course (ajouter review )
     public function ask_for_course ($course_id) {
+        // check if the user has been loggd;
+        $this->islogin();
         $demand_access=new Prendre_course_user();
         $demand_access->course_id=$course_id;
         $demand_access->user_id=Auth::user()->id;
@@ -215,7 +239,8 @@ class CourseController extends Controller
 
     // update the acces from in progress to refuse or confirm
     public function update_acces_of_course($coure_user_id,$access){
-
+// check if the user has been loggd;
+$this->islogin();
         $update_demand=Prendre_course_user::FindOrFail($coure_user_id);
         $update_demand->access=$access;
         $update_demand->update();
@@ -224,7 +249,8 @@ class CourseController extends Controller
     
     // showing the invitaion for the users whos askin for the course
     public static function show_all_demands(){
-
+// check if the user has been loggd;
+        
 
         $test_course_user_owner=User::FindOrFail(Auth::user()->id)
         ->whereHas('former',function (Builder $query) {
@@ -260,7 +286,8 @@ class CourseController extends Controller
     }
     public function insert_review(request $request){
 
-
+// check if the user has been loggd;
+$this->islogin();
         $review = Prendre_course_user::
         where('user_id', Auth::user()->id)
         ->where('course_id', $request->course_id)
