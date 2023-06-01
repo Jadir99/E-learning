@@ -9,10 +9,13 @@ E-Learning detail
 <span class="d-none">{{$if_is_learner=0}}</span>
 @section('courses')
 @if (session('status'))
-  <div class="alert alert-info border-2 d-flex align-items-center" role="alert">
-    <div class="bg-info me-3 icon-item"><span class="fas fa-info-circle text-white fs-3"></span></div>
-    <p class="mb-0 flex-1">{{ session('status') }}</p><button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
-  </div>
+<script>
+  Swal.fire(
+  'Good job!',
+  '{{session('status')}}!',
+  'success'
+)
+</script>
 @endif    
 <div class="content">
     <script>
@@ -131,16 +134,35 @@ E-Learning detail
                     <td class="align-middle white-space-nowrap text-end">
                       <div class="dropdown font-sans-serif position-static d-inline-block btn-reveal-trigger"><button class="btn btn-link text-600 btn-sm dropdown-toggle btn-reveal dropdown-caret-none float-end" type="button" id="dropdown-0" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs--1"></span></button>
                         <div class="dropdown-menu dropdown-menu-end border py-2" aria-labelledby="dropdown-0"><a class="dropdown-item" href="{{route('parties.show',['party'=>$part->id])}}">View</a><a class="dropdown-item" href="#!">Edit</a>
-                          <form action="{{route('parties.destroy',['party'=>$part->id ])}}" method="post" >
+                          <form action="{{route('parties.destroy',['party'=>$part->id ])}}" method="post" id="deleteForm-{{$course->id}}" >
                             @csrf
                             @method('delete')
-                          <div class="dropdown-divider"></div> <button type="submit" class="dropdown-item text-danger">Delete</button> 
+                          <div class="dropdown-divider"></div> <button type="button" onclick="confirmation()" class="dropdown-item text-danger">Delete</button> 
                           </form>
                         </div>
                       </div>
                     </td>
                         
                     @endif
+                    {{-- script to confirm the delete --}}
+                    <script>
+                      function confirmation() {
+                          Swal.fire({
+                        title: 'Are you sure?',
+                        text: "You won't be able to revert this!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yes, delete it!'
+                      }).then((result) => {
+                        if (result.isConfirmed) {
+                          document.getElementById('deleteForm-{{$course->id}}').submit();
+                        }
+                      })
+                      }
+                    
+                    </script>
                   </tr>
                       
                   @endforeach

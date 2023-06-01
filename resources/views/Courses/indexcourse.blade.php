@@ -6,10 +6,13 @@ E-Learning courses
     
 @section('courses')
 @if (session('status'))
-  <div class="alert alert-info border-2 d-flex align-items-center" role="alert">
-    <div class="bg-info me-3 icon-item"><span class="fas fa-info-circle text-white fs-3"></span></div>
-    <p class="mb-0 flex-1">{{ session('status') }}</p><button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
-  </div>
+<script>
+  Swal.fire(
+  'Good job!',
+  '{{session('status')}}!',
+  'success'
+)
+</script>
 @endif
 
 
@@ -133,12 +136,30 @@ E-Learning courses
                         <a class="dropdown-item" href="{{route('courses.show',['course'=>$course->id])}}">View</a>
                         @if (Auth::user()->id==$course->user->id || Auth::user()->role=='admin')
                         <a class="dropdown-item" href="{{route('courses.edit',['course'=>$course->id])}}">Edit</a>
-                        <form action="{{route('courses.destroy',['course'=>$course->id ])}}" method="post" >
+                        <form action="{{route('courses.destroy',['course'=>$course->id ])}}" method="post" id="deleteForm-{{$course->id}}">
                           @csrf
                           @method('delete')
-                        <div class="dropdown-divider"></div> <button type="submit" class="dropdown-item text-danger">Delete</button> 
+                        <div class="dropdown-divider"></div> <button type="button" class="dropdown-item text-danger" onclick="confirmation()">Delete</button> 
                         </form>
                         @endif
+<script>
+  function confirmation() {
+      Swal.fire({
+    title: 'Are you sure?',
+    text: "You won't be able to revert this!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, delete it!'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      document.getElementById('deleteForm-{{$course->id}}').submit();
+    }
+  })
+  }
+
+</script>
                       </div>
                   @if ($is_existe==0)
                   <a class="btn btn-sm btn-falcon-default me-2 hover-danger" href="{{route('courses.demand',['course_id'=>$course->id])}}" data-bs-toggle="tooltip" data-bs-placement="top" title="Add to Wishlist"><span class="fas fa-plus" data-fa-transform="down-2"></span></a>
@@ -215,5 +236,8 @@ E-Learning courses
     }
   }
 }
+
+
+
   </script>
 @endsection

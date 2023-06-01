@@ -8,7 +8,7 @@
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 <head>
   <link rel="icon" sizes="16x16" type="image/x-icon" href="/images/logo_yaneCode.png">
-
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -81,13 +81,13 @@
         <nav class="navbar navbar-light navbar-glass navbar-top navbar-expand-lg ">
           <button class="btn navbar-toggler-humburger-icon navbar-toggler me-1 me-sm-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarStandard" aria-controls="navbarStandard" aria-expanded="false" aria-label="Toggle Navigation"><span class="navbar-toggle-icon"><span class="toggle-line"></span></span></button>
           <a class="navbar-brand me-1 me-sm-3" href="{{route('courses.index')}}">
-            <div class="d-flex align-items-center"><img class="me-2" src="\images\logo_yaneCode.png" alt="" width="40" /><span class="font-sans-serif text-bleu" style="color:#2444bb">E-Learning</span></div>
+            <div class="d-flex align-items-center"><img class="me-2" src="\images\logo_yaneCode.png" alt="" width="40" /><span class="" style="color:#2444bb;font-family:Verdana,sans-serif">E-Learning</span></div>
           </a>
           <div class="collapse navbar-collapse scrollbar" id="navbarStandard">
           </div>
           <ul class="navbar-nav navbar-nav-icons ms-auto flex-row align-items-center">
             @if (Auth::User()->role=='admin')
-              <li class="nav-item pt-2 dropdown"><a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dashboards">Dashboard</a>
+              <li class="nav-item pt-2 dropdown"><a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dashboards">Admin </a>
                 <div class="dropdown-menu dropdown-caret dropdown-menu-card border-0 mt-0" aria-labelledby="dashboards">
                   <div class="bg-white dark__bg-1000 rounded-3 py-2">><a class="dropdown-item link-600 fw-medium" href="{{route('users.all_users')}}">Users</a><a class="dropdown-item link-600 fw-medium" href="{{route('categories.index')}}">Categories</a><a class="dropdown-item link-600 fw-medium" href="{{route('users.dashboard')}}">Dashboards</a></div>
                 </div>
