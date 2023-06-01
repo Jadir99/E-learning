@@ -1,4 +1,4 @@
-@section('title')
+
 @section('title')
 Landing page
 @endsection

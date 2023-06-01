@@ -7,6 +7,8 @@
 <!-- Mirrored from prium.github.io/falcon/v3.16.0/app/e-learning/course/course-grid.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 22 Apr 2023 03:57:01 GMT -->
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 <head>
+  <link rel="icon" sizes="16x16" type="image/x-icon" href="/images/logo_yaneCode.png">
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -19,13 +21,11 @@
     <!-- ===============================================-->
     <!--    Favicons-->
     <!-- ===============================================-->
-    <link rel="apple-touch-icon" sizes="180x180" href="../../../assets/img/favicons/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="../../../assets/img/favicons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../../../assets/img/favicons/favicon-16x16.png">
-    <link rel="shortcut icon" type="image/x-icon" href="../../../assets/img/favicons/favicon.ico">
+    
     <link rel="manifest" href="../../../assets/img/favicons/manifest.json">
     <meta name="msapplication-TileImage" content="../../../assets/img/favicons/mstile-150x150.png">
     <meta name="theme-color" content="#ffffff">
+    
     <script src="../../../assets/js/config.js"></script>
     <script src="../../../vendors/simplebar/simplebar.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/echarts@5.2.0/dist/echarts.min.js"></script>
@@ -33,7 +33,7 @@
     <!-- ===============================================-->
     <!--    Stylesheets-->
     <!-- ===============================================-->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
+    {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css"> --}}
     <link href="../../../vendors/swiper/swiper-bundle.min.css" rel="stylesheet">
     <link href="../../../vendors/glightbox/glightbox.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.gstatic.com/">
@@ -58,8 +58,10 @@
         userLinkRTL.setAttribute('disabled', true);
       }
     </script>
-    <link rel="icon" href="{{ URL::asset('\images\logo_yaneCode.png') }}" type="image/x-icon"/>
-  </head>
+    {{-- <link rel="icon" href="{{ URL::asset('\images\logo_yaneCode.png') }}" type="image/x-icon"/> --}}
+  
+
+</head>
 
   <body class="">
 
