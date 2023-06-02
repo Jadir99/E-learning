@@ -27,6 +27,9 @@ class UserController extends Controller
      */
     public function index()
     {
+        if(!Auth::check()){
+            return redirect()->route('login')->with('error','you have to login first!!!');
+        }
         // show reviews of each course 
         $reviews=course::whereHas('learner',function(Builder $query){
             $query->where('access', 'like', 'confirm')
@@ -36,20 +39,10 @@ class UserController extends Controller
         })
         ->get();
 
-        // $user_courses=DB::table('users as u1')->where('u1.id','=',Auth::user()->id)
-        // ->join('courses', 'u1.id', '=', 'courses.user_id')
-        // ->select('*','courses.id as course_id')
-        // ->get();
 
         $user_courses=User::FindOrFail(Auth::user()->id)->get();
 
-        // var_dump($user_courses->course);
-
-        // foreach ($user_courses as $user_course){
-        //     foreach ($user_course->former as $item){
-        //         echo $item->title;
-        //     }
-        // }
+        
 
 
         return view('users.home',['user_courses'=>$user_courses,'reviews'=>$reviews]);
@@ -84,6 +77,9 @@ class UserController extends Controller
      */
     public function edit( $id)
     {
+        if(!Auth::check()){
+            return redirect()->route('login')->with('error','you have to login first!!!');
+        }
         return view('users.settings');
     }
 
@@ -91,13 +87,15 @@ class UserController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
-    {
-        $request->validate([
-            'name'=>'Required',
-            'email'=>'Required',
-            'tele'=>'Required',
-            'description'=>'Required',
-        ]);
+    {if(!Auth::check()){
+        return redirect()->route('login')->with('error','you have to login first!!!');
+    }
+        // $request->validate([
+        //     'name'=>'Required',
+        //     'email'=>'Required',
+        //     'tele'=>'Required',
+        //     'description'=>'Required',
+        // ]);
 
         
 
@@ -270,9 +268,5 @@ class UserController extends Controller
 
 
 
-    public static function haslogin(){
-        if (!auth()->check()){
-            return redirect()->route('login')->with('status','you have to login first');
-        }
-    }
+    
 }

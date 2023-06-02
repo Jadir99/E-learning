@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\categorie; 
+use App\Models\categorie;
+use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {
@@ -12,6 +13,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
+        if(!Auth::check()){
+            return redirect()->route('login')->with('error','you have to login first!!!');
+        }
         return view ('categories.index',['categories'=>categorie::all()]);
     }
 
@@ -28,6 +32,9 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        if(!Auth::check()){
+            return redirect()->route('login')->with('error','you have to login first!!!');
+        }
         $new_category=new categorie;
         $new_category->Nom_categorie=$request->category;
         $new_category->save();
@@ -41,6 +48,9 @@ class CategoryController extends Controller
      */
     public function show(string $id)
     {
+        if(!Auth::check()){
+            return redirect()->route('login')->with('error','you have to login first!!!');
+        }
         $courses_by_category=categorie::findOrfail($id);
         return view('Courses.indexcourse',['courses'=>$courses_by_category->courses,'categories'=>categorie::all()]);
     }
@@ -58,7 +68,9 @@ class CategoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-    
+        if(!Auth::check()){
+            return redirect()->route('login')->with('error','you have to login first!!!');
+        }
         $category_update=categorie::FindOrFail($id);
         $category_update->Nom_categorie=$request->category;
         $category_update->save();
@@ -72,6 +84,9 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
+        if(!Auth::check()){
+            return redirect()->route('login')->with('error','you have to login first!!!');
+        }
         $category_delete=categorie::FindOrFail($id);
         $category_delete->delete();
         return redirect()->back()->with('status', 'You have been deleted the category');

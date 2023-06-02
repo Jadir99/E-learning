@@ -18,23 +18,13 @@ class PartieController extends Controller
      */
     public function index()
     {
+        if(!Auth::check()){
+            return redirect()->route('login')->with('error','you have to login first!!!');
+        }
         // this is devoirs of all learner in all courses;
         $user=User::FindOrFail(Auth::user()->id);
 
-        // foreach ($user->former as $course){
-        //     // echo 'title: ';echo $course->title;echo '<br>';
-        //     foreach($course->partie as $parties){
-        //         // echo 'partie:' ;echo $parties->title_partie;echo '<br>';
-        //         foreach($parties->devoirs as $devoir){
-        //             // echo 'devoir:' ;echo $devoir->devoir_title;echo '<br>';
-        //             // var_dump($devoir->users_devoir);
-        //             foreach($devoir->users_devoir as $user_devoir){
-        //                 echo 'date ::::'.$user_devoir->pivot->date_remise.'<br>';
-        //                 echo 'date ::::'.$user_devoir->name.'<br>';
-        //             }
-        //         }
-        //     }
-        // }
+      
         return view('parties.devoirs',['devoirs'=>$user]);
     }
 
@@ -43,6 +33,9 @@ class PartieController extends Controller
      */
     public function create()
     {
+        if(!Auth::check()){
+            return redirect()->route('login')->with('error','you have to login first!!!');
+        }
         // echo $_GET['course'];
         // echo 'lknlkn';
         return view('parties.add_chapter',['couse'=>$_GET['course']]);
@@ -54,6 +47,9 @@ class PartieController extends Controller
     public function store(Request $request)
     {
 
+        if(!Auth::check()){
+            return redirect()->route('login')->with('error','you have to login first!!!');
+        }
         // echo 'lihkuhkho';
         // dd($request);
 
@@ -113,6 +109,9 @@ class PartieController extends Controller
      */
     public function show(string $id )
     {
+        if(!Auth::check()){
+            return redirect()->route('login')->with('error','you have to login first!!!');
+        }
         $party= Partie::findOrFail($id);
         if ($party !=false )
         return view('parties.party_detail',['party'=>$party]);
@@ -139,6 +138,9 @@ class PartieController extends Controller
      */
     public function destroy(string $id)
     {
+        if(!Auth::check()){
+            return redirect()->route('login')->with('error','you have to login first!!!');
+        }
         $delete_party=Partie::FindOrFail($id);
         $delete_party->delete();
         return redirect()->back()->with('status','the cahpter has been deleted');
@@ -146,6 +148,9 @@ class PartieController extends Controller
 
     public function remise_devoir(Request $request){
                 // dd($request);
+                if(!Auth::check()){
+                    return redirect()->route('login')->with('error','you have to login first!!!');
+                }
 
                 $date_delevry =date('Y-m-d');
                 $request->validate([
