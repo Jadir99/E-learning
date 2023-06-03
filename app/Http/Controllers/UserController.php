@@ -218,7 +218,6 @@ class UserController extends Controller
         // search about the users of this year
         $users = User::selectRaw('COUNT(*) as count, MONTH(created_at) as month')
         ->whereYear('created_at', date('Y'))
-        ->where('role','user')
         ->groupBy('month')
         ->get();
         $users_count=$this->search_data($users);
@@ -247,7 +246,6 @@ class UserController extends Controller
         // search about the users of this month and last month
         $nbr_users = User::selectRaw('COUNT(*) as count, MONTH(created_at) as month')
         ->whereYear('created_at', [date("Y-m",strtotime("-1 month")),date('Y-m')])
-        ->where('role','user')
         ->groupBy('month')
         ->get();
         $nbr_users=$this->to_array($nbr_users);
