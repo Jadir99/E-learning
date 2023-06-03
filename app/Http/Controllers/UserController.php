@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Delivery_user_partie_Devoir;
 use App\Models\User;
 use App\Models\course;
 use App\Models\Prendre_course_user;
@@ -16,6 +17,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\VarDumper\VarDumper;
 use Symfony\Contracts\Service\Attribute\Required;
 
 use function PHPUnit\Framework\isEmpty;
@@ -262,6 +264,18 @@ class UserController extends Controller
 
         return view('users.dashboeard_admin',['courses'=>$cours_count,'users_count'=>$users_count,'reviews_count'=>$reviews_count,'nbr_courses'=>$nbr_courses,'nbr_users'=>$nbr_users]);
 
+    }
+    public function update_note_devoir(Request $request){
+        
+        // $updatenote=Delivery_user_partie_Devoir::FindOrFail($id);
+        var_dump(($request->id));
+        foreach ($request->id as $id){
+            $updatenote=Delivery_user_partie_Devoir::FindOrFail($id);
+            $updatenote->note_devoir=$request->notes[$id];
+            $updatenote->update();
+        }
+        return redirect()->back()->with('status','you have been updated your data');
+        
     }
 
 

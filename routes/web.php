@@ -44,6 +44,7 @@ Route::resource('courses', CourseController::class);
 Route::resource('users', UserController::class);
 Route::resource('parties', PartieController::class);
 Route::resource('categories', CategoryController::class);
+Route::resource('assignements', HomeworkSubmissionsController::class);
 
 Route::get('/courses/category_id/{category_id}', [CourseController::class, 'courses_by_category'])->name('courses.by_category');
 Route::get('/courses/course_id/{course_id}', [CourseController::class, 'ask_for_course'])->name('courses.demand');
@@ -55,6 +56,7 @@ Route::get('/users.all_users', [UserController::class, 'all_users'])->name('user
 Route::get('/users/profile/{profile_id}',[UserController::class, 'profile'])->name('users.profile');
 Route::get('/users/add_admin/{user}',[UserController::class, 'add_admin'])->name('users.add_admin');
 Route::get('/users.dashboard_admin',[UserController::class, 'dashboard'])->name('users.dashboard');
+Route::post('/users.update_note_devoir',[UserController::class, 'update_note_devoir'])->name('users.update_note_devoir');
 // Route::get('/courses.layoutt', [CourseController::class, 'show_all_demands']);
 
 // Route::get('/home', [PagesControllers::class, 'index'])->name('pages.index');

@@ -74,7 +74,7 @@
 <body class="bg-white">
     <main class="main " id="top">
         <nav class="navbar navbar-standard navbar-expand-lg fixed-top navbar-dark bg-primary opacity-75" data-navbar-darken-on-scroll="data-navbar-darken-on-scroll">
-            <div class="container"><a class="navbar-brand" href="{{route('courses.index')}}"><img class="me-2" src="\images\yanecode_white.png" alt="" width="58" /><span class="text-white " style="font-family:Verdana,sans-serif">E-Learning</span></a><button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarStandard" aria-controls="navbarStandard" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="container"><a class="navbar-brand" href="/"><img class="me-2" src="\images\yanecode_white.png" alt="" width="58" /><span class="text-white " style="font-family:Verdana,sans-serif">E-Learning</span></a><button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarStandard" aria-controls="navbarStandard" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
               <div class="collapse navbar-collapse scrollbar" id="navbarStandard">
                 <ul class="navbar-nav ms-auto">
                   <li class="nav-item d-flex align-items-center me-2">
