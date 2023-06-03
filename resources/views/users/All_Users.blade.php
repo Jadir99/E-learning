@@ -34,15 +34,13 @@ E-Learning users
 
             
         <div class="col-6 col-md-4 col-lg-3 col-xxl-2 mb-1">
-            <div class="bg-white dark__bg-1100 p-3 h-100"><a href="{{route('users.profile',['profile_id'=>$user->id])}}"><img class="img-thumbnail img-fluid rounded-circle mb-3 shadow-sm" src="\images\users\{{$user->profile_image_path}}" alt="" width="100" /></a>
+            <div class="bg-white dark__bg-1100 p-3 h-100"><a href="{{route('users.profile',['profile_id'=>$user->id])}}"><img class="img-thumbnail img-fluid rounded-circle mb-3 shadow-sm" src="\images\users\{{$user->profile_image_path}}" alt="" style="width: 100px; height: 100px;" /></a>
               <h6 class="mb-1"><a href="{{route('users.profile',['profile_id'=>$user->id])}}"  data-sort="name"> {{$user->name}} </a></h6>
               <p class="fs--2 mb-1 ">
                {{$user->role}}
               </p>
-              <p class="fs--2 mb-1">
-                @if ($user->id !=Auth::user()->id)
-                
-                <div class="col-auto pe-3">
+              <p class="fs--2 mb-1 ">
+                <div class="col-auto pl-4 ">
                     <button class="btn btn-link text-600 btn-sm dropdown-toggle btn-reveal dropdown-caret-none float-center" type="button" id="dropdown-0" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs--1"></span></button>
                       <div class="dropdown-menu dropdown-menu-end border py-2" aria-labelledby="dropdown-0">
                        
@@ -55,7 +53,7 @@ E-Learning users
 
                       </div>
                 </div>  
-                @endif
+                
                 {{-- script of confirmation  --}}
                 <script>
                   function confirmation() {
