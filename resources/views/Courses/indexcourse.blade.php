@@ -3,7 +3,7 @@
   
   @extends('Courses.layoutt')
   @section('title')
-  E-Learning courses
+courses
   @endsection
       
   @section('courses')
@@ -16,11 +16,6 @@
       )
       </script>
     @endif
-
-
-
-
-  
       {{-- ml,lm --}}
   <div class="row g-3">
       <div class="col-xxl-2 col-xl-3">
@@ -144,24 +139,24 @@
                           <div class="dropdown-divider"></div> <button type="button" class="dropdown-item text-danger" onclick="confirmation()">Delete</button> 
                           </form>
                           @endif
-  <script>
-    function confirmation() {
-        Swal.fire({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        document.getElementById('deleteForm-{{$course->id}}').submit();
-      }
-    })
-    }
+                            <script>
+                              function confirmation() {
+                                  Swal.fire({
+                                title: 'Are you sure?',
+                                text: "You won't be able to revert this!",
+                                icon: 'warning',
+                                showCancelButton: true,
+                                confirmButtonColor: '#3085d6',
+                                cancelButtonColor: '#d33',
+                                confirmButtonText: 'Yes, delete it!'
+                              }).then((result) => {
+                                if (result.isConfirmed) {
+                                  document.getElementById('deleteForm-{{$course->id}}').submit();
+                                }
+                              })
+                              }
 
-  </script>
+                            </script>
                         </div>
                     @if ($is_existe==0)
                     <a class="btn btn-sm btn-falcon-default me-2 hover-danger" href="{{route('courses.demand',['course_id'=>$course->id])}}" data-bs-toggle="tooltip" data-bs-placement="top" title="Add to Wishlist"><span class="fas fa-plus" data-fa-transform="down-2"></span></a>

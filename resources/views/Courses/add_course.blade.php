@@ -32,7 +32,7 @@ E-Learning add course
                 
               </select></div>
             
-            <div class="mb-3"><label class="form-label">Upload Cover Image</label><input class="form-control" type="file" name="image" /></div>
+            <div class="mb-3"><label class="form-label">Upload an Image</label><input class="form-control" type="file" name="image" /></div>
             <div class="mb-3"><label class="form-label" for="basic-form-textarea">Description</label><textarea class="form-control" id="basic-form-textarea" rows="3" placeholder="Description" name="description"></textarea></div>
             
             <button class="btn btn-primary" type="submit">Submit</button>

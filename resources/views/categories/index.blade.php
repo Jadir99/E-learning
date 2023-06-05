@@ -6,10 +6,13 @@ E-Learning categories
     
 @section('courses')
 @if (session('status'))
-  <div class="alert alert-info border-2 d-flex align-items-center" role="alert">
-    <div class="bg-info me-3 icon-item"><span class="fas fa-info-circle text-white fs-3"></span></div>
-    <p class="mb-0 flex-1">{{ session('status') }}</p><button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
-  </div>
+<script>
+    Swal.fire(
+    'Good job!',
+    '{{session('status')}}!',
+    'success'
+  )
+  </script>
 @endif
 <div class="card col-6 justify_content-center p-3 m-auto mt-7">
     
@@ -83,10 +86,10 @@ E-Learning categories
                     <div class="row ">
                         
                         <div class="col "> 
-                            <form action="{{route('categories.destroy',['category'=>$category->id])}}" method="post" >
+                            <form action="{{route('categories.destroy',['category'=>$category->id])}}" method="post" id="deleteForm-{{$category->id}}" >
                                 @csrf
                                 @method('delete')
-                                <button class="btn btn-secondary mx-2 bg-transparent border-0" style="background-color:#edf2f9" type="submit" ><i class="bi bi-trash " style="font-size:20px;color:#5e6e82"></i></button>
+                                <button class="btn btn-secondary mx-2 bg-transparent border-0" style="background-color:#edf2f9" type="button" onclick="confirmation()" ><i class="bi bi-trash " style="font-size:20px;color:#5e6e82"></i></button>
                             </form>
                         </div>
                         <div class="col">
@@ -133,10 +136,28 @@ E-Learning categories
         </tbody>
       </table>
     </div>
-    <div class="d-flex justify-content-center mt-3"><button class="btn btn-sm btn-falcon-default me-1" type="button" title="Previous" data-list-pagination="prev"><span class="fas fa-chevron-left"></span></button>
-      <ul class="pagination mb-0"></ul><button class="btn btn-sm btn-falcon-default ms-1" type="button" title="Next" data-list-pagination="next"><span class="fas fa-chevron-right"> </span></button>
+    {{-- <div class="d-flex justify-content-center mt-3"><button class="btn btn-sm btn-falcon-default me-1" type="button" title="Previous" data-list-pagination="prev"><span class="fas fa-chevron-left"></span></button>
+      <ul class="pagination mb-0"></ul><button class="btn btn-sm btn-falcon-default ms-1" type="button" title="Next" data-list-pagination="next"><span class="fas fa-chevron-right"> </span></button> --}}
     </div>
   </div>
 
 </div>
+<script>
+    function confirmation() {
+        Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        document.getElementById('deleteForm-{{$category->id}}').submit();
+      }
+    })
+    }
+  
+  </script>
 @endsection

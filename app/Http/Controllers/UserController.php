@@ -140,12 +140,18 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
+        if(!Auth::check()){
+            return redirect()->route('login')->with('error','you have to login first!!!');
+        }
         $delet_user=User::FindOrFail($id);
         $delet_user->forceDelete();
         return redirect()->back()->with('status','the user have been deleted');
     }
 
     public function profile($id){
+        if(!Auth::check()){
+            return redirect()->route('login')->with('error','you have to login first!!!');
+        }
         $profile_courses=User::FindOrFail($id);
 
         // show reviews of each course 
@@ -166,10 +172,16 @@ class UserController extends Controller
         
     }
     public function all_users(){
+        if(!Auth::check()){
+            return redirect()->route('login')->with('error','you have to login first!!!');
+        }
         return view('users.All_Users',['users'=>User::all()]);
     }
 
     public function add_admin($id){
+        if(!Auth::check()){
+            return redirect()->route('login')->with('error','you have to login first!!!');
+        }
         $add_admin=user::FindOrFail($id);
         $add_admin->role='admin';
         $add_admin->save();
@@ -207,6 +219,9 @@ class UserController extends Controller
     }
 
     public function dashboard(){
+        if(!Auth::check()){
+            return redirect()->route('login')->with('error','you have to login first!!!');
+        }
         // search about the courses of this year
         $courses = course::selectRaw('COUNT(*) as count, MONTH(date_pub) as month')
         ->whereYear('date_pub', date('Y'))
@@ -264,6 +279,9 @@ class UserController extends Controller
 
     }
     public function update_note_devoir(Request $request){
+        if(!Auth::check()){
+            return redirect()->route('login')->with('error','you have to login first!!!');
+        }
         
         // $updatenote=Delivery_user_partie_Devoir::FindOrFail($id);
         var_dump(($request->id));
