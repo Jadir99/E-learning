@@ -43,19 +43,6 @@ E-Learning courses
                       <h5 class="mb-1 text-800 fs-0">{{Auth::user()->tele}}</ >
                       <p class="mb-0 fs--1">  {{Auth::user()->city}} in {{Auth::user()->contry}} </p>
                     </div>
-                    <div class="col mt-4 mt-md-5 mt-lg-4 order-md-1 order-lg-0"><button class="btn btn-falcon-default btn-md mb-2 w-100" type="button"><span class="fas fa-comment me-1"> </span>Message</button><button class="btn btn-primary btn-md w-100" type="button"><span class="fas fa-heart me-1"> </span>Follow</button></div>
-                    <div class="col mt-4 mt-md-5 mt-lg-4">
-                      <div class="row text-center">
-                        <div class="col-6 border-end-sm border-300"><img class="mb-2" src="../../assets/img/icons/user-plus.svg" width="30" alt="" />
-                          <h4 class="text-700" data-countup='{"endValue":79563}'>0</h4>
-                          <h6 class="fw-normal mb-0">Following</h6>
-                        </div>
-                        <div class="col-6"><img class="mb-2" src="../../assets/img/icons/users.svg" width="30" alt="" />
-                          <h4 class="text-700" data-countup='{"endValue":120302}'>0</h4>
-                          <h6 class="fw-normal mb-0">Followers</h6>
-                        </div>
-                      </div>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -158,6 +145,9 @@ E-Learning courses
           <div class="row mb-3 g-3" id="allcourses">
             
             @foreach ($user_courses as $user_course)
+          @if ($user_course->id==Auth::user()->id)
+              
+          
               @foreach ($user_course->former as $item)
               <article class="col-md-6 col-xxl-4">
                 <div class="card h-120 overflow-hidden">
@@ -202,8 +192,9 @@ E-Learning courses
               </div>
             </article>
             @endforeach
+            @endif
             @endforeach
-    
+          
           </div>
           <div class="card-footer py-2 bg-light d-flex justify-content-end"><button class="btn btn-falcon-default btn-sm me-2" type="button" disabled="disabled" data-bs-toggle="tooltip" data-bs-placement="top" title="Prev"><span class="fas fa-chevron-left"></span></button><a class="btn btn-sm btn-falcon-default text-primary me-2" href="#!">1</a><a class="btn btn-sm btn-falcon-default me-2" href="#!">2</a><a class="btn btn-sm btn-falcon-default me-2" href="#!">3</a><button class="btn btn-falcon-default btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Next"><span class="fas fa-chevron-right"></span></button></div>
         </div>

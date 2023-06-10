@@ -7,6 +7,33 @@ courses
   @endsection
       
   @section('courses')
+
+
+{{-- <script>
+    function myprenom() {
+        // Declare variables
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("mynput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("all_courses");
+        tr = document.getElementsById("article");
+
+        // Loop through all table rows, and hide those who don't match the search query
+        for (i = 1; i < tr.length; i++) {
+            td = tr[i].getElementsById("td")[0];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+    </script> --}}
+
+    {{-- <input type="search"  placeholder="Cherche par model..."></input> --}}
     @if (session('status'))
       <script>
         Swal.fire(
@@ -45,7 +72,7 @@ courses
           </ul>
         </aside>
       </div>
-      <div class="col-xxl-10 col-xl-9">
+      <div class="col-xxl-10 col-xl-9" id="all_courses">
         <div class="card mb-3">
           <div class="card-header position-relative">
             <h5 class="mb-0 mt-1">All Courses</h5>
@@ -56,23 +83,12 @@ courses
             <div class="row g-3 align-items-center">
               <div class="col-auto d-xl-none"><button class="btn btn-sm p-0 btn-link position-relative" type="button" data-bs-toggle="offcanvas" data-bs-target="#filterOffcanvas" aria-controls="filterOffcanvas"><span class="fas fa-filter fs-0 text-700"></span></button></div>
               <div class="col">
-                <form class="position-relative"><input class="form-control form-control-sm search-input lh-1 rounded-2 ps-4" type="search" placeholder="Search..." aria-label="Search" />
+                <form class="position-relative"><input class="form-control form-control-sm search-input lh-1 rounded-2 ps-4" type="search" onkeyup="myprenom()" id="mynput"placeholder="Search..." aria-label="Search" />
                   <div class="position-absolute top-50 start-0 translate-middle-y ms-2"><span class="fas fa-search text-400 fs--1"></span></div>
                 </form>
               </div>
               <div class="col position-sm-relative position-absolute top-0 end-0 me-3 me-sm-0 p-0">
-                <div class="row g-0 g-md-3 justify-content-end">
-                  <div class="col-auto">
-                    <form class="row gx-2">
-                      <div class="col-auto d-none d-lg-block"><small class="fw-semi-bold">Sort by:</small></div>
-                      <div class="col-auto"> <select class="form-select form-select-sm" aria-label="Bulk actions">
-                          <option value="rating">Rating</option>
-                          <option value="review">Review</option>
-                          <option value="price">{{$courses->count()}}</option>
-                        </select></div>
-                    </form>
-                  </div>
-                </div>
+                
               </div>
             </div>
           </div>
@@ -91,14 +107,14 @@ courses
                 @endif
               
             @endforeach
-          <article class="col-md-6 col-xxl-4">
+          <article class="col-md-6 col-xxl-4" id="article">
             <div class="card h-101 overflow-hidden">
               <div class="card-body p-0 d-flex flex-column justify-content-between">
                 <div>
                   <div class="hoverbox text-center"><a class="text-decoration-none" href="\iamges\{{$course->image}}" data-gallery="attachment-bg"><img class="w-100 h-100 object-fit-cover" src="\iamges\{{$course->image}}" alt="" /></a>
                   </div>
                   <div class=" ps-3">
-                    <h5 class="fs-0 mt-2"><a class="text-dark" href="{{route('courses.show',['course'=>$course->id])}}">{{$course->title}}</a></h5>
+                    <h5 class="fs-0 mt-2"><a class="text-dark" href="{{route('courses.show',['course'=>$course->id])}}"><span id="td">{{$course->title}}</span></a></h5>
                     <h5 class="fs-0 "><a href="{{route('users.profile',['profile_id'=>$course->user->id])}}"> {{$course->user->name	}}</a></h5><br>
                   </div>
                 </div>

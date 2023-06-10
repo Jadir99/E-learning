@@ -42,9 +42,9 @@ class UserController extends Controller
         ->get();
 
 
-        $user_courses=User::FindOrFail(Auth::user()->id)->get();
+        $user_courses=User::FindOrFail(3)->get();
 
-        
+        echo count($user_courses);
 
 
         return view('users.home',['user_courses'=>$user_courses,'reviews'=>$reviews]);

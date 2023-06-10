@@ -173,12 +173,12 @@ class CourseController extends Controller
         // check if the user has been loggd;
         
         
-        $request->validate([
-                'title' => 'required',
-                'category' => 'required',
-                'image' => 'required ',
-                'description' => 'required ',
-        ]);
+        // $request->validate([
+        //         'title' => 'required',
+        //         'category' => 'required',
+        //         'image' => 'required ',
+        //         'description' => 'required ',
+        // ]);
 
         $course_update= course::findOrFail($id);
         $course_update->title=$request->input('title');
