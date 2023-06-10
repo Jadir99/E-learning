@@ -78,9 +78,9 @@ class PartieController extends Controller
 
                 // adding video
 
-                $video= new  Conetent();
+                $video = new  Conetent();
 
-                $slug=Str::slug($request->input('title'),'-');
+                $slug=Str::slug($request->input('devoir_title'),'-');
                 $new_video=uniqid().'-'.$slug.'.'.$request->video->extension() ;
                 $request->video->move(public_path('videos'), $new_video);
                 $video->path_content=$new_video;
@@ -92,7 +92,7 @@ class PartieController extends Controller
                 // adding document
                 $document= new Conetent();
 
-                $slug=Str::slug($request->input('title'),'-');
+                $slug=Str::slug($request->input('devoir_title'),'-');
                 $new_document=uniqid().'-'.$slug.'.'.$request->document->extension() ;
                 $request->document->move(public_path('documents'), $new_document);
                 $document->path_content=$new_document;

@@ -181,7 +181,6 @@ courses
                               <span class="d-none">{{$is_existe=1}}</span>
                           @endif
                         @endforeach
-                        
                         @if ($is_existe==0)
                         <a class="btn btn-sm btn-falcon-default me-2 hover-danger" href="{{route('courses.demand',['course_id'=>$course->id])}}" data-bs-toggle="tooltip" data-bs-placement="top" title="Add to Wishlist"><span class="fas fa-plus" data-fa-transform="down-2"></span></a>
                     @endif
