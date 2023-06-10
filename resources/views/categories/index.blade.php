@@ -86,6 +86,8 @@ E-Learning categories
                     <div class="row ">
                         
                         <div class="col "> 
+                          aifueiufhzaou
+                          aaoz
                             <form action="{{route('categories.destroy',['category'=>$category->id])}}" method="post" id="deleteForm-{{$category->id}}" >
                                 @csrf
                                 @method('delete')
