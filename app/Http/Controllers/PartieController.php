@@ -76,7 +76,16 @@ class PartieController extends Controller
                 $devoir->partie_id	=$partie_id;
                 $devoir->save();
 
+                // adding document
+                $document= new Conetent();
 
+                $slug=Str::slug($request->input('devoir_title'),'-');
+                $new_document=uniqid().'-'.$slug.'.'.$request->document->extension() ;
+                $request->document->move(public_path('documents'), $new_document);
+                $document->path_content=$new_document;
+                $document->type_content='document';
+                $document->partie_id=$partie_id;
+                $document->save();
                 // adding video
 
                 $video = new  Conetent();
@@ -91,16 +100,7 @@ class PartieController extends Controller
                 $video->save();
 
 
-                // adding document
-                $document= new Conetent();
-
-                $slug=Str::slug($request->input('devoir_title'),'-');
-                $new_document=uniqid().'-'.$slug.'.'.$request->document->extension() ;
-                $request->document->move(public_path('documents'), $new_document);
-                $document->path_content=$new_document;
-                $document->type_content='document';
-                $document->partie_id=$partie_id;
-                $document->save();
+                
 
 
                 return redirect()->route('courses.edit',['course'=>$request->input('course')])->with('status','You add new chapter');
