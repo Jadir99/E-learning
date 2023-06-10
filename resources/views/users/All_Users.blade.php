@@ -32,7 +32,7 @@ E-Learning users
       <div class="row g-0 text-center fs--1">
         @foreach ($users as $user)
 
-            
+            tauzvusjb
         <div class="col-6 col-md-4 col-lg-3 col-xxl-2 mb-1">
             <div class="bg-white dark__bg-1100 p-3 h-100"><a href="{{route('users.profile',['profile_id'=>$user->id])}}"><img class="img-thumbnail img-fluid rounded-circle mb-3 shadow-sm" src="\images\users\{{$user->profile_image_path}}" alt="" style="width: 100px; height: 100px;" /></a>
               <h6 class="mb-1"><a href="{{route('users.profile',['profile_id'=>$user->id])}}"  data-sort="name"> {{$user->name}} </a></h6>

@@ -211,7 +211,7 @@ class CourseController extends Controller
         
         $to_delete= course::findOrFail($id);
         $to_delete->delete();
-        return redirect()->route('courses.index')->with('status','You had been edit this course succesfly'); 
+        return redirect()->route('courses.index')->with('status','You had been delete this course '); 
     }
     public function courses_by_category($category_id){
         if(!Auth::check()){

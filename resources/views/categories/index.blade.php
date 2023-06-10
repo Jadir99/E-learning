@@ -70,7 +70,7 @@ E-Learning categories
         
       </div>
     </div>
-    <div class="table-responsive scrollbar">hh
+    <div class="table-responsive scrollbar">
       <table class="table table-bordered table-striped fs--1 mb-0 ">
         <thead class="bg-200 text-900">
           <tr>
