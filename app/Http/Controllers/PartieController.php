@@ -10,6 +10,7 @@ use App\Models\Conetent;
 use Illuminate\Support\Str;
 use App\Models\Delivery_user_partie_Devoir;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class PartieController extends Controller
 {
@@ -81,8 +82,9 @@ class PartieController extends Controller
                 $video = new  Conetent();
 
                 $slug=Str::slug($request->input('devoir_title'),'-');
-                $new_video=uniqid().'-'.$slug.'.'.$request->video->extension() ;
+                $new_video=uniqid().'-'.$slug.'.'.$request->video->getClientOriginalExtension() ;
                 $request->video->move(public_path('videos'), $new_video);
+                // $video->path_content = Storage::disk('public')->putFileAs('videos', $request->video, $new_video);
                 $video->path_content=$new_video;
                 $video->type_content='video';
                 $video->partie_id=$partie_id;
