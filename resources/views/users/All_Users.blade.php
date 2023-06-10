@@ -48,7 +48,7 @@ E-Learning users
                         <form action="{{route('users.destroy',['user'=>$user->id ])}}" method="post" id="deleteForm-{{$user->id}}" >
                           @csrf
                           @method('delete')
-                        <div class="dropdown-divider"></div> <button type="button" onclick="confirmation()" class="dropdown-item text-danger">Delete</button> 
+                        <div class="dropdown-divider"></div> <button type="button" onclick="confirmation({{$user->id}})" class="dropdown-item text-danger ">Delete</button> 
                         </form>
 
                       </div>
@@ -56,7 +56,8 @@ E-Learning users
                 
                 {{-- script of confirmation  --}}
                 <script>
-                  function confirmation() {
+
+                  function confirmation(e) {
                       Swal.fire({
                     title: 'Are you sure?',
                     text: "You won't be able to revert this!",
@@ -67,7 +68,7 @@ E-Learning users
                     confirmButtonText: 'Yes, delete it!'
                   }).then((result) => {
                     if (result.isConfirmed) {
-                      document.getElementById('deleteForm-{{$user->id}}').submit();
+                      document.getElementById('deleteForm-'+e).submit();
                     }
                   })
                   }

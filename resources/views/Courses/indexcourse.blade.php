@@ -152,11 +152,11 @@ courses
                           <form action="{{route('courses.destroy',['course'=>$course->id ])}}" method="post" id="deleteForm-{{$course->id}}">
                             @csrf
                             @method('delete')
-                          <div class="dropdown-divider"></div> <button type="button" class="dropdown-item text-danger" onclick="confirmation()">Delete</button> 
+                          <div class="dropdown-divider"></div> <button type="button" class="dropdown-item text-danger" onclick="confirmation({{$course->id}})">Delete</button> 
                           </form>
                           @endif
                             <script>
-                              function confirmation() {
+                              function confirmation(e) {
                                   Swal.fire({
                                 title: 'Are you sure?',
                                 text: "You won't be able to revert this!",
@@ -164,10 +164,10 @@ courses
                                 showCancelButton: true,
                                 confirmButtonColor: '#3085d6',
                                 cancelButtonColor: '#d33',
-                                confirmButtonText: 'Yes, delete it!'
+                                confirmButtonText: 'Yes, delete it! '
                               }).then((result) => {
                                 if (result.isConfirmed) {
-                                  document.getElementById('deleteForm-{{$course->id}}').submit();
+                                  document.getElementById('deleteForm-'+e).submit();
                                 }
                               })
                               }

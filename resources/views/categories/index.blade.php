@@ -89,7 +89,7 @@ E-Learning categories
                             <form action="{{route('categories.destroy',['category'=>$category->id])}}" method="post" id="deleteForm-{{$category->id}}" >
                                 @csrf
                                 @method('delete')
-                                <button class="btn btn-secondary mx-2 bg-transparent border-0" style="background-color:#edf2f9" type="button" onclick="confirmation()" ><i class="bi bi-trash " style="font-size:20px;color:#5e6e82"></i></button>
+                                <button class="btn btn-secondary mx-2 bg-transparent border-0" style="background-color:#edf2f9" type="button" onclick="confirmation({{$category->id}})" ><i class="bi bi-trash " style="font-size:20px;color:#5e6e82"></i></button>
                             </form>
                         </div>
                         <div class="col">
@@ -143,7 +143,7 @@ E-Learning categories
 
 </div>
 <script>
-    function confirmation() {
+    function confirmation(e) {
         Swal.fire({
       title: 'Are you sure?',
       text: "You won't be able to revert this!",
@@ -154,7 +154,7 @@ E-Learning categories
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.isConfirmed) {
-        document.getElementById('deleteForm-{{$category->id}}').submit();
+        document.getElementById('deleteForm-'+e).submit();
       }
     })
     }
