@@ -39,6 +39,12 @@ class CourseController extends Controller
             ->where('access','like','confirm');
         })->get();
 
+        $inprogress=Prendre_course_user::all();
+        $inprogress=$inprogress->where('access','like','in progress');  
+
+
+        // var_dump($inprogress);
+
 
 
 
@@ -51,7 +57,7 @@ class CourseController extends Controller
         })
         ->get();
         
-    return view('Courses.indexcourse',['courses'=>course::all(),'categories'=>categorie::all(),'existes'=>$existe,'reviews'=>$reviews]);
+    return view('Courses.indexcourse',['courses'=>course::all(),'categories'=>categorie::all(),'existes'=>$existe,'reviews'=>$reviews,'inprogress'=>$inprogress]);
     }
 
     /**

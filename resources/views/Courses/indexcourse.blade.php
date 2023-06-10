@@ -174,9 +174,18 @@ courses
 
                             </script>
                         </div>
-                    @if ($is_existe==0)
-                    <a class="btn btn-sm btn-falcon-default me-2 hover-danger" href="{{route('courses.demand',['course_id'=>$course->id])}}" data-bs-toggle="tooltip" data-bs-placement="top" title="Add to Wishlist"><span class="fas fa-plus" data-fa-transform="down-2"></span></a>
+                        
+                        @foreach ($inprogress as $isSend)
+                          @if ($isSend->user_id==Auth::user()->id && $isSend->course_id==$course->id)
+                              <a class="btn btn-sm btn-falcon-default me-2 hover-danger" href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Add to Wishlist"><span class="fas fa-check" data-fa-transform="down-2"></span></a>
+                              <span class="d-none">{{$is_existe=1}}</span>
+                          @endif
+                        @endforeach
+                        
+                        @if ($is_existe==0)
+                        <a class="btn btn-sm btn-falcon-default me-2 hover-danger" href="{{route('courses.demand',['course_id'=>$course->id])}}" data-bs-toggle="tooltip" data-bs-placement="top" title="Add to Wishlist"><span class="fas fa-plus" data-fa-transform="down-2"></span></a>
                     @endif
+                        
                   </div>
                 </div>
               </div>
