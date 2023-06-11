@@ -61,18 +61,21 @@ E-Learning detail
             <hr class="text-secondary text-opacity-50" />
             <ul class="list-unstyled d-flex flex-wrap gap-3 fs--1 fw-semi-bold text-300 mt-3 mb-0">
                     @foreach ($reviews as $review)
+                    <span class="d-none"> {{$nbr=0}} </span>
                       <li><span class="fas fa-graduation-cap text-white me-1"> </span> {{$review->learner->count('pivot.review')}} Learners </li>
                       <p class="text-white fw-semi-bold fs--1"><span class="me-1"><span class="fas fa-user-graduate text-white me-1"> </span>rate :  {{$nbr=$review->learner->avg('pivot.review') }} % </span>
                 
                       <span class="d-none">{{$review->course_id}}</span>
                       
                       {{-- show the stars --}}
+                        @if ($nbr!=0)
                         @for ($i = 0; $i < $nbr/20; $i++)
                           <span class="fa fa-star text-warning"></span>
                         @endfor
                         @for ($i = 0; $i < 5-$nbr/20 ; $i++)
                           <span class="far fa-star text-warning"></span>
                         @endfor
+                        @endif
 
                         <span class="text-info ms-2">( {{$review->learner->count('pivot.review')}} reviews)</span></p>
                         
@@ -90,7 +93,7 @@ E-Learning detail
         </div>
         <div class="card mb-3">
           <div class="card-header bg-light">
-            <h5 class="mb-0">Lesson Plans</h5>
+            <h5 class="mb-0">course Plan</h5>
           </div>
           <div class="card-body p-0">
             <div class="table-responsive scrollbar">
@@ -99,9 +102,11 @@ E-Learning detail
                   @foreach ($reviews as $existe)
                     @foreach ($existe->learner as $review)
                     <span class="d-none">{{$review->pivot->review}}</span>
-                    
-                        @if ($course->user_id==Auth::user()->id || (Auth::user()->role=='admin' || $review->id==Auth::user()->id) )
+                    <h1>{{$review->id}}</h1>
+                    <h1>{{Auth::user()->id}}</h1>
+                        @if ($review->id==Auth::user()->id) 
                             <span class="d-none">{{$if_is_learner=1}}</span>
+                    <h1>{{Auth::user()->id}}</h1>
                             
                         @endif
                     @endforeach
@@ -204,13 +209,16 @@ E-Learning detail
                         <div class="row">
                           <div class="col-12">
                             <h6 class="fs-0"><a class="me-2" href="{{route('users.profile',['profile_id'=>$review->id])}}">{{$review->name}}</a>
-                              <span class="d-none">{{$nbr=$review->pivot->review/20}}</span>
-                              @for ($i = 0; $i < $nbr; $i++)
-                                <span class="fa fa-star text-warning"></span>
-                              @endfor
-                              @for ($i = 0; $i < 5-$nbr; $i++)
-                                <span class="far fa-star text-warning"></span>
-                              @endfor
+                              <span class="d-none"> {{$nbr=0}} {{$nbr=$review->pivot->review/20}}</span>
+                              
+                              @if ($nbr!=0)
+                                @for ($i = 0; $i < $nbr; $i++)
+                                  <span class="fa fa-star text-warning"></span>
+                                @endfor
+                                @for ($i = 0; $i < 5-$nbr; $i++)
+                                  <span class="far fa-star text-warning"></span>
+                                @endfor
+                              @endif
                             </h6>
                           </div>
                           <div class="col-md-10">
@@ -261,8 +269,9 @@ E-Learning detail
               </div>
               <button type='submit'class="btn btn-primary me-1 mb-1">Add comment <i class="bi bi-caret-right-fill"></i></button>
             </form>
+          @elseif (Auth::user()->id==$course->user_id || Auth::user()->role=='admin')
+          hjvvhvjhv
           @else
-          
           <div class="card-footer text-center py-1 bg-light">
             <p class="mb-0 fs--1 "><a class="text-danger opacity-70" href="{{route('courses.demand',['course_id'=>$course->id])}}"> <h3 class="">Ask for the course !</h3></span></a></p>
           </div>

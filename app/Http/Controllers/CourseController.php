@@ -118,8 +118,8 @@ class CourseController extends Controller
 // show reviews of each course 
         $reviews=course::whereHas('learner',function(Builder $query){
             $query->where('access', 'like', 'confirm')
-            ->where('comment','like','_%')
-            ->where('review','!=','0')
+            // ->where('comment','like','_%')
+            // ->where('review','!=','0')
             ->select('course_id',DB::raw('AVG(review) as avg_reviews'),DB::raw('count(review) as sum_reviews'))
             ->groupBy('course_id');
         })
@@ -337,7 +337,11 @@ if(!Auth::check()){
         $review->date_comment = date('Y-m-d H:i');
         $review->date_review = date('Y-m-d H:i');
         $review->comment = $request->comment;
+        if ($request->review)
         $review->review = $request->review;
+        else
+        $review->review = 0;
+
         $review->update();
         return redirect()->back();
 
