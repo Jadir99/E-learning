@@ -102,12 +102,10 @@ E-Learning detail
                   @foreach ($reviews as $existe)
                     @foreach ($existe->learner as $review)
                     <span class="d-none">{{$review->pivot->review}}</span>
-                    <h1>{{$review->id}}</h1>
-                    <h1>{{Auth::user()->id}}</h1>
+                    
+                    
                         @if ($review->id==Auth::user()->id) 
                             <span class="d-none">{{$if_is_learner=1}}</span>
-                    <h1>{{Auth::user()->id}}</h1>
-                            
                         @endif
                     @endforeach
                   @endforeach

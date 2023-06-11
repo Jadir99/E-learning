@@ -239,9 +239,12 @@ class CourseController extends Controller
         })
         ->get();
         $courses_by_category=categorie::findOrfail($category_id);
+
+        $inprogress=Prendre_course_user::all();
+        $inprogress=$inprogress->where('access','like','in progress');  
         
         // dd($courses_by_category->courses);
-        return view('Courses.indexcourse',['courses'=>$courses_by_category->courses,'categories'=>categorie::all(),'existes'=>$existe,'reviews'=>$reviews]);
+        return view('Courses.indexcourse',['courses'=>$courses_by_category->courses,'categories'=>categorie::all(),'existes'=>$existe,'reviews'=>$reviews,'inprogress'=>$inprogress]);
 
     }
     
