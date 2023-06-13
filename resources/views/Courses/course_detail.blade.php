@@ -268,7 +268,7 @@ E-Learning detail
               <button type='submit'class="btn btn-primary me-1 mb-1">Add comment <i class="bi bi-caret-right-fill"></i></button>
             </form>
           @elseif (Auth::user()->id==$course->user_id || Auth::user()->role=='admin')
-          hjvvhvjhv
+          You cannot add a new comment 
           @else
           <div class="card-footer text-center py-1 bg-light">
             <p class="mb-0 fs--1 "><a class="text-danger opacity-70" href="{{route('courses.demand',['course_id'=>$course->id])}}"> <h3 class="">Ask for the course !</h3></span></a></p>

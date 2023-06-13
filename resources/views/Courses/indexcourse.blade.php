@@ -126,14 +126,16 @@ courses
                         <span class="d-none">{{$review->course_id}}</span>
                         @if ($review->id==$course->id)
                         {{-- show the stars --}}
-                        <span class="d-none">{{$nbr=$review->learner->avg('pivot.review') /20}}</span>
+                          <span class="d-none"> {{$nbr=0}} {{$nbr=$review->learner->avg('pivot.review') /20}}</span>
+                          @if ($nbr!=0)
                           @for ($i = 0; $i < $nbr; $i++)
                             <span class="fa fa-star text-warning"></span>
-                          @endfor
-                          @for ($i = 0; $i < 5-$nbr; $i++)
-                            <span class="far fa-star text-warning"></span>
-                          @endfor
-                          <span class="text-info ms-2">({{$review->learner->count('pivot.review')}})</span></p>
+                            @endfor
+                            @for ($i = 0; $i < 5-$nbr; $i++)
+                              <span class="far fa-star text-warning"></span>
+                            @endfor
+                            <span class="text-info ms-2">({{$review->learner->count('pivot.review')}})</span></p>
+                          @endif
                           
                         @endif
                       @endforeach
